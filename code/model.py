@@ -35,11 +35,8 @@ for i in pkl_files:
     # print(len(cycle_data0)) # 8
 
     for key, value in cycle_data0.items():
-        # print(key)
-        if value == "cycle_number":
-            print(key, ",", value)
-        else: 
-            print(key, ",", len(value))
+        print(key, value)
+        print('------------------')
     '''
     cycle_number
     current_in_A
