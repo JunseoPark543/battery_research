@@ -35,17 +35,28 @@ for i in pkl_files:
     # print(len(cycle_data0)) # 8
 
     for key, value in cycle_data0.items():
-        print(key, value)
-        print('------------------')
+        if key == "cycle_number" or "temperature_in_C" or "internal_resistance_in_ohm" or "time_in_s":
+            print('pass')
+        else:
+            x = cycle_data0["time_in_s"]
+            y = value
+        
+            plt.plot(x, y)
+            
+            plt.xlabel("time_in_s")
+            plt.ylabel(key)
+            plt.show()
+        
+        # print(key, value)
+        # print('------------------')
     '''
-    cycle_number
-    current_in_A
-    voltage_in_V
-    charge_capacity_in_Ah
-    discharge_capacity_in_Ah
-    time_in_s
-    temperature_in_C
-    internal_resistance_in_ohm
+    cycle_number                    int
+    current_in_A                    list 
+    voltage_in_V                    list
+    charge_capacity_in_Ah           list
+    discharge_capacity_in_Ah        list
+    time_in_s                       list 
+    temperature_in_C                None 
+    internal_resistance_in_ohm      None 
     '''
-    print('------------')
     break
