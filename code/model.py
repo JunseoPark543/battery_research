@@ -31,11 +31,21 @@ for i in pkl_files:
     # print(len(cycle_data)) # 1번 파일: 1504 
 
     cycle_data0 = cycle_data[0]
-    print(type(cycle_data0))
-    print(len(cycle_data0))
+    # print(type(cycle_data0)) # dict
+    # print(len(cycle_data0)) # 8
 
     for key, value in cycle_data0.items():
-        print(key)
-
+        # print(key)
+        print(key, ",", len(value))
+    '''
+    cycle_number
+    current_in_A
+    voltage_in_V
+    charge_capacity_in_Ah
+    discharge_capacity_in_Ah
+    time_in_s
+    temperature_in_C
+    internal_resistance_in_ohm
+    '''
     print('------------')
     break
