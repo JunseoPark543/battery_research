@@ -26,4 +26,9 @@ for i in pkl_files:
     cycle_data_name = "cycle_data"
 
     cycle_data = data[cycle_data_name]
-    print(type(cycle_data))
+
+    # print(type(cycle_data)) # list 
+    
+    cycle_data0 = cycle_data[0]
+    for key, values in data.items():
+        print(key)
