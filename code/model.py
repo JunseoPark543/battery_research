@@ -32,7 +32,7 @@ for i in pkl_files:
 
     cycle_data0 = cycle_data[0]
     
-    for key, values in data.items():
+    for key, values in cycle_data.items():
         print(key)
         '''
         cell_id
