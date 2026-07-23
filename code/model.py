@@ -28,33 +28,12 @@ for i in pkl_files:
     cycle_data = data[cycle_data_name]
 
     # print(type(cycle_data)) # list 
-    print(len(cycle_data))
+    # print(len(cycle_data)) # 1번 파일: 1504 
 
     cycle_data0 = cycle_data[0]
     
-    for key, values in cycle_data.items():
-        print(key)
-        '''
-        cell_id
-        cycle_data
-        form_factor
-        anode_material
-        cathode_material
-        electrolyte_material
-        nominal_capacity_in_Ah
-        depth_of_charge
-        depth_of_discharge
-        already_spent_cycles
-        max_voltage_limit_in_V
-        min_voltage_limit_in_V
-        max_current_limit_in_A
-        min_current_limit_in_A
-        reference
-        description
-        charge_protocol
-        discharge_protocol
-        SOC_interval
-        '''
+    print(cycle_data0)
+
 
     print('------------')
     break
