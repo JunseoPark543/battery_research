@@ -31,9 +31,11 @@ for i in pkl_files:
     # print(len(cycle_data)) # 1번 파일: 1504 
 
     cycle_data0 = cycle_data[0]
-    
-    print(cycle_data0)
+    print(type(cycle_data0))
+    print(len(cycle_data0))
 
+    for key, value in cycle_data0.items():
+        print(key)
 
     print('------------')
     break
