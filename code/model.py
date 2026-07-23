@@ -15,6 +15,7 @@ import numpy as np
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DATA_DIR = PROJECT_ROOT / "data" / "HUST"
+PLOT_DIR = PROJECT_ROOT / "plot" / "HUST"
 
 pkl_files = sorted(DEFAULT_DATA_DIR.glob("*.pkl"))
 rows = []
@@ -41,7 +42,7 @@ for i in pkl_files:
     
     plt.xlabel("time_in_s")
     plt.ylabel("current_in_A")
-    plt.show()
+    plt.savefig(f"{PLOT_DIR}/plot.png", dpi=300, bbox_inches="tight")
     '''
     cycle_number                    int
     current_in_A                    list 
