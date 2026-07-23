@@ -34,21 +34,14 @@ for i in pkl_files:
     # print(type(cycle_data0)) # dict
     # print(len(cycle_data0)) # 8
 
-    for key, value in cycle_data0.items():
-        if key == "cycle_number" or "temperature_in_C" or "internal_resistance_in_ohm" or "time_in_s":
-            print('pass')
-        else:
-            x = cycle_data0["time_in_s"]
-            y = value
-        
-            plt.plot(x, y)
-            
-            plt.xlabel("time_in_s")
-            plt.ylabel(key)
-            plt.show()
-        
-        # print(key, value)
-        # print('------------------')
+    
+    x = cycle_data0["time_in_s"]
+    y = cycle_data0["current_in_A"]
+    plt.plot(x, y)
+    
+    plt.xlabel("time_in_s")
+    plt.ylabel("current_in_A")
+    plt.show()
     '''
     cycle_number                    int
     current_in_A                    list 
