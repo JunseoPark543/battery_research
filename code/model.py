@@ -25,5 +25,5 @@ for i in pkl_files:
 
     cycle_data_name = "cycle_data"
 
-    cycle_data = data[cycle_data]
+    cycle_data = data[cycle_data_name]
     print(type(cycle_data))
