@@ -1,0 +1,2107 @@
+[    0.0s] INFO  run directory: /home/JunseoPark/바탕화면/battery/runs/20260726_034513
+[    0.0s] INFO  device: cuda  (NVIDIA GeForce RTX 5080, 15.5 GiB, torch 2.13.0+cu130)
+[    0.0s] INFO  config: {"data_root": "data", "cache_root": "cache", "run_root": "runs", "labels_path": "data/1. Life labels", "label_source": "auto", "grid_points": 128, "ref_cycle": 10, "cache_max_cycle": 300, "seg_min_points": 30, "crate_bin": 0.25, "seg_min_vspan": 0.05, "datasets": ["MATR", "Tongji", "HUST", "SNL", "RWTH", "Stanford"], "charge_segment": true, "relative_q": true, "grid_inset": 0.02, "eol_frac": 0.8, "eol_reference": "nominal", "init_cycles": 5, "min_life": 150, "L_min": 20, "L_max": 100, "truncate_source": true, "seed": 0, "n_seeds": 5, "ref_grid": [20, 35, 50, 65, 80], "d_cycle": 16, "enc_hidden": 32, "d_attn": 16, "n_fourier": 8, "m_bottleneck": 8, "head_hidden": 64, "dropout": 0.2, "lambda_align": 0.0, "align_warmup": 300, "gamma_ssl": 0.0, "lr": 0.001, "weight_decay": 0.0001, "grad_clip": 1.0, "batch_source": 32, "batch_target": 16, "max_steps": 1500, "log_every": 50, "eval_every": 100, "patience": 400, "val_frac": 0.15, "device": "cuda", "strat_edges": [20, 40, 60, 80, 101]}
+[    0.0s] INFO  ========================================================================
+[    0.0s] INFO  [1/4] PREPARE — parse pkl files and cache features
+[    0.0s] INFO  ========================================================================
+[    0.0s] INFO  datasets found: ['MATR', 'Tongji', 'HUST', 'SNL', 'RWTH', 'Stanford']
+[    0.0s] INFO  [MATR] 169 cell files, segment profile = discharge
+[    0.0s] INFO    (1/169) MATR_b1c0.pkl: cached
+[    0.0s] INFO    (2/169) MATR_b1c1.pkl: cached
+[    0.0s] INFO    (3/169) MATR_b1c11.pkl: cached
+[    0.0s] INFO    (4/169) MATR_b1c14.pkl: cached
+[    0.0s] INFO    (5/169) MATR_b1c15.pkl: cached
+[    0.0s] INFO    (6/169) MATR_b1c16.pkl: cached
+[    0.0s] INFO    (7/169) MATR_b1c17.pkl: cached
+[    0.0s] INFO    (8/169) MATR_b1c18.pkl: cached
+[    0.0s] INFO    (9/169) MATR_b1c19.pkl: cached
+[    0.0s] INFO    (10/169) MATR_b1c2.pkl: cached
+[    0.0s] INFO    (11/169) MATR_b1c20.pkl: cached
+[    0.0s] INFO    (12/169) MATR_b1c21.pkl: cached
+[    0.0s] INFO    (13/169) MATR_b1c23.pkl: cached
+[    0.0s] INFO    (14/169) MATR_b1c24.pkl: cached
+[    0.0s] INFO    (15/169) MATR_b1c25.pkl: cached
+[    0.0s] INFO    (16/169) MATR_b1c26.pkl: cached
+[    0.0s] INFO    (17/169) MATR_b1c27.pkl: cached
+[    0.0s] INFO    (18/169) MATR_b1c28.pkl: cached
+[    0.0s] INFO    (19/169) MATR_b1c29.pkl: cached
+[    0.0s] INFO    (20/169) MATR_b1c3.pkl: cached
+[    0.0s] INFO    (21/169) MATR_b1c30.pkl: cached
+[    0.0s] INFO    (22/169) MATR_b1c31.pkl: cached
+[    0.0s] INFO    (23/169) MATR_b1c32.pkl: cached
+[    0.0s] INFO    (24/169) MATR_b1c33.pkl: cached
+[    0.0s] INFO    (25/169) MATR_b1c34.pkl: cached
+[    0.0s] INFO    (26/169) MATR_b1c35.pkl: cached
+[    0.0s] INFO    (27/169) MATR_b1c36.pkl: cached
+[    0.0s] INFO    (28/169) MATR_b1c37.pkl: cached
+[    0.0s] INFO    (29/169) MATR_b1c38.pkl: cached
+[    0.0s] INFO    (30/169) MATR_b1c39.pkl: cached
+[    0.0s] INFO    (31/169) MATR_b1c4.pkl: cached
+[    0.0s] INFO    (32/169) MATR_b1c40.pkl: cached
+[    0.0s] INFO    (33/169) MATR_b1c41.pkl: cached
+[    0.0s] INFO    (34/169) MATR_b1c42.pkl: cached
+[    0.0s] INFO    (35/169) MATR_b1c43.pkl: cached
+[    0.0s] INFO    (36/169) MATR_b1c44.pkl: cached
+[    0.0s] INFO    (37/169) MATR_b1c45.pkl: cached
+[    0.0s] INFO    (38/169) MATR_b1c5.pkl: cached
+[    0.0s] INFO    (39/169) MATR_b1c6.pkl: cached
+[    0.0s] INFO    (40/169) MATR_b1c7.pkl: cached
+[    0.0s] INFO    (41/169) MATR_b1c9.pkl: cached
+[    0.0s] INFO    (42/169) MATR_b2c0.pkl: cached
+[    0.0s] INFO    (43/169) MATR_b2c1.pkl: cached
+[    0.0s] INFO    (44/169) MATR_b2c10.pkl: cached
+[    0.0s] INFO    (45/169) MATR_b2c11.pkl: cached
+[    0.0s] INFO    (46/169) MATR_b2c12.pkl: cached
+[    0.0s] INFO    (47/169) MATR_b2c13.pkl: cached
+[    0.0s] INFO    (48/169) MATR_b2c14.pkl: cached
+[    0.0s] INFO    (49/169) MATR_b2c17.pkl: cached
+[    0.0s] INFO    (50/169) MATR_b2c18.pkl: cached
+[    0.0s] INFO    (51/169) MATR_b2c19.pkl: cached
+[    0.0s] INFO    (52/169) MATR_b2c2.pkl: cached
+[    0.0s] INFO    (53/169) MATR_b2c20.pkl: cached
+[    0.0s] INFO    (54/169) MATR_b2c21.pkl: cached
+[    0.0s] INFO    (55/169) MATR_b2c22.pkl: cached
+[    0.0s] INFO    (56/169) MATR_b2c23.pkl: cached
+[    0.0s] INFO    (57/169) MATR_b2c24.pkl: cached
+[    0.0s] INFO    (58/169) MATR_b2c25.pkl: cached
+[    0.0s] INFO    (59/169) MATR_b2c26.pkl: cached
+[    0.0s] INFO    (60/169) MATR_b2c27.pkl: cached
+[    0.0s] INFO    (61/169) MATR_b2c28.pkl: cached
+[    0.0s] INFO    (62/169) MATR_b2c29.pkl: cached
+[    0.0s] INFO    (63/169) MATR_b2c3.pkl: cached
+[    0.0s] INFO    (64/169) MATR_b2c30.pkl: cached
+[    0.0s] INFO    (65/169) MATR_b2c31.pkl: cached
+[    0.0s] INFO    (66/169) MATR_b2c32.pkl: cached
+[    0.0s] INFO    (67/169) MATR_b2c33.pkl: cached
+[    0.0s] INFO    (68/169) MATR_b2c34.pkl: cached
+[    0.0s] INFO    (69/169) MATR_b2c35.pkl: cached
+[    0.0s] INFO    (70/169) MATR_b2c36.pkl: cached
+[    0.0s] INFO    (71/169) MATR_b2c37.pkl: cached
+[    0.0s] INFO    (72/169) MATR_b2c38.pkl: cached
+[    0.0s] INFO    (73/169) MATR_b2c39.pkl: cached
+[    0.0s] INFO    (74/169) MATR_b2c4.pkl: cached
+[    0.0s] INFO    (75/169) MATR_b2c40.pkl: cached
+[    0.0s] INFO    (76/169) MATR_b2c41.pkl: cached
+[    0.0s] INFO    (77/169) MATR_b2c42.pkl: cached
+[    0.0s] INFO    (78/169) MATR_b2c43.pkl: cached
+[    0.0s] INFO    (79/169) MATR_b2c44.pkl: cached
+[    0.0s] INFO    (80/169) MATR_b2c45.pkl: cached
+[    0.0s] INFO    (81/169) MATR_b2c46.pkl: cached
+[    0.0s] INFO    (82/169) MATR_b2c47.pkl: cached
+[    0.0s] INFO    (83/169) MATR_b2c5.pkl: cached
+[    0.0s] INFO    (84/169) MATR_b2c6.pkl: cached
+[    0.0s] INFO    (85/169) MATR_b3c0.pkl: cached
+[    0.0s] INFO    (86/169) MATR_b3c1.pkl: cached
+[    0.0s] INFO    (87/169) MATR_b3c10.pkl: cached
+[    0.0s] INFO    (88/169) MATR_b3c11.pkl: cached
+[    0.0s] INFO    (89/169) MATR_b3c12.pkl: cached
+[    0.0s] INFO    (90/169) MATR_b3c13.pkl: cached
+[    0.0s] INFO    (91/169) MATR_b3c14.pkl: cached
+[    0.0s] INFO    (92/169) MATR_b3c15.pkl: cached
+[    0.0s] INFO    (93/169) MATR_b3c16.pkl: cached
+[    0.0s] INFO    (94/169) MATR_b3c17.pkl: cached
+[    0.0s] INFO    (95/169) MATR_b3c18.pkl: cached
+[    0.0s] INFO    (96/169) MATR_b3c19.pkl: cached
+[    0.0s] INFO    (97/169) MATR_b3c20.pkl: cached
+[    0.0s] INFO    (98/169) MATR_b3c21.pkl: cached
+[    0.0s] INFO    (99/169) MATR_b3c22.pkl: cached
+[    0.0s] INFO    (100/169) MATR_b3c24.pkl: cached
+[    0.0s] INFO    (101/169) MATR_b3c25.pkl: cached
+[    0.0s] INFO    (102/169) MATR_b3c26.pkl: cached
+[    0.0s] INFO    (103/169) MATR_b3c27.pkl: cached
+[    0.0s] INFO    (104/169) MATR_b3c28.pkl: cached
+[    0.0s] INFO    (105/169) MATR_b3c29.pkl: cached
+[    0.0s] INFO    (106/169) MATR_b3c3.pkl: cached
+[    0.0s] INFO    (107/169) MATR_b3c30.pkl: cached
+[    0.0s] INFO    (108/169) MATR_b3c31.pkl: cached
+[    0.0s] INFO    (109/169) MATR_b3c33.pkl: cached
+[    0.0s] INFO    (110/169) MATR_b3c34.pkl: cached
+[    0.0s] INFO    (111/169) MATR_b3c35.pkl: cached
+[    0.0s] INFO    (112/169) MATR_b3c36.pkl: cached
+[    0.0s] INFO    (113/169) MATR_b3c38.pkl: cached
+[    0.0s] INFO    (114/169) MATR_b3c39.pkl: cached
+[    0.0s] INFO    (115/169) MATR_b3c4.pkl: cached
+[    0.0s] INFO    (116/169) MATR_b3c40.pkl: cached
+[    0.0s] INFO    (117/169) MATR_b3c41.pkl: cached
+[    0.0s] INFO    (118/169) MATR_b3c44.pkl: cached
+[    0.0s] INFO    (119/169) MATR_b3c45.pkl: cached
+[    0.0s] INFO    (120/169) MATR_b3c5.pkl: cached
+[    0.0s] INFO    (121/169) MATR_b3c6.pkl: cached
+[    0.0s] INFO    (122/169) MATR_b3c7.pkl: cached
+[    0.0s] INFO    (123/169) MATR_b3c8.pkl: cached
+[    0.0s] INFO    (124/169) MATR_b3c9.pkl: cached
+[    0.0s] INFO    (125/169) MATR_b4c0.pkl: cached
+[    0.0s] INFO    (126/169) MATR_b4c1.pkl: cached
+[    0.0s] INFO    (127/169) MATR_b4c10.pkl: cached
+[    0.0s] INFO    (128/169) MATR_b4c11.pkl: cached
+[    0.0s] INFO    (129/169) MATR_b4c12.pkl: cached
+[    0.0s] INFO    (130/169) MATR_b4c13.pkl: cached
+[    0.0s] INFO    (131/169) MATR_b4c14.pkl: cached
+[    0.0s] INFO    (132/169) MATR_b4c15.pkl: cached
+[    0.0s] INFO    (133/169) MATR_b4c16.pkl: cached
+[    0.0s] INFO    (134/169) MATR_b4c17.pkl: cached
+[    0.0s] INFO    (135/169) MATR_b4c18.pkl: cached
+[    0.0s] INFO    (136/169) MATR_b4c19.pkl: cached
+[    0.0s] INFO    (137/169) MATR_b4c2.pkl: cached
+[    0.0s] INFO    (138/169) MATR_b4c20.pkl: cached
+[    0.0s] INFO    (139/169) MATR_b4c21.pkl: cached
+[    0.0s] INFO    (140/169) MATR_b4c22.pkl: cached
+[    0.0s] INFO    (141/169) MATR_b4c23.pkl: cached
+[    0.0s] INFO    (142/169) MATR_b4c24.pkl: cached
+[    0.0s] INFO    (143/169) MATR_b4c25.pkl: cached
+[    0.0s] INFO    (144/169) MATR_b4c26.pkl: cached
+[    0.0s] INFO    (145/169) MATR_b4c27.pkl: cached
+[    0.0s] INFO    (146/169) MATR_b4c28.pkl: cached
+[    0.0s] INFO    (147/169) MATR_b4c29.pkl: cached
+[    0.0s] INFO    (148/169) MATR_b4c3.pkl: cached
+[    0.0s] INFO    (149/169) MATR_b4c30.pkl: cached
+[    0.0s] INFO    (150/169) MATR_b4c31.pkl: cached
+[    0.0s] INFO    (151/169) MATR_b4c32.pkl: cached
+[    0.0s] INFO    (152/169) MATR_b4c33.pkl: cached
+[    0.0s] INFO    (153/169) MATR_b4c34.pkl: cached
+[    0.0s] INFO    (154/169) MATR_b4c35.pkl: cached
+[    0.0s] INFO    (155/169) MATR_b4c36.pkl: cached
+[    0.0s] INFO    (156/169) MATR_b4c37.pkl: cached
+[    0.0s] INFO    (157/169) MATR_b4c38.pkl: cached
+[    0.0s] INFO    (158/169) MATR_b4c39.pkl: cached
+[    0.0s] INFO    (159/169) MATR_b4c4.pkl: cached
+[    0.0s] INFO    (160/169) MATR_b4c40.pkl: cached
+[    0.0s] INFO    (161/169) MATR_b4c41.pkl: cached
+[    0.0s] INFO    (162/169) MATR_b4c42.pkl: cached
+[    0.0s] INFO    (163/169) MATR_b4c43.pkl: cached
+[    0.0s] INFO    (164/169) MATR_b4c44.pkl: cached
+[    0.0s] INFO    (165/169) MATR_b4c5.pkl: cached
+[    0.0s] INFO    (166/169) MATR_b4c6.pkl: cached
+[    0.0s] INFO    (167/169) MATR_b4c7.pkl: cached
+[    0.0s] INFO    (168/169) MATR_b4c8.pkl: cached
+[    0.0s] INFO    (169/169) MATR_b4c9.pkl: cached
+[    0.0s] INFO  [MATR] cached 169 cells
+[    0.0s] INFO  [Tongji] 130 cell files, segment profile = auto
+[    0.0s] INFO    (1/130) Tongji1_CY25-025_1--1.pkl: cached
+[    0.0s] INFO    (2/130) Tongji1_CY25-025_1--2.pkl: cached
+[    0.0s] INFO    (3/130) Tongji1_CY25-025_1--3.pkl: cached
+[    0.0s] INFO    (4/130) Tongji1_CY25-025_1--4.pkl: cached
+[    0.0s] INFO    (5/130) Tongji1_CY25-025_1--5.pkl: cached
+[    0.0s] INFO    (6/130) Tongji1_CY25-025_1--6.pkl: cached
+[    0.0s] INFO    (7/130) Tongji1_CY25-025_1--7.pkl: cached
+[    0.0s] INFO    (8/130) Tongji1_CY25-05_1--1.pkl: cached
+[    0.0s] INFO    (9/130) Tongji1_CY25-05_1--10.pkl: cached
+[    0.0s] INFO    (10/130) Tongji1_CY25-05_1--11.pkl: cached
+[    0.0s] INFO    (11/130) Tongji1_CY25-05_1--12.pkl: cached
+[    0.0s] INFO    (12/130) Tongji1_CY25-05_1--13.pkl: cached
+[    0.0s] INFO    (13/130) Tongji1_CY25-05_1--14.pkl: cached
+[    0.0s] INFO    (14/130) Tongji1_CY25-05_1--15.pkl: cached
+[    0.0s] INFO    (15/130) Tongji1_CY25-05_1--16.pkl: cached
+[    0.0s] INFO    (16/130) Tongji1_CY25-05_1--17.pkl: cached
+[    0.0s] INFO    (17/130) Tongji1_CY25-05_1--18.pkl: cached
+[    0.0s] INFO    (18/130) Tongji1_CY25-05_1--19.pkl: cached
+[    0.0s] INFO    (19/130) Tongji1_CY25-05_1--2.pkl: cached
+[    0.0s] INFO    (20/130) Tongji1_CY25-05_1--3.pkl: cached
+[    0.0s] INFO    (21/130) Tongji1_CY25-05_1--4.pkl: cached
+[    0.0s] INFO    (22/130) Tongji1_CY25-05_1--5.pkl: cached
+[    0.0s] INFO    (23/130) Tongji1_CY25-05_1--6.pkl: cached
+[    0.0s] INFO    (24/130) Tongji1_CY25-05_1--7.pkl: cached
+[    0.0s] INFO    (25/130) Tongji1_CY25-05_1--8.pkl: cached
+[    0.0s] INFO    (26/130) Tongji1_CY25-05_1--9.pkl: cached
+[    0.0s] WARNING     skip Tongji1_CY25-1_1--1.pkl: only 34 cycles
+[    0.0s] WARNING     skip Tongji1_CY25-1_1--2.pkl: only 35 cycles
+[    0.0s] WARNING     skip Tongji1_CY25-1_1--3.pkl: only 27 cycles
+[    0.0s] WARNING     skip Tongji1_CY25-1_1--4.pkl: only 29 cycles
+[    0.0s] WARNING     skip Tongji1_CY25-1_1--5.pkl: only 31 cycles
+[    0.0s] WARNING     skip Tongji1_CY25-1_1--6.pkl: only 27 cycles
+[    0.1s] WARNING     skip Tongji1_CY25-1_1--7.pkl: only 33 cycles
+[    0.1s] WARNING     skip Tongji1_CY25-1_1--8.pkl: only 28 cycles
+[    0.1s] WARNING     skip Tongji1_CY25-1_1--9.pkl: only 32 cycles
+[    0.1s] INFO    (36/130) Tongji1_CY35-05_1--1.pkl: cached
+[    0.1s] INFO    (37/130) Tongji1_CY35-05_1--2.pkl: cached
+[    0.1s] WARNING     skip Tongji1_CY35-05_1--3.pkl: only 30 cycles
+[    0.1s] INFO    (39/130) Tongji1_CY45-05_1--1.pkl: cached
+[    0.1s] INFO    (40/130) Tongji1_CY45-05_1--10.pkl: cached
+[    0.1s] INFO    (41/130) Tongji1_CY45-05_1--11.pkl: cached
+[    0.1s] INFO    (42/130) Tongji1_CY45-05_1--12.pkl: cached
+[    0.1s] INFO    (43/130) Tongji1_CY45-05_1--13.pkl: cached
+[    0.1s] INFO    (44/130) Tongji1_CY45-05_1--14.pkl: cached
+[    0.1s] INFO    (45/130) Tongji1_CY45-05_1--15.pkl: cached
+[    0.1s] INFO    (46/130) Tongji1_CY45-05_1--16.pkl: cached
+[    0.1s] INFO    (47/130) Tongji1_CY45-05_1--17.pkl: cached
+[    0.1s] INFO    (48/130) Tongji1_CY45-05_1--18.pkl: cached
+[    0.1s] INFO    (49/130) Tongji1_CY45-05_1--19.pkl: cached
+[    0.1s] INFO    (50/130) Tongji1_CY45-05_1--2.pkl: cached
+[    0.1s] INFO    (51/130) Tongji1_CY45-05_1--20.pkl: cached
+[    0.1s] INFO    (52/130) Tongji1_CY45-05_1--21.pkl: cached
+[    0.1s] INFO    (53/130) Tongji1_CY45-05_1--22.pkl: cached
+[    0.1s] INFO    (54/130) Tongji1_CY45-05_1--23.pkl: cached
+[    0.1s] INFO    (55/130) Tongji1_CY45-05_1--24.pkl: cached
+[    0.1s] INFO    (56/130) Tongji1_CY45-05_1--25.pkl: cached
+[    0.1s] INFO    (57/130) Tongji1_CY45-05_1--26.pkl: cached
+[    0.1s] INFO    (58/130) Tongji1_CY45-05_1--27.pkl: cached
+[    0.1s] INFO    (59/130) Tongji1_CY45-05_1--28.pkl: cached
+[    0.1s] INFO    (60/130) Tongji1_CY45-05_1--3.pkl: cached
+[    0.1s] INFO    (61/130) Tongji1_CY45-05_1--4.pkl: cached
+[    0.1s] INFO    (62/130) Tongji1_CY45-05_1--5.pkl: cached
+[    0.1s] INFO    (63/130) Tongji1_CY45-05_1--6.pkl: cached
+[    0.1s] INFO    (64/130) Tongji1_CY45-05_1--7.pkl: cached
+[    0.1s] INFO    (65/130) Tongji1_CY45-05_1--8.pkl: cached
+[    0.1s] INFO    (66/130) Tongji1_CY45-05_1--9.pkl: cached
+[    0.1s] INFO    (67/130) Tongji2_CY25-05_1--1.pkl: cached
+[    0.1s] INFO    (68/130) Tongji2_CY25-05_1--10.pkl: cached
+[    0.1s] INFO    (69/130) Tongji2_CY25-05_1--11.pkl: cached
+[    0.1s] INFO    (70/130) Tongji2_CY25-05_1--12.pkl: cached
+[    0.1s] INFO    (71/130) Tongji2_CY25-05_1--13.pkl: cached
+[    0.1s] WARNING     skip Tongji2_CY25-05_1--14.pkl: only 42 cycles
+[    0.1s] INFO    (73/130) Tongji2_CY25-05_1--15.pkl: cached
+[    0.1s] INFO    (74/130) Tongji2_CY25-05_1--16.pkl: cached
+[    0.1s] INFO    (75/130) Tongji2_CY25-05_1--17.pkl: cached
+[    0.1s] INFO    (76/130) Tongji2_CY25-05_1--18.pkl: cached
+[    0.1s] INFO    (77/130) Tongji2_CY25-05_1--19.pkl: cached
+[    0.1s] INFO    (78/130) Tongji2_CY25-05_1--2.pkl: cached
+[    0.1s] INFO    (79/130) Tongji2_CY25-05_1--20.pkl: cached
+[    0.1s] INFO    (80/130) Tongji2_CY25-05_1--21.pkl: cached
+[    0.1s] INFO    (81/130) Tongji2_CY25-05_1--22.pkl: cached
+[    0.1s] INFO    (82/130) Tongji2_CY25-05_1--23.pkl: cached
+[    0.1s] INFO    (83/130) Tongji2_CY25-05_1--3.pkl: cached
+[    0.1s] INFO    (84/130) Tongji2_CY25-05_1--4.pkl: cached
+[    0.1s] INFO    (85/130) Tongji2_CY25-05_1--5.pkl: cached
+[    0.1s] INFO    (86/130) Tongji2_CY25-05_1--6.pkl: cached
+[    0.1s] INFO    (87/130) Tongji2_CY25-05_1--7.pkl: cached
+[    0.1s] INFO    (88/130) Tongji2_CY25-05_1--8.pkl: cached
+[    0.1s] INFO    (89/130) Tongji2_CY25-05_1--9.pkl: cached
+[    0.1s] INFO    (90/130) Tongji2_CY35-05_1--1.pkl: cached
+[    0.1s] INFO    (91/130) Tongji2_CY35-05_1--2.pkl: cached
+[    0.1s] INFO    (92/130) Tongji2_CY35-05_1--3.pkl: cached
+[    0.1s] INFO    (93/130) Tongji2_CY35-05_1--4.pkl: cached
+[    0.1s] INFO    (94/130) Tongji2_CY45-05_1--1.pkl: cached
+[    0.1s] INFO    (95/130) Tongji2_CY45-05_1--10.pkl: cached
+[    0.1s] INFO    (96/130) Tongji2_CY45-05_1--11.pkl: cached
+[    0.1s] INFO    (97/130) Tongji2_CY45-05_1--12.pkl: cached
+[    0.1s] INFO    (98/130) Tongji2_CY45-05_1--13.pkl: cached
+[    0.1s] INFO    (99/130) Tongji2_CY45-05_1--14.pkl: cached
+[    0.1s] INFO    (100/130) Tongji2_CY45-05_1--15.pkl: cached
+[    0.1s] INFO    (101/130) Tongji2_CY45-05_1--16.pkl: cached
+[    0.1s] INFO    (102/130) Tongji2_CY45-05_1--17.pkl: cached
+[    0.1s] INFO    (103/130) Tongji2_CY45-05_1--18.pkl: cached
+[    0.1s] INFO    (104/130) Tongji2_CY45-05_1--19.pkl: cached
+[    0.1s] INFO    (105/130) Tongji2_CY45-05_1--2.pkl: cached
+[    0.1s] INFO    (106/130) Tongji2_CY45-05_1--20.pkl: cached
+[    0.1s] INFO    (107/130) Tongji2_CY45-05_1--21.pkl: cached
+[    0.1s] INFO    (108/130) Tongji2_CY45-05_1--22.pkl: cached
+[    0.1s] INFO    (109/130) Tongji2_CY45-05_1--23.pkl: cached
+[    0.1s] INFO    (110/130) Tongji2_CY45-05_1--24.pkl: cached
+[    0.1s] INFO    (111/130) Tongji2_CY45-05_1--25.pkl: cached
+[    0.1s] INFO    (112/130) Tongji2_CY45-05_1--26.pkl: cached
+[    0.1s] INFO    (113/130) Tongji2_CY45-05_1--27.pkl: cached
+[    0.1s] INFO    (114/130) Tongji2_CY45-05_1--28.pkl: cached
+[    0.1s] INFO    (115/130) Tongji2_CY45-05_1--3.pkl: cached
+[    0.1s] INFO    (116/130) Tongji2_CY45-05_1--4.pkl: cached
+[    0.1s] INFO    (117/130) Tongji2_CY45-05_1--5.pkl: cached
+[    0.1s] INFO    (118/130) Tongji2_CY45-05_1--6.pkl: cached
+[    0.1s] INFO    (119/130) Tongji2_CY45-05_1--7.pkl: cached
+[    0.1s] INFO    (120/130) Tongji2_CY45-05_1--8.pkl: cached
+[    0.1s] INFO    (121/130) Tongji2_CY45-05_1--9.pkl: cached
+[    0.1s] INFO    (122/130) Tongji3_CY25-05_1--1.pkl: cached
+[    0.1s] INFO    (123/130) Tongji3_CY25-05_1--2.pkl: cached
+[    0.1s] INFO    (124/130) Tongji3_CY25-05_1--3.pkl: cached
+[    0.1s] INFO    (125/130) Tongji3_CY25-05_2--1.pkl: cached
+[    0.1s] INFO    (126/130) Tongji3_CY25-05_2--2.pkl: cached
+[    0.1s] INFO    (127/130) Tongji3_CY25-05_2--3.pkl: cached
+[    0.1s] INFO    (128/130) Tongji3_CY25-05_4--1.pkl: cached
+[    0.1s] INFO    (129/130) Tongji3_CY25-05_4--2.pkl: cached
+[    0.1s] INFO    (130/130) Tongji3_CY25-05_4--3.pkl: cached
+[    0.1s] INFO  [Tongji] cached 119 cells
+[    0.1s] INFO  [HUST] 77 cell files, segment profile = charge
+[    0.1s] INFO    (1/77) HUST_1-1.pkl: cached
+[    0.1s] INFO    (2/77) HUST_1-2.pkl: cached
+[    0.1s] INFO    (3/77) HUST_1-3.pkl: cached
+[    0.1s] INFO    (4/77) HUST_1-4.pkl: cached
+[    0.1s] INFO    (5/77) HUST_1-5.pkl: cached
+[    0.1s] INFO    (6/77) HUST_1-6.pkl: cached
+[    0.1s] INFO    (7/77) HUST_1-7.pkl: cached
+[    0.1s] INFO    (8/77) HUST_1-8.pkl: cached
+[    0.1s] INFO    (9/77) HUST_10-1.pkl: cached
+[    0.1s] INFO    (10/77) HUST_10-2.pkl: cached
+[    0.1s] INFO    (11/77) HUST_10-3.pkl: cached
+[    0.1s] INFO    (12/77) HUST_10-4.pkl: cached
+[    0.1s] INFO    (13/77) HUST_10-5.pkl: cached
+[    0.1s] INFO    (14/77) HUST_10-6.pkl: cached
+[    0.1s] INFO    (15/77) HUST_10-7.pkl: cached
+[    0.1s] INFO    (16/77) HUST_10-8.pkl: cached
+[    0.1s] INFO    (17/77) HUST_2-2.pkl: cached
+[    0.1s] INFO    (18/77) HUST_2-3.pkl: cached
+[    0.1s] INFO    (19/77) HUST_2-4.pkl: cached
+[    0.1s] INFO    (20/77) HUST_2-5.pkl: cached
+[    0.1s] INFO    (21/77) HUST_2-6.pkl: cached
+[    0.1s] INFO    (22/77) HUST_2-7.pkl: cached
+[    0.1s] INFO    (23/77) HUST_2-8.pkl: cached
+[    0.1s] INFO    (24/77) HUST_3-1.pkl: cached
+[    0.1s] INFO    (25/77) HUST_3-2.pkl: cached
+[    0.1s] INFO    (26/77) HUST_3-3.pkl: cached
+[    0.1s] INFO    (27/77) HUST_3-4.pkl: cached
+[    0.1s] INFO    (28/77) HUST_3-5.pkl: cached
+[    0.1s] INFO    (29/77) HUST_3-6.pkl: cached
+[    0.1s] INFO    (30/77) HUST_3-7.pkl: cached
+[    0.1s] INFO    (31/77) HUST_3-8.pkl: cached
+[    0.1s] INFO    (32/77) HUST_4-1.pkl: cached
+[    0.1s] INFO    (33/77) HUST_4-2.pkl: cached
+[    0.1s] INFO    (34/77) HUST_4-3.pkl: cached
+[    0.1s] INFO    (35/77) HUST_4-4.pkl: cached
+[    0.1s] INFO    (36/77) HUST_4-5.pkl: cached
+[    0.1s] INFO    (37/77) HUST_4-6.pkl: cached
+[    0.1s] INFO    (38/77) HUST_4-7.pkl: cached
+[    0.1s] INFO    (39/77) HUST_4-8.pkl: cached
+[    0.1s] INFO    (40/77) HUST_5-1.pkl: cached
+[    0.1s] INFO    (41/77) HUST_5-2.pkl: cached
+[    0.1s] INFO    (42/77) HUST_5-3.pkl: cached
+[    0.1s] INFO    (43/77) HUST_5-4.pkl: cached
+[    0.1s] INFO    (44/77) HUST_5-5.pkl: cached
+[    0.1s] INFO    (45/77) HUST_5-6.pkl: cached
+[    0.1s] INFO    (46/77) HUST_5-7.pkl: cached
+[    0.1s] INFO    (47/77) HUST_6-1.pkl: cached
+[    0.1s] INFO    (48/77) HUST_6-2.pkl: cached
+[    0.1s] INFO    (49/77) HUST_6-3.pkl: cached
+[    0.1s] INFO    (50/77) HUST_6-4.pkl: cached
+[    0.1s] INFO    (51/77) HUST_6-5.pkl: cached
+[    0.1s] INFO    (52/77) HUST_6-6.pkl: cached
+[    0.1s] INFO    (53/77) HUST_6-8.pkl: cached
+[    0.1s] INFO    (54/77) HUST_7-1.pkl: cached
+[    0.1s] INFO    (55/77) HUST_7-2.pkl: cached
+[    0.1s] INFO    (56/77) HUST_7-3.pkl: cached
+[    0.1s] INFO    (57/77) HUST_7-4.pkl: cached
+[    0.1s] INFO    (58/77) HUST_7-5.pkl: cached
+[    0.1s] INFO    (59/77) HUST_7-6.pkl: cached
+[    0.1s] INFO    (60/77) HUST_7-7.pkl: cached
+[    0.1s] INFO    (61/77) HUST_7-8.pkl: cached
+[    0.1s] INFO    (62/77) HUST_8-1.pkl: cached
+[    0.1s] INFO    (63/77) HUST_8-2.pkl: cached
+[    0.1s] INFO    (64/77) HUST_8-3.pkl: cached
+[    0.1s] INFO    (65/77) HUST_8-4.pkl: cached
+[    0.1s] INFO    (66/77) HUST_8-5.pkl: cached
+[    0.1s] INFO    (67/77) HUST_8-6.pkl: cached
+[    0.1s] INFO    (68/77) HUST_8-7.pkl: cached
+[    0.1s] INFO    (69/77) HUST_8-8.pkl: cached
+[    0.1s] INFO    (70/77) HUST_9-1.pkl: cached
+[    0.1s] INFO    (71/77) HUST_9-2.pkl: cached
+[    0.1s] INFO    (72/77) HUST_9-3.pkl: cached
+[    0.1s] INFO    (73/77) HUST_9-4.pkl: cached
+[    0.1s] INFO    (74/77) HUST_9-5.pkl: cached
+[    0.1s] INFO    (75/77) HUST_9-6.pkl: cached
+[    0.1s] INFO    (76/77) HUST_9-7.pkl: cached
+[    0.1s] INFO    (77/77) HUST_9-8.pkl: cached
+[    0.1s] INFO  [HUST] cached 77 cells
+[    0.1s] INFO  [SNL] 61 cell files, segment profile = auto
+[    0.1s] INFO    (1/61) SNL_18650_LFP_15C_0-100_0.5-2C_b.pkl: cached
+[    0.1s] INFO    (2/61) SNL_18650_LFP_25C_0-100_0.5-0.5C_a.pkl: cached
+[    0.1s] INFO    (3/61) SNL_18650_LFP_25C_0-100_0.5-1C_a.pkl: cached
+[    0.1s] INFO    (4/61) SNL_18650_LFP_25C_0-100_0.5-1C_b.pkl: cached
+[    0.1s] INFO    (5/61) SNL_18650_LFP_25C_0-100_0.5-1C_c.pkl: cached
+[    0.1s] INFO    (6/61) SNL_18650_LFP_25C_0-100_0.5-1C_d.pkl: cached
+[    0.1s] INFO    (7/61) SNL_18650_LFP_25C_0-100_0.5-2C_a.pkl: cached
+[    0.1s] INFO    (8/61) SNL_18650_LFP_25C_0-100_0.5-2C_b.pkl: cached
+[    0.1s] INFO    (9/61) SNL_18650_LFP_25C_0-100_0.5-3C_a.pkl: cached
+[    0.1s] INFO    (10/61) SNL_18650_LFP_25C_0-100_0.5-3C_b.pkl: cached
+[    0.1s] INFO    (11/61) SNL_18650_LFP_25C_0-100_0.5-3C_c.pkl: cached
+[    0.1s] INFO    (12/61) SNL_18650_LFP_25C_0-100_0.5-3C_d.pkl: cached
+[    0.1s] INFO    (13/61) SNL_18650_LFP_35C_0-100_0.5-1C_a.pkl: cached
+[    0.1s] INFO    (14/61) SNL_18650_LFP_35C_0-100_0.5-1C_b.pkl: cached
+[    0.1s] INFO    (15/61) SNL_18650_LFP_35C_0-100_0.5-1C_c.pkl: cached
+[    0.1s] INFO    (16/61) SNL_18650_LFP_35C_0-100_0.5-1C_d.pkl: cached
+[    0.1s] INFO    (17/61) SNL_18650_LFP_35C_0-100_0.5-2C_a.pkl: cached
+[    0.1s] INFO    (18/61) SNL_18650_LFP_35C_0-100_0.5-2C_b.pkl: cached
+[    0.1s] INFO    (19/61) SNL_18650_NCA_15C_0-100_0.5-1C_a.pkl: cached
+[    0.1s] INFO    (20/61) SNL_18650_NCA_15C_0-100_0.5-1C_b.pkl: cached
+[    0.1s] INFO    (21/61) SNL_18650_NCA_15C_0-100_0.5-2C_a.pkl: cached
+[    0.1s] INFO    (22/61) SNL_18650_NCA_15C_0-100_0.5-2C_b.pkl: cached
+[    0.1s] INFO    (23/61) SNL_18650_NCA_25C_0-100_0.5-0.5C_a.pkl: cached
+[    0.1s] INFO    (24/61) SNL_18650_NCA_25C_0-100_0.5-0.5C_b.pkl: cached
+[    0.1s] INFO    (25/61) SNL_18650_NCA_25C_0-100_0.5-1C_a.pkl: cached
+[    0.1s] INFO    (26/61) SNL_18650_NCA_25C_0-100_0.5-1C_b.pkl: cached
+[    0.1s] INFO    (27/61) SNL_18650_NCA_25C_0-100_0.5-1C_c.pkl: cached
+[    0.1s] INFO    (28/61) SNL_18650_NCA_25C_0-100_0.5-1C_d.pkl: cached
+[    0.1s] INFO    (29/61) SNL_18650_NCA_25C_0-100_0.5-2C_a.pkl: cached
+[    0.1s] INFO    (30/61) SNL_18650_NCA_25C_0-100_0.5-2C_b.pkl: cached
+[    0.1s] INFO    (31/61) SNL_18650_NCA_25C_20-80_0.5-0.5C_a.pkl: cached
+[    0.1s] INFO    (32/61) SNL_18650_NCA_25C_20-80_0.5-0.5C_b.pkl: cached
+[    0.1s] INFO    (33/61) SNL_18650_NCA_25C_20-80_0.5-0.5C_c.pkl: cached
+[    0.1s] INFO    (34/61) SNL_18650_NCA_25C_20-80_0.5-0.5C_d.pkl: cached
+[    0.1s] INFO    (35/61) SNL_18650_NCA_35C_0-100_0.5-1C_a.pkl: cached
+[    0.1s] INFO    (36/61) SNL_18650_NCA_35C_0-100_0.5-1C_b.pkl: cached
+[    0.1s] INFO    (37/61) SNL_18650_NCA_35C_0-100_0.5-1C_c.pkl: cached
+[    0.1s] INFO    (38/61) SNL_18650_NCA_35C_0-100_0.5-1C_d.pkl: cached
+[    0.1s] INFO    (39/61) SNL_18650_NCA_35C_0-100_0.5-2C_a.pkl: cached
+[    0.1s] INFO    (40/61) SNL_18650_NCA_35C_0-100_0.5-2C_b.pkl: cached
+[    0.1s] INFO    (41/61) SNL_18650_NMC_15C_0-100_0.5-1C_a.pkl: cached
+[    0.1s] INFO    (42/61) SNL_18650_NMC_15C_0-100_0.5-1C_b.pkl: cached
+[    0.1s] INFO    (43/61) SNL_18650_NMC_15C_0-100_0.5-2C_a.pkl: cached
+[    0.1s] INFO    (44/61) SNL_18650_NMC_15C_0-100_0.5-2C_b.pkl: cached
+[    0.1s] INFO    (45/61) SNL_18650_NMC_25C_0-100_0.5-0.5C_b.pkl: cached
+[    0.1s] INFO    (46/61) SNL_18650_NMC_25C_0-100_0.5-1C_a.pkl: cached
+[    0.1s] INFO    (47/61) SNL_18650_NMC_25C_0-100_0.5-1C_b.pkl: cached
+[    0.1s] INFO    (48/61) SNL_18650_NMC_25C_0-100_0.5-1C_c.pkl: cached
+[    0.1s] INFO    (49/61) SNL_18650_NMC_25C_0-100_0.5-1C_d.pkl: cached
+[    0.1s] INFO    (50/61) SNL_18650_NMC_25C_0-100_0.5-2C_a.pkl: cached
+[    0.1s] INFO    (51/61) SNL_18650_NMC_25C_0-100_0.5-2C_b.pkl: cached
+[    0.1s] INFO    (52/61) SNL_18650_NMC_25C_0-100_0.5-3C_a.pkl: cached
+[    0.1s] INFO    (53/61) SNL_18650_NMC_25C_0-100_0.5-3C_b.pkl: cached
+[    0.1s] INFO    (54/61) SNL_18650_NMC_25C_0-100_0.5-3C_c.pkl: cached
+[    0.1s] INFO    (55/61) SNL_18650_NMC_25C_0-100_0.5-3C_d.pkl: cached
+[    0.1s] INFO    (56/61) SNL_18650_NMC_35C_0-100_0.5-1C_a.pkl: cached
+[    0.1s] INFO    (57/61) SNL_18650_NMC_35C_0-100_0.5-1C_b.pkl: cached
+[    0.1s] INFO    (58/61) SNL_18650_NMC_35C_0-100_0.5-1C_c.pkl: cached
+[    0.1s] INFO    (59/61) SNL_18650_NMC_35C_0-100_0.5-1C_d.pkl: cached
+[    0.1s] INFO    (60/61) SNL_18650_NMC_35C_0-100_0.5-2C_a.pkl: cached
+[    0.1s] INFO    (61/61) SNL_18650_NMC_35C_0-100_0.5-2C_b.pkl: cached
+[    0.1s] INFO  [SNL] cached 61 cells
+[    0.1s] INFO  [RWTH] 48 cell files, segment profile = charge
+[    0.3s] WARNING     skip RWTH_002.pkl: no usable CC segment (mode=charge)
+[    0.3s] INFO    (2/48) RWTH_003.pkl: cached
+[    0.3s] INFO    (3/48) RWTH_004.pkl: cached
+[    0.3s] INFO    (4/48) RWTH_005.pkl: cached
+[    0.5s] WARNING     skip RWTH_006.pkl: no usable CC segment (mode=charge)
+[    0.5s] INFO    (6/48) RWTH_007.pkl: cached
+[    0.6s] WARNING     skip RWTH_008.pkl: no usable CC segment (mode=charge)
+[    0.8s] WARNING     skip RWTH_009.pkl: no usable CC segment (mode=charge)
+[    1.0s] WARNING     skip RWTH_010.pkl: no usable CC segment (mode=charge)
+[    1.0s] INFO    (10/48) RWTH_011.pkl: cached
+[    1.2s] WARNING     skip RWTH_012.pkl: no usable CC segment (mode=charge)
+[    1.4s] WARNING     skip RWTH_013.pkl: no usable CC segment (mode=charge)
+[    1.6s] WARNING     skip RWTH_014.pkl: no usable CC segment (mode=charge)
+[    1.7s] WARNING     skip RWTH_015.pkl: no usable CC segment (mode=charge)
+[    1.8s] INFO    (15/48) RWTH_016.pkl: cached
+[    1.8s] INFO    (16/48) RWTH_017.pkl: cached
+[    1.8s] INFO    (17/48) RWTH_018.pkl: cached
+[    1.8s] INFO    (18/48) RWTH_019.pkl: cached
+[    1.8s] INFO    (19/48) RWTH_020.pkl: cached
+[    1.8s] INFO    (20/48) RWTH_021.pkl: cached
+[    1.9s] WARNING     skip RWTH_022.pkl: no usable CC segment (mode=charge)
+[    2.0s] INFO    (22/48) RWTH_023.pkl: cached
+[    2.0s] INFO    (23/48) RWTH_024.pkl: cached
+[    2.1s] WARNING     skip RWTH_025.pkl: no usable CC segment (mode=charge)
+[    2.3s] WARNING     skip RWTH_026.pkl: no usable CC segment (mode=charge)
+[    2.4s] WARNING     skip RWTH_027.pkl: no usable CC segment (mode=charge)
+[    2.5s] INFO    (27/48) RWTH_028.pkl: cached
+[    2.6s] WARNING     skip RWTH_029.pkl: no usable CC segment (mode=charge)
+[    2.7s] WARNING     skip RWTH_030.pkl: no usable CC segment (mode=charge)
+[    2.7s] INFO    (30/48) RWTH_031.pkl: cached
+[    2.7s] INFO    (31/48) RWTH_032.pkl: cached
+[    2.9s] WARNING     skip RWTH_033.pkl: no usable CC segment (mode=charge)
+[    2.9s] INFO    (33/48) RWTH_034.pkl: cached
+[    2.9s] INFO    (34/48) RWTH_035.pkl: cached
+[    2.9s] INFO    (35/48) RWTH_036.pkl: cached
+[    3.0s] WARNING     skip RWTH_037.pkl: no usable CC segment (mode=charge)
+[    3.1s] INFO    (37/48) RWTH_038.pkl: cached
+[    3.2s] WARNING     skip RWTH_039.pkl: no usable CC segment (mode=charge)
+[    3.2s] INFO    (39/48) RWTH_040.pkl: cached
+[    3.2s] INFO    (40/48) RWTH_041.pkl: cached
+[    3.2s] INFO    (41/48) RWTH_042.pkl: cached
+[    3.2s] INFO    (42/48) RWTH_043.pkl: cached
+[    3.2s] INFO    (43/48) RWTH_044.pkl: cached
+[    3.2s] INFO    (44/48) RWTH_045.pkl: cached
+[    3.4s] WARNING     skip RWTH_046.pkl: no usable CC segment (mode=charge)
+[    3.5s] WARNING     skip RWTH_047.pkl: no usable CC segment (mode=charge)
+[    3.6s] INFO    (47/48) RWTH_048.pkl: cached
+[    3.6s] INFO    (48/48) RWTH_049.pkl: cached
+[    3.6s] INFO  [RWTH] cached 28 cells
+[    3.6s] INFO  [Stanford] 41 cell files, segment profile = charge
+[    3.6s] INFO    (1/41) Stanford_Nova_Regular_191.pkl: cached
+[    3.6s] INFO    (2/41) Stanford_Nova_Regular_192.pkl: cached
+[    3.6s] INFO    (3/41) Stanford_Nova_Regular_193.pkl: cached
+[    3.6s] INFO    (4/41) Stanford_Nova_Regular_194.pkl: cached
+[    3.6s] INFO    (5/41) Stanford_Nova_Regular_195.pkl: cached
+[    3.6s] INFO    (6/41) Stanford_Nova_Regular_196.pkl: cached
+[    3.6s] INFO    (7/41) Stanford_Nova_Regular_198.pkl: cached
+[    3.6s] INFO    (8/41) Stanford_Nova_Regular_199.pkl: cached
+[    3.6s] INFO    (9/41) Stanford_Nova_Regular_200.pkl: cached
+[    3.6s] INFO    (10/41) Stanford_Nova_Regular_201.pkl: cached
+[    3.6s] INFO    (11/41) Stanford_Nova_Regular_202.pkl: cached
+[    3.6s] INFO    (12/41) Stanford_Nova_Regular_203.pkl: cached
+[    3.6s] INFO    (13/41) Stanford_Nova_Regular_204.pkl: cached
+[    3.6s] INFO    (14/41) Stanford_Nova_Regular_205.pkl: cached
+[    3.6s] INFO    (15/41) Stanford_Nova_Regular_206.pkl: cached
+[    3.6s] INFO    (16/41) Stanford_Nova_Regular_207.pkl: cached
+[    3.6s] INFO    (17/41) Stanford_Nova_Regular_208.pkl: cached
+[    3.6s] INFO    (18/41) Stanford_Nova_Regular_209.pkl: cached
+[    3.6s] INFO    (19/41) Stanford_Nova_Regular_210.pkl: cached
+[    3.6s] INFO    (20/41) Stanford_Nova_Regular_211.pkl: cached
+[    3.6s] INFO    (21/41) Stanford_Nova_Regular_212.pkl: cached
+[    3.6s] INFO    (22/41) Stanford_Nova_Regular_213.pkl: cached
+[    3.6s] INFO    (23/41) Stanford_Nova_Regular_214.pkl: cached
+[    3.6s] INFO    (24/41) Stanford_Nova_Regular_215.pkl: cached
+[    3.6s] INFO    (25/41) Stanford_Nova_Regular_216.pkl: cached
+[    3.6s] INFO    (26/41) Stanford_Nova_Regular_217.pkl: cached
+[    3.6s] INFO    (27/41) Stanford_Nova_Regular_219.pkl: cached
+[    3.6s] INFO    (28/41) Stanford_Nova_Regular_220.pkl: cached
+[    3.6s] INFO    (29/41) Stanford_Nova_Regular_221.pkl: cached
+[    3.6s] INFO    (30/41) Stanford_Nova_Regular_222.pkl: cached
+[    3.6s] INFO    (31/41) Stanford_Nova_Regular_223.pkl: cached
+[    3.6s] INFO    (32/41) Stanford_Nova_Regular_224.pkl: cached
+[    3.6s] INFO    (33/41) Stanford_Nova_Regular_225.pkl: cached
+[    3.6s] INFO    (34/41) Stanford_Nova_Regular_226.pkl: cached
+[    3.6s] INFO    (35/41) Stanford_Nova_Regular_227.pkl: cached
+[    3.6s] INFO    (36/41) Stanford_Nova_Regular_228.pkl: cached
+[    3.6s] INFO    (37/41) Stanford_Nova_Regular_229.pkl: cached
+[    3.6s] INFO    (38/41) Stanford_Nova_Regular_230.pkl: cached
+[    3.6s] INFO    (39/41) Stanford_Nova_Regular_Ref_100.pkl: cached
+[    3.6s] INFO    (40/41) Stanford_Nova_Regular_Ref_101.pkl: cached
+[    3.6s] INFO    (41/41) Stanford_Nova_Regular_Ref_102.pkl: cached
+[    3.6s] INFO  [Stanford] cached 41 cells
+[    3.6s] INFO  -- done (3.5s): PREPARE — parse pkl files and cache features
+[    3.6s] INFO  ========================================================================
+[    3.6s] INFO  [2/4] DIAGNOSE — rank, slope consistency, label summary
+[    3.6s] INFO  ========================================================================
+[    3.9s] INFO  loaded 495 cached cells
+[    3.9s] INFO    CALB_labels.json: 27 labels (hint=CALB) e.g. [('CALB_0_B182', 108.0), ('CALB_0_B183', 105.0)]
+[    3.9s] INFO    CALCE_labels.json: 13 labels (hint=CALCE) e.g. [('CALCE_CS2_38', 568.0), ('CALCE_CX2_36', 519.0)]
+[    3.9s] INFO    HNEI_labels.json: 14 labels (hint=HNEI) e.g. [('HNEI_18650_NMC_LCO_25C_0_100_0.5_1.5C_O', 266.0), ('HNEI_18650_NMC_LCO_25C_0_100_0.5_1.5C_L', 228.0)]
+[    3.9s] INFO    HUST_labels.json: 77 labels (hint=HUST) e.g. [('HUST_10_1', 1760.0), ('HUST_1_6', 1179.0)]
+[    3.9s] INFO    ISU-ILCC_labels.json: 240 labels (hint=ISU_ILCC) e.g. [('ISU_ILCC_G41C2', 735.0), ('ISU_ILCC_G33C1', 1667.0)]
+[    3.9s] INFO    MATR_labels.json: 169 labels (hint=MATR) e.g. [('MATR_B4C36', 599.0), ('MATR_B2C46', 428.0)]
+[    3.9s] INFO    MICH_EXP_labels.json: 12 labels (hint=MICH_EXP) e.g. [('MICH_01R_POUCH_NMC_25C_0_100_0.2_0.2C', 269.0), ('MICH_02C_POUCH_NMC__5C_0_100_0.2_0.2C', 204.0)]
+[    3.9s] INFO    MICH_labels.json: 40 labels (hint=MICH) e.g. [('MICH_BLFORM10_POUCH_NMC_25C_0_100_1_1C_J', 323.0), ('MICH_BLFORM11_POUCH_NMC_25C_0_100_1_1C_A', 314.0)]
+[    3.9s] INFO    NA-ion_labels.json: 34 labels (hint=NA_ION) e.g. [('NA_ION_270040_1_2_63', 177.0), ('NA_ION_270040_1_3_62', 268.0)]
+[    3.9s] INFO    RWTH_labels.json: 48 labels (hint=RWTH) e.g. [('RWTH_021', 614.0), ('RWTH_032', 667.0)]
+[    3.9s] INFO    SDU_labels.json: 70 labels (hint=SDU) e.g. [('SDU_BATTERY_1', 820.0), ('SDU_BATTERY_10', 399.0)]
+[    3.9s] INFO    SNL_labels.json: 52 labels (hint=SNL) e.g. [('SNL_18650_NCA_15C_0_100_0.5_1C_A', 331.0), ('SNL_18650_NCA_25C_20_80_0.5_0.5C_D', 840.0)]
+[    3.9s] INFO    Stanford_2_labels.json: 181 labels (hint=STANFORD_2) e.g. [('STANFORD_NOVA_REGULAR_100', 470.0), ('STANFORD_NOVA_REGULAR_101', 533.0)]
+[    3.9s] INFO    Stanford_labels.json: 41 labels (hint=STANFORD) e.g. [('STANFORD_NOVA_REGULAR_225', 859.0), ('STANFORD_NOVA_REGULAR_191', 665.0)]
+[    3.9s] INFO    Tongji_labels.json: 108 labels (hint=TONGJI) e.g. [('TONGJI1_CY25_05_1_#19', 127.0), ('TONGJI2_CY35_05_1_#4', 460.0)]
+[    3.9s] INFO    UL-PUR_labels.json: 2 labels (hint=UL_PUR) e.g. [('UL_PUR_N10_NA7_18650_NCA_23C_0_100_0.5_0.5C_G', 159.0), ('UL_PUR_N15_NA10_18650_NCA_23C_0_100_0.5_0.5C_J', 259.0)]
+[    3.9s] INFO    XJTU_labels.json: 23 labels (hint=XJTU) e.g. [('XJTU_2C_BATTERY_1', 389.0), ('XJTU_2C_BATTERY_2', 405.0)]
+[    3.9s] INFO    ZN-coin_labels.json: 121 labels (hint=ZN_COIN) e.g. [('ZN_COIN_202_20231213213655_03_3', 359.0), ('ZN_COIN_202_20231213213655_03_4', 223.0)]
+[    3.9s] INFO    total_MICH_labels.json: 52 labels (hint=TOTAL_MICH) e.g. [('MICH_BLFORM9_POUCH_NMC_45C_0_100_1_1C_I', 191.0), ('MICH_MCFORM21_POUCH_NMC_25C_0_100_1_1C_A', 362.0)]
+[    3.9s] INFO  official life labels: 1324 entries across 19 files
+[    3.9s] INFO  label source: mixed (367/495 cells matched an official label)
+[    3.9s] WARNING 128 cells fell back to a DERIVED life. Stored records can stop before the EOL threshold is crossed, in which case the derived value is missing or wrong (HUST_1-1: official 1542, record ends at cycle 1504). Check that the cell ids in the label json match the pkl file names.
+[    3.9s] INFO    official vs derived: median |rel diff| = 0.000%, max = 99.898%
+[    3.9s] WARNING dropped 49 cells (no life or life < 150): [('MATR_b2c1', 147), ('SNL_18650_LFP_15C_0-100_0.5-2C_b', None), ('SNL_18650_LFP_25C_0-100_0.5-0.5C_a', None), ('SNL_18650_LFP_25C_0-100_0.5-1C_a', None), ('SNL_18650_LFP_25C_0-100_0.5-1C_c', None), ('SNL_18650_LFP_25C_0-100_0.5-1C_d', None), ('SNL_18650_LFP_25C_0-100_0.5-2C_a', None), ('SNL_18650_LFP_25C_0-100_0.5-2C_b', None)]...
+[    3.9s] INFO  [HUST] 77 cells, branch=charge, common V=[3.447,3.590]
+[    3.9s] INFO  [MATR] 168 cells, branch=discharge, common V=[2.553,3.209]
+[    3.9s] INFO  [RWTH] 28 cells, branch=charge, common V=[3.706,3.893]
+[    3.9s] INFO  [SNL] 50 cells, branch=charge/discharge, common V=[3.649,3.248]
+[    3.9s] WARNING [SNL] cells disagree on the branch (['charge', 'discharge']); pin it in DATASET_PROFILES or the curves are not comparable
+[    3.9s] INFO  [Stanford] 41 cells, branch=charge, common V=[3.577,4.379]
+[    3.9s] INFO  [Tongji] 82 cells, branch=discharge, common V=[2.678,3.641]
+[    3.9s] INFO  regridded 446 cells onto the common grids (0.0s)
+[    3.9s] INFO  LEAK CHECK  corr(L_i, log c_eol) = -0.0022 (must be ~0; |r|>0.2 invalidates the protocol)
+[    3.9s] INFO  
+[    3.9s] INFO  [A] effective rank of the difference curves (per cell)
+[    3.9s] INFO    cell       cycles  PC1     cum2    cum3  
+[    3.9s] INFO    -----------------------------------------
+[    3.9s] INFO    HUST_1-1   90      0.9834  0.9983  0.9987
+[    3.9s] INFO    HUST_1-2   90      0.9400  0.9968  0.9976
+[    3.9s] INFO    HUST_1-3   90      0.9052  0.9972  0.9987
+[    3.9s] INFO    HUST_1-4   90      0.9769  0.9991  0.9995
+[    3.9s] INFO    HUST_1-5   90      0.9874  0.9995  0.9996
+[    3.9s] INFO    HUST_1-6   90      0.9949  0.9990  0.9993
+[    3.9s] INFO    HUST_1-7   90      0.9897  0.9977  0.9986
+[    3.9s] INFO    HUST_1-8   90      0.9829  0.9975  0.9985
+[    3.9s] INFO    HUST_10-1  90      0.9901  0.9983  0.9987
+[    3.9s] INFO    HUST_10-2  90      0.9542  0.9974  0.9988
+[    3.9s] INFO    HUST_10-3  90      0.9804  0.9969  0.9983
+[    3.9s] INFO    HUST_10-4  90      0.9741  0.9987  0.9994
+[    3.9s] INFO  
+[    3.9s] INFO  [B] slope consistency across window lengths (divergence => length-dependent bias, which a linear summary cannot absorb)
+[    3.9s] INFO    cell       L=20      L=50      L=100     L=200   
+[    3.9s] INFO    -------------------------------------------------
+[    3.9s] INFO    HUST_1-1   2.82e-01  7.94e-02  2.88e-02  1.35e-02
+[    3.9s] INFO    HUST_1-2   3.54e-01  9.73e-02  3.31e-02  1.30e-02
+[    3.9s] INFO    HUST_1-3   3.65e-01  9.43e-02  3.33e-02  1.32e-02
+[    3.9s] INFO    HUST_1-4   3.69e-01  9.79e-02  3.39e-02  1.24e-02
+[    3.9s] INFO    HUST_1-5   3.96e-01  1.00e-01  3.54e-02  1.30e-02
+[    3.9s] INFO    HUST_1-6   2.99e-01  8.71e-02  3.62e-02  1.62e-02
+[    3.9s] INFO    HUST_1-7   3.07e-01  8.19e-02  3.25e-02  1.55e-02
+[    3.9s] INFO    HUST_1-8   3.73e-01  8.12e-02  2.91e-02  1.30e-02
+[    3.9s] INFO    HUST_10-1  3.22e-01  8.96e-02  3.57e-02  1.50e-02
+[    3.9s] INFO    HUST_10-2  4.98e-01  9.89e-02  3.53e-02  1.28e-02
+[    3.9s] INFO    HUST_10-3  2.10e-01  9.55e-02  3.85e-02  1.57e-02
+[    3.9s] INFO    HUST_10-4  5.49e-01  1.21e-01  4.01e-02  1.36e-02
+[    3.9s] INFO  
+[    3.9s] INFO  [C] label and protocol summary
+[    3.9s] INFO    dataset   cells  life min  med   max   mean L
+[    3.9s] INFO    ---------------------------------------------
+[    3.9s] INFO    HUST      77     1164      1911  2768  61.1  
+[    3.9s] INFO    MATR      168    299       765   2237  62.5  
+[    3.9s] INFO    RWTH      28     510       660   761   57.5  
+[    3.9s] INFO    SNL       50     152       480   3842  60.1  
+[    3.9s] INFO    Stanford  41     473       665   1004  66.4  
+[    3.9s] INFO    Tongji    82     150       394   580   62.2  
+[    3.9s] INFO  -- done (0.4s): DIAGNOSE — rank, slope consistency, label summary
+[    3.9s] INFO  ========================================================================
+[    3.9s] INFO  [3/4] TRAIN — leave-one-dataset-out
+[    3.9s] INFO  ========================================================================
+[    4.2s] INFO  loaded 495 cached cells
+[    4.2s] INFO    CALB_labels.json: 27 labels (hint=CALB) e.g. [('CALB_0_B182', 108.0), ('CALB_0_B183', 105.0)]
+[    4.2s] INFO    CALCE_labels.json: 13 labels (hint=CALCE) e.g. [('CALCE_CS2_38', 568.0), ('CALCE_CX2_36', 519.0)]
+[    4.2s] INFO    HNEI_labels.json: 14 labels (hint=HNEI) e.g. [('HNEI_18650_NMC_LCO_25C_0_100_0.5_1.5C_O', 266.0), ('HNEI_18650_NMC_LCO_25C_0_100_0.5_1.5C_L', 228.0)]
+[    4.2s] INFO    HUST_labels.json: 77 labels (hint=HUST) e.g. [('HUST_10_1', 1760.0), ('HUST_1_6', 1179.0)]
+[    4.2s] INFO    ISU-ILCC_labels.json: 240 labels (hint=ISU_ILCC) e.g. [('ISU_ILCC_G41C2', 735.0), ('ISU_ILCC_G33C1', 1667.0)]
+[    4.2s] INFO    MATR_labels.json: 169 labels (hint=MATR) e.g. [('MATR_B4C36', 599.0), ('MATR_B2C46', 428.0)]
+[    4.2s] INFO    MICH_EXP_labels.json: 12 labels (hint=MICH_EXP) e.g. [('MICH_01R_POUCH_NMC_25C_0_100_0.2_0.2C', 269.0), ('MICH_02C_POUCH_NMC__5C_0_100_0.2_0.2C', 204.0)]
+[    4.2s] INFO    MICH_labels.json: 40 labels (hint=MICH) e.g. [('MICH_BLFORM10_POUCH_NMC_25C_0_100_1_1C_J', 323.0), ('MICH_BLFORM11_POUCH_NMC_25C_0_100_1_1C_A', 314.0)]
+[    4.2s] INFO    NA-ion_labels.json: 34 labels (hint=NA_ION) e.g. [('NA_ION_270040_1_2_63', 177.0), ('NA_ION_270040_1_3_62', 268.0)]
+[    4.2s] INFO    RWTH_labels.json: 48 labels (hint=RWTH) e.g. [('RWTH_021', 614.0), ('RWTH_032', 667.0)]
+[    4.2s] INFO    SDU_labels.json: 70 labels (hint=SDU) e.g. [('SDU_BATTERY_1', 820.0), ('SDU_BATTERY_10', 399.0)]
+[    4.2s] INFO    SNL_labels.json: 52 labels (hint=SNL) e.g. [('SNL_18650_NCA_15C_0_100_0.5_1C_A', 331.0), ('SNL_18650_NCA_25C_20_80_0.5_0.5C_D', 840.0)]
+[    4.2s] INFO    Stanford_2_labels.json: 181 labels (hint=STANFORD_2) e.g. [('STANFORD_NOVA_REGULAR_100', 470.0), ('STANFORD_NOVA_REGULAR_101', 533.0)]
+[    4.2s] INFO    Stanford_labels.json: 41 labels (hint=STANFORD) e.g. [('STANFORD_NOVA_REGULAR_225', 859.0), ('STANFORD_NOVA_REGULAR_191', 665.0)]
+[    4.2s] INFO    Tongji_labels.json: 108 labels (hint=TONGJI) e.g. [('TONGJI1_CY25_05_1_#19', 127.0), ('TONGJI2_CY35_05_1_#4', 460.0)]
+[    4.2s] INFO    UL-PUR_labels.json: 2 labels (hint=UL_PUR) e.g. [('UL_PUR_N10_NA7_18650_NCA_23C_0_100_0.5_0.5C_G', 159.0), ('UL_PUR_N15_NA10_18650_NCA_23C_0_100_0.5_0.5C_J', 259.0)]
+[    4.2s] INFO    XJTU_labels.json: 23 labels (hint=XJTU) e.g. [('XJTU_2C_BATTERY_1', 389.0), ('XJTU_2C_BATTERY_2', 405.0)]
+[    4.2s] INFO    ZN-coin_labels.json: 121 labels (hint=ZN_COIN) e.g. [('ZN_COIN_202_20231213213655_03_3', 359.0), ('ZN_COIN_202_20231213213655_03_4', 223.0)]
+[    4.2s] INFO    total_MICH_labels.json: 52 labels (hint=TOTAL_MICH) e.g. [('MICH_BLFORM9_POUCH_NMC_45C_0_100_1_1C_I', 191.0), ('MICH_MCFORM21_POUCH_NMC_25C_0_100_1_1C_A', 362.0)]
+[    4.2s] INFO  official life labels: 1324 entries across 19 files
+[    4.2s] INFO  label source: mixed (367/495 cells matched an official label)
+[    4.2s] WARNING 128 cells fell back to a DERIVED life. Stored records can stop before the EOL threshold is crossed, in which case the derived value is missing or wrong (HUST_1-1: official 1542, record ends at cycle 1504). Check that the cell ids in the label json match the pkl file names.
+[    4.2s] INFO    official vs derived: median |rel diff| = 0.000%, max = 99.898%
+[    4.2s] WARNING dropped 49 cells (no life or life < 150): [('MATR_b2c1', 147), ('SNL_18650_LFP_15C_0-100_0.5-2C_b', None), ('SNL_18650_LFP_25C_0-100_0.5-0.5C_a', None), ('SNL_18650_LFP_25C_0-100_0.5-1C_a', None), ('SNL_18650_LFP_25C_0-100_0.5-1C_c', None), ('SNL_18650_LFP_25C_0-100_0.5-1C_d', None), ('SNL_18650_LFP_25C_0-100_0.5-2C_a', None), ('SNL_18650_LFP_25C_0-100_0.5-2C_b', None)]...
+[    4.2s] INFO  [HUST] 77 cells, branch=charge, common V=[3.447,3.590]
+[    4.2s] INFO  [MATR] 168 cells, branch=discharge, common V=[2.553,3.209]
+[    4.2s] INFO  [RWTH] 28 cells, branch=charge, common V=[3.706,3.893]
+[    4.2s] INFO  [SNL] 50 cells, branch=charge/discharge, common V=[3.649,3.248]
+[    4.2s] WARNING [SNL] cells disagree on the branch (['charge', 'discharge']); pin it in DATASET_PROFILES or the curves are not comparable
+[    4.2s] INFO  [Stanford] 41 cells, branch=charge, common V=[3.577,4.379]
+[    4.2s] INFO  [Tongji] 82 cells, branch=discharge, common V=[2.678,3.641]
+[    4.2s] INFO  regridded 446 cells onto the common grids (0.0s)
+[    4.2s] INFO  LEAK CHECK  corr(L_i, log c_eol) = -0.0022 (must be ~0; |r|>0.2 invalidates the protocol)
+[    4.2s] INFO  leave-one-dataset-out over 6 folds: ['HUST', 'MATR', 'RWTH', 'SNL', 'Stanford', 'Tongji']
+[    4.2s] INFO  ========================================================================
+[    4.2s] INFO  [train] FOLD 1/6 — target = HUST
+[    4.2s] INFO  ========================================================================
+[    4.2s] INFO  fold=HUST seed=0 | source 314 train / 55 val, target 77 | label mu=6.371 sd=0.541
+[    4.2s] INFO    source datasets: ['MATR', 'RWTH', 'SNL', 'Stanford', 'Tongji']
+[    4.3s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[    5.0s] INFO    step     1/1500  loss=0.6871  reg=0.6871  lr=1.00e-03
+[    5.1s] INFO    step    50/1500  loss=0.8467  reg=0.8467  lr=9.97e-04
+[    5.2s] INFO    step   100/1500  loss=1.1157  reg=1.1157  lr=9.89e-04
+[    5.2s] INFO    step   100  val_mse(log-life)=0.3491  <- best
+[    5.3s] INFO    step   150/1500  loss=0.5889  reg=0.5889  lr=9.76e-04
+[    5.3s] INFO    step   200/1500  loss=0.4040  reg=0.4040  lr=9.57e-04
+[    5.3s] INFO    step   200  val_mse(log-life)=0.3537
+[    5.4s] INFO    step   250/1500  loss=0.9268  reg=0.9268  lr=9.33e-04
+[    5.5s] INFO    step   300/1500  loss=0.7743  reg=0.7743  lr=9.05e-04
+[    5.5s] INFO    step   300  val_mse(log-life)=0.5633
+[    5.6s] INFO    step   350/1500  loss=0.6082  reg=0.6082  lr=8.72e-04
+[    5.7s] INFO    step   400/1500  loss=0.7959  reg=0.7959  lr=8.35e-04
+[    5.7s] INFO    step   400  val_mse(log-life)=0.3396  <- best
+[    5.8s] INFO    step   450/1500  loss=0.4194  reg=0.4194  lr=7.94e-04
+[    5.8s] INFO    step   500/1500  loss=0.9013  reg=0.9013  lr=7.50e-04
+[    5.8s] INFO    step   500  val_mse(log-life)=0.2939  <- best
+[    5.9s] INFO    step   550/1500  loss=0.2201  reg=0.2201  lr=7.03e-04
+[    6.0s] INFO    step   600/1500  loss=0.6702  reg=0.6702  lr=6.55e-04
+[    6.0s] INFO    step   600  val_mse(log-life)=0.2916  <- best
+[    6.1s] INFO    step   650/1500  loss=0.4241  reg=0.4241  lr=6.04e-04
+[    6.2s] INFO    step   700/1500  loss=0.9671  reg=0.9671  lr=5.52e-04
+[    6.2s] INFO    step   700  val_mse(log-life)=0.3454
+[    6.3s] INFO    step   750/1500  loss=0.2072  reg=0.2072  lr=5.00e-04
+[    6.4s] INFO    step   800/1500  loss=0.6038  reg=0.6038  lr=4.48e-04
+[    6.4s] INFO    step   800  val_mse(log-life)=0.3967
+[    6.4s] INFO    step   850/1500  loss=0.8086  reg=0.8086  lr=3.96e-04
+[    6.5s] INFO    step   900/1500  loss=0.4391  reg=0.4391  lr=3.45e-04
+[    6.5s] INFO    step   900  val_mse(log-life)=0.6510
+[    6.6s] INFO    step   950/1500  loss=0.6579  reg=0.6579  lr=2.97e-04
+[    6.7s] INFO    step  1000/1500  loss=0.7636  reg=0.7636  lr=2.50e-04
+[    6.7s] INFO    step  1000  val_mse(log-life)=1.0994
+[    6.7s] INFO    early stop at step 1000 (no improvement for 400)
+[    6.7s] INFO    restored best checkpoint from step 600 (val_mse=0.2916)
+[    6.7s] INFO    saved checkpoint -> runs/20260726_034513/fold_HUST/seed_0/checkpoint.pt
+[    7.1s] INFO  fold=HUST seed=1 | source 314 train / 55 val, target 77 | label mu=6.348 sd=0.509
+[    7.1s] INFO    source datasets: ['MATR', 'RWTH', 'SNL', 'Stanford', 'Tongji']
+[    7.1s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[    7.1s] INFO    step     1/1500  loss=0.7824  reg=0.7824  lr=1.00e-03
+[    7.2s] INFO    step    50/1500  loss=1.4786  reg=1.4786  lr=9.97e-04
+[    7.3s] INFO    step   100/1500  loss=0.7864  reg=0.7864  lr=9.89e-04
+[    7.3s] INFO    step   100  val_mse(log-life)=0.5520  <- best
+[    7.4s] INFO    step   150/1500  loss=0.8179  reg=0.8179  lr=9.76e-04
+[    7.5s] INFO    step   200/1500  loss=0.2960  reg=0.2960  lr=9.57e-04
+[    7.5s] INFO    step   200  val_mse(log-life)=0.4308  <- best
+[    7.6s] INFO    step   250/1500  loss=0.4021  reg=0.4021  lr=9.33e-04
+[    7.6s] INFO    step   300/1500  loss=0.7972  reg=0.7972  lr=9.05e-04
+[    7.6s] INFO    step   300  val_mse(log-life)=0.3264  <- best
+[    7.7s] INFO    step   350/1500  loss=0.6162  reg=0.6162  lr=8.72e-04
+[    7.8s] INFO    step   400/1500  loss=0.7829  reg=0.7829  lr=8.35e-04
+[    7.8s] INFO    step   400  val_mse(log-life)=0.3019  <- best
+[    7.9s] INFO    step   450/1500  loss=1.0188  reg=1.0188  lr=7.94e-04
+[    8.0s] INFO    step   500/1500  loss=0.3938  reg=0.3938  lr=7.50e-04
+[    8.0s] INFO    step   500  val_mse(log-life)=0.2973  <- best
+[    8.1s] INFO    step   550/1500  loss=0.9427  reg=0.9427  lr=7.03e-04
+[    8.2s] INFO    step   600/1500  loss=0.7333  reg=0.7333  lr=6.55e-04
+[    8.2s] INFO    step   600  val_mse(log-life)=0.2866  <- best
+[    8.2s] INFO    step   650/1500  loss=0.7883  reg=0.7883  lr=6.04e-04
+[    8.3s] INFO    step   700/1500  loss=0.3604  reg=0.3604  lr=5.52e-04
+[    8.3s] INFO    step   700  val_mse(log-life)=0.2982
+[    8.4s] INFO    step   750/1500  loss=0.5570  reg=0.5570  lr=5.00e-04
+[    8.5s] INFO    step   800/1500  loss=0.4802  reg=0.4802  lr=4.48e-04
+[    8.5s] INFO    step   800  val_mse(log-life)=0.2967
+[    8.6s] INFO    step   850/1500  loss=0.2860  reg=0.2860  lr=3.96e-04
+[    8.7s] INFO    step   900/1500  loss=0.3579  reg=0.3579  lr=3.45e-04
+[    8.7s] INFO    step   900  val_mse(log-life)=0.3015
+[    8.7s] INFO    step   950/1500  loss=0.5315  reg=0.5315  lr=2.97e-04
+[    8.8s] INFO    step  1000/1500  loss=0.8119  reg=0.8119  lr=2.50e-04
+[    8.8s] INFO    step  1000  val_mse(log-life)=0.2861  <- best
+[    8.9s] INFO    step  1050/1500  loss=0.3714  reg=0.3714  lr=2.06e-04
+[    9.0s] INFO    step  1100/1500  loss=0.6408  reg=0.6408  lr=1.65e-04
+[    9.0s] INFO    step  1100  val_mse(log-life)=0.2918
+[    9.1s] INFO    step  1150/1500  loss=0.7042  reg=0.7042  lr=1.28e-04
+[    9.2s] INFO    step  1200/1500  loss=0.3736  reg=0.3736  lr=9.55e-05
+[    9.2s] INFO    step  1200  val_mse(log-life)=0.2917
+[    9.3s] INFO    step  1250/1500  loss=0.4063  reg=0.4063  lr=6.70e-05
+[    9.3s] INFO    step  1300/1500  loss=0.5145  reg=0.5145  lr=4.32e-05
+[    9.3s] INFO    step  1300  val_mse(log-life)=0.2896
+[    9.4s] INFO    step  1350/1500  loss=0.7373  reg=0.7373  lr=2.45e-05
+[    9.5s] INFO    step  1400/1500  loss=0.2409  reg=0.2409  lr=1.09e-05
+[    9.5s] INFO    step  1400  val_mse(log-life)=0.2912
+[    9.5s] INFO    early stop at step 1400 (no improvement for 400)
+[    9.5s] INFO    restored best checkpoint from step 1000 (val_mse=0.2861)
+[    9.5s] INFO    saved checkpoint -> runs/20260726_034513/fold_HUST/seed_1/checkpoint.pt
+[    9.5s] INFO  fold=HUST seed=2 | source 314 train / 55 val, target 77 | label mu=6.399 sd=0.562
+[    9.5s] INFO    source datasets: ['MATR', 'RWTH', 'SNL', 'Stanford', 'Tongji']
+[    9.5s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[    9.5s] INFO    step     1/1500  loss=1.5518  reg=1.5518  lr=1.00e-03
+[    9.6s] INFO    step    50/1500  loss=1.4353  reg=1.4353  lr=9.97e-04
+[    9.7s] INFO    step   100/1500  loss=1.2041  reg=1.2041  lr=9.89e-04
+[    9.7s] INFO    step   100  val_mse(log-life)=0.2187  <- best
+[    9.8s] INFO    step   150/1500  loss=0.5947  reg=0.5947  lr=9.76e-04
+[    9.9s] INFO    step   200/1500  loss=0.3627  reg=0.3627  lr=9.57e-04
+[    9.9s] INFO    step   200  val_mse(log-life)=0.1948  <- best
+[   10.0s] INFO    step   250/1500  loss=0.8162  reg=0.8162  lr=9.33e-04
+[   10.1s] INFO    step   300/1500  loss=0.5669  reg=0.5669  lr=9.05e-04
+[   10.1s] INFO    step   300  val_mse(log-life)=0.1888  <- best
+[   10.1s] INFO    step   350/1500  loss=1.4354  reg=1.4354  lr=8.72e-04
+[   10.2s] INFO    step   400/1500  loss=0.9882  reg=0.9882  lr=8.35e-04
+[   10.2s] INFO    step   400  val_mse(log-life)=0.1488  <- best
+[   10.3s] INFO    step   450/1500  loss=0.5074  reg=0.5074  lr=7.94e-04
+[   10.4s] INFO    step   500/1500  loss=0.9758  reg=0.9758  lr=7.50e-04
+[   10.4s] INFO    step   500  val_mse(log-life)=0.1308  <- best
+[   10.5s] INFO    step   550/1500  loss=0.8121  reg=0.8121  lr=7.03e-04
+[   10.6s] INFO    step   600/1500  loss=0.8932  reg=0.8932  lr=6.55e-04
+[   10.6s] INFO    step   600  val_mse(log-life)=0.1358
+[   10.6s] INFO    step   650/1500  loss=0.8589  reg=0.8589  lr=6.04e-04
+[   10.7s] INFO    step   700/1500  loss=0.4913  reg=0.4913  lr=5.52e-04
+[   10.7s] INFO    step   700  val_mse(log-life)=0.1278  <- best
+[   10.8s] INFO    step   750/1500  loss=0.3858  reg=0.3858  lr=5.00e-04
+[   10.9s] INFO    step   800/1500  loss=0.6371  reg=0.6371  lr=4.48e-04
+[   10.9s] INFO    step   800  val_mse(log-life)=0.1244  <- best
+[   11.0s] INFO    step   850/1500  loss=0.8332  reg=0.8332  lr=3.96e-04
+[   11.1s] INFO    step   900/1500  loss=0.5841  reg=0.5841  lr=3.45e-04
+[   11.1s] INFO    step   900  val_mse(log-life)=0.1222  <- best
+[   11.2s] INFO    step   950/1500  loss=0.5662  reg=0.5662  lr=2.97e-04
+[   11.2s] INFO    step  1000/1500  loss=0.5752  reg=0.5752  lr=2.50e-04
+[   11.2s] INFO    step  1000  val_mse(log-life)=0.1244
+[   11.3s] INFO    step  1050/1500  loss=0.3688  reg=0.3688  lr=2.06e-04
+[   11.4s] INFO    step  1100/1500  loss=0.5171  reg=0.5171  lr=1.65e-04
+[   11.4s] INFO    step  1100  val_mse(log-life)=0.1268
+[   11.5s] INFO    step  1150/1500  loss=0.6460  reg=0.6460  lr=1.28e-04
+[   11.6s] INFO    step  1200/1500  loss=0.4924  reg=0.4924  lr=9.55e-05
+[   11.6s] INFO    step  1200  val_mse(log-life)=0.1280
+[   11.7s] INFO    step  1250/1500  loss=0.6131  reg=0.6131  lr=6.70e-05
+[   11.8s] INFO    step  1300/1500  loss=0.5201  reg=0.5201  lr=4.32e-05
+[   11.8s] INFO    step  1300  val_mse(log-life)=0.1255
+[   11.8s] INFO    early stop at step 1300 (no improvement for 400)
+[   11.8s] INFO    restored best checkpoint from step 900 (val_mse=0.1222)
+[   11.8s] INFO    saved checkpoint -> runs/20260726_034513/fold_HUST/seed_2/checkpoint.pt
+[   11.8s] INFO  fold=HUST seed=3 | source 314 train / 55 val, target 77 | label mu=6.389 sd=0.543
+[   11.8s] INFO    source datasets: ['MATR', 'RWTH', 'SNL', 'Stanford', 'Tongji']
+[   11.8s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   11.8s] INFO    step     1/1500  loss=1.3721  reg=1.3721  lr=1.00e-03
+[   11.9s] INFO    step    50/1500  loss=1.1616  reg=1.1616  lr=9.97e-04
+[   12.0s] INFO    step   100/1500  loss=0.9442  reg=0.9442  lr=9.89e-04
+[   12.0s] INFO    step   100  val_mse(log-life)=0.3323  <- best
+[   12.1s] INFO    step   150/1500  loss=0.5323  reg=0.5323  lr=9.76e-04
+[   12.2s] INFO    step   200/1500  loss=0.8487  reg=0.8487  lr=9.57e-04
+[   12.2s] INFO    step   200  val_mse(log-life)=0.2894  <- best
+[   12.2s] INFO    step   250/1500  loss=0.6528  reg=0.6528  lr=9.33e-04
+[   12.3s] INFO    step   300/1500  loss=0.6352  reg=0.6352  lr=9.05e-04
+[   12.3s] INFO    step   300  val_mse(log-life)=0.3383
+[   12.4s] INFO    step   350/1500  loss=0.6337  reg=0.6337  lr=8.72e-04
+[   12.5s] INFO    step   400/1500  loss=0.5258  reg=0.5258  lr=8.35e-04
+[   12.5s] INFO    step   400  val_mse(log-life)=0.2644  <- best
+[   12.6s] INFO    step   450/1500  loss=0.4679  reg=0.4679  lr=7.94e-04
+[   12.7s] INFO    step   500/1500  loss=0.4607  reg=0.4607  lr=7.50e-04
+[   12.7s] INFO    step   500  val_mse(log-life)=0.4263
+[   12.8s] INFO    step   550/1500  loss=1.0555  reg=1.0555  lr=7.03e-04
+[   12.8s] INFO    step   600/1500  loss=0.5157  reg=0.5157  lr=6.55e-04
+[   12.8s] INFO    step   600  val_mse(log-life)=0.3259
+[   12.9s] INFO    step   650/1500  loss=0.3068  reg=0.3068  lr=6.04e-04
+[   13.0s] INFO    step   700/1500  loss=0.7083  reg=0.7083  lr=5.52e-04
+[   13.0s] INFO    step   700  val_mse(log-life)=0.2517  <- best
+[   13.1s] INFO    step   750/1500  loss=0.5452  reg=0.5452  lr=5.00e-04
+[   13.2s] INFO    step   800/1500  loss=0.4914  reg=0.4914  lr=4.48e-04
+[   13.2s] INFO    step   800  val_mse(log-life)=0.3340
+[   13.3s] INFO    step   850/1500  loss=0.3467  reg=0.3467  lr=3.96e-04
+[   13.4s] INFO    step   900/1500  loss=0.2417  reg=0.2417  lr=3.45e-04
+[   13.4s] INFO    step   900  val_mse(log-life)=0.2187  <- best
+[   13.4s] INFO    step   950/1500  loss=0.4416  reg=0.4416  lr=2.97e-04
+[   13.5s] INFO    step  1000/1500  loss=0.3025  reg=0.3025  lr=2.50e-04
+[   13.5s] INFO    step  1000  val_mse(log-life)=0.4411
+[   13.6s] INFO    step  1050/1500  loss=0.4110  reg=0.4110  lr=2.06e-04
+[   13.7s] INFO    step  1100/1500  loss=0.2079  reg=0.2079  lr=1.65e-04
+[   13.7s] INFO    step  1100  val_mse(log-life)=0.2323
+[   13.8s] INFO    step  1150/1500  loss=0.4626  reg=0.4626  lr=1.28e-04
+[   13.9s] INFO    step  1200/1500  loss=0.3112  reg=0.3112  lr=9.55e-05
+[   13.9s] INFO    step  1200  val_mse(log-life)=0.2400
+[   13.9s] INFO    step  1250/1500  loss=0.3163  reg=0.3163  lr=6.70e-05
+[   14.0s] INFO    step  1300/1500  loss=0.2865  reg=0.2865  lr=4.32e-05
+[   14.0s] INFO    step  1300  val_mse(log-life)=0.2251
+[   14.0s] INFO    early stop at step 1300 (no improvement for 400)
+[   14.0s] INFO    restored best checkpoint from step 900 (val_mse=0.2187)
+[   14.0s] INFO    saved checkpoint -> runs/20260726_034513/fold_HUST/seed_3/checkpoint.pt
+[   14.1s] INFO  fold=HUST seed=4 | source 314 train / 55 val, target 77 | label mu=6.369 sd=0.544
+[   14.1s] INFO    source datasets: ['MATR', 'RWTH', 'SNL', 'Stanford', 'Tongji']
+[   14.1s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   14.1s] INFO    step     1/1500  loss=0.8446  reg=0.8446  lr=1.00e-03
+[   14.2s] INFO    step    50/1500  loss=1.1985  reg=1.1985  lr=9.97e-04
+[   14.2s] INFO    step   100/1500  loss=1.1413  reg=1.1413  lr=9.89e-04
+[   14.2s] INFO    step   100  val_mse(log-life)=0.3368  <- best
+[   14.3s] INFO    step   150/1500  loss=0.5576  reg=0.5576  lr=9.76e-04
+[   14.4s] INFO    step   200/1500  loss=1.0399  reg=1.0399  lr=9.57e-04
+[   14.4s] INFO    step   200  val_mse(log-life)=0.2801  <- best
+[   14.5s] INFO    step   250/1500  loss=0.9944  reg=0.9944  lr=9.33e-04
+[   14.6s] INFO    step   300/1500  loss=0.6458  reg=0.6458  lr=9.05e-04
+[   14.6s] INFO    step   300  val_mse(log-life)=0.2398  <- best
+[   14.7s] INFO    step   350/1500  loss=0.6630  reg=0.6630  lr=8.72e-04
+[   14.8s] INFO    step   400/1500  loss=0.5215  reg=0.5215  lr=8.35e-04
+[   14.8s] INFO    step   400  val_mse(log-life)=0.2192  <- best
+[   14.8s] INFO    step   450/1500  loss=0.2408  reg=0.2408  lr=7.94e-04
+[   14.9s] INFO    step   500/1500  loss=0.4963  reg=0.4963  lr=7.50e-04
+[   14.9s] INFO    step   500  val_mse(log-life)=0.2126  <- best
+[   15.0s] INFO    step   550/1500  loss=0.7019  reg=0.7019  lr=7.03e-04
+[   15.1s] INFO    step   600/1500  loss=0.7348  reg=0.7348  lr=6.55e-04
+[   15.1s] INFO    step   600  val_mse(log-life)=0.2101  <- best
+[   15.2s] INFO    step   650/1500  loss=0.2600  reg=0.2600  lr=6.04e-04
+[   15.3s] INFO    step   700/1500  loss=0.3665  reg=0.3665  lr=5.52e-04
+[   15.3s] INFO    step   700  val_mse(log-life)=0.2073  <- best
+[   15.3s] INFO    step   750/1500  loss=0.9002  reg=0.9002  lr=5.00e-04
+[   15.4s] INFO    step   800/1500  loss=0.5912  reg=0.5912  lr=4.48e-04
+[   15.4s] INFO    step   800  val_mse(log-life)=0.2080
+[   15.5s] INFO    step   850/1500  loss=0.2228  reg=0.2228  lr=3.96e-04
+[   15.6s] INFO    step   900/1500  loss=0.3325  reg=0.3325  lr=3.45e-04
+[   15.6s] INFO    step   900  val_mse(log-life)=0.2036  <- best
+[   15.7s] INFO    step   950/1500  loss=0.3219  reg=0.3219  lr=2.97e-04
+[   15.8s] INFO    step  1000/1500  loss=0.6042  reg=0.6042  lr=2.50e-04
+[   15.8s] INFO    step  1000  val_mse(log-life)=0.2047
+[   15.9s] INFO    step  1050/1500  loss=0.8944  reg=0.8944  lr=2.06e-04
+[   15.9s] INFO    step  1100/1500  loss=0.3372  reg=0.3372  lr=1.65e-04
+[   15.9s] INFO    step  1100  val_mse(log-life)=0.2074
+[   16.0s] INFO    step  1150/1500  loss=0.2906  reg=0.2906  lr=1.28e-04
+[   16.1s] INFO    step  1200/1500  loss=0.2881  reg=0.2881  lr=9.55e-05
+[   16.1s] INFO    step  1200  val_mse(log-life)=0.2040
+[   16.2s] INFO    step  1250/1500  loss=0.6325  reg=0.6325  lr=6.70e-05
+[   16.3s] INFO    step  1300/1500  loss=0.5114  reg=0.5114  lr=4.32e-05
+[   16.3s] INFO    step  1300  val_mse(log-life)=0.2029  <- best
+[   16.4s] INFO    step  1350/1500  loss=0.5171  reg=0.5171  lr=2.45e-05
+[   16.5s] INFO    step  1400/1500  loss=0.4858  reg=0.4858  lr=1.09e-05
+[   16.5s] INFO    step  1400  val_mse(log-life)=0.2033
+[   16.5s] INFO    step  1450/1500  loss=0.2992  reg=0.2992  lr=2.74e-06
+[   16.6s] INFO    step  1500/1500  loss=0.2724  reg=0.2724  lr=0.00e+00
+[   16.6s] INFO    step  1500  val_mse(log-life)=0.2034
+[   16.6s] INFO    restored best checkpoint from step 1300 (val_mse=0.2029)
+[   16.6s] INFO    saved checkpoint -> runs/20260726_034513/fold_HUST/seed_4/checkpoint.pt
+[   16.7s] INFO  -- done (12.4s): FOLD 1/6 — target = HUST
+[   16.7s] INFO  ========================================================================
+[   16.7s] INFO  [train] FOLD 2/6 — target = MATR
+[   16.7s] INFO  ========================================================================
+[   16.7s] INFO  fold=MATR seed=0 | source 237 train / 41 val, target 168 | label mu=6.552 sd=0.813
+[   16.7s] INFO    source datasets: ['HUST', 'RWTH', 'SNL', 'Stanford', 'Tongji']
+[   16.7s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   16.7s] INFO    step     1/1500  loss=1.3450  reg=1.3450  lr=1.00e-03
+[   16.8s] INFO    step    50/1500  loss=1.0876  reg=1.0876  lr=9.97e-04
+[   16.8s] INFO    step   100/1500  loss=0.7725  reg=0.7725  lr=9.89e-04
+[   16.8s] INFO    step   100  val_mse(log-life)=0.4980  <- best
+[   16.9s] INFO    step   150/1500  loss=0.6170  reg=0.6170  lr=9.76e-04
+[   17.0s] INFO    step   200/1500  loss=0.4299  reg=0.4299  lr=9.57e-04
+[   17.0s] INFO    step   200  val_mse(log-life)=0.4385  <- best
+[   17.1s] INFO    step   250/1500  loss=0.4313  reg=0.4313  lr=9.33e-04
+[   17.2s] INFO    step   300/1500  loss=0.6003  reg=0.6003  lr=9.05e-04
+[   17.2s] INFO    step   300  val_mse(log-life)=0.3140  <- best
+[   17.3s] INFO    step   350/1500  loss=0.4862  reg=0.4862  lr=8.72e-04
+[   17.3s] INFO    step   400/1500  loss=0.4067  reg=0.4067  lr=8.35e-04
+[   17.3s] INFO    step   400  val_mse(log-life)=0.3154
+[   17.4s] INFO    step   450/1500  loss=0.3899  reg=0.3899  lr=7.94e-04
+[   17.5s] INFO    step   500/1500  loss=0.5848  reg=0.5848  lr=7.50e-04
+[   17.5s] INFO    step   500  val_mse(log-life)=0.3161
+[   17.6s] INFO    step   550/1500  loss=0.3982  reg=0.3982  lr=7.03e-04
+[   17.7s] INFO    step   600/1500  loss=0.5240  reg=0.5240  lr=6.55e-04
+[   17.7s] INFO    step   600  val_mse(log-life)=0.2969  <- best
+[   17.8s] INFO    step   650/1500  loss=0.3913  reg=0.3913  lr=6.04e-04
+[   17.9s] INFO    step   700/1500  loss=0.3015  reg=0.3015  lr=5.52e-04
+[   17.9s] INFO    step   700  val_mse(log-life)=0.2740  <- best
+[   17.9s] INFO    step   750/1500  loss=0.2510  reg=0.2510  lr=5.00e-04
+[   18.0s] INFO    step   800/1500  loss=0.3076  reg=0.3076  lr=4.48e-04
+[   18.0s] INFO    step   800  val_mse(log-life)=0.3066
+[   18.1s] INFO    step   850/1500  loss=0.3146  reg=0.3146  lr=3.96e-04
+[   18.2s] INFO    step   900/1500  loss=0.2906  reg=0.2906  lr=3.45e-04
+[   18.2s] INFO    step   900  val_mse(log-life)=0.2345  <- best
+[   18.3s] INFO    step   950/1500  loss=0.3109  reg=0.3109  lr=2.97e-04
+[   18.4s] INFO    step  1000/1500  loss=0.3557  reg=0.3557  lr=2.50e-04
+[   18.4s] INFO    step  1000  val_mse(log-life)=0.2347
+[   18.5s] INFO    step  1050/1500  loss=0.3246  reg=0.3246  lr=2.06e-04
+[   18.5s] INFO    step  1100/1500  loss=0.4569  reg=0.4569  lr=1.65e-04
+[   18.5s] INFO    step  1100  val_mse(log-life)=0.2582
+[   18.6s] INFO    step  1150/1500  loss=0.3474  reg=0.3474  lr=1.28e-04
+[   18.7s] INFO    step  1200/1500  loss=0.2745  reg=0.2745  lr=9.55e-05
+[   18.7s] INFO    step  1200  val_mse(log-life)=0.2339  <- best
+[   18.8s] INFO    step  1250/1500  loss=0.4094  reg=0.4094  lr=6.70e-05
+[   18.9s] INFO    step  1300/1500  loss=0.1855  reg=0.1855  lr=4.32e-05
+[   18.9s] INFO    step  1300  val_mse(log-life)=0.2435
+[   19.0s] INFO    step  1350/1500  loss=0.3392  reg=0.3392  lr=2.45e-05
+[   19.1s] INFO    step  1400/1500  loss=0.2017  reg=0.2017  lr=1.09e-05
+[   19.1s] INFO    step  1400  val_mse(log-life)=0.2481
+[   19.1s] INFO    step  1450/1500  loss=0.4153  reg=0.4153  lr=2.74e-06
+[   19.2s] INFO    step  1500/1500  loss=0.3929  reg=0.3929  lr=0.00e+00
+[   19.2s] INFO    step  1500  val_mse(log-life)=0.2464
+[   19.2s] INFO    restored best checkpoint from step 1200 (val_mse=0.2339)
+[   19.2s] INFO    saved checkpoint -> runs/20260726_034513/fold_MATR/seed_0/checkpoint.pt
+[   19.3s] INFO  fold=MATR seed=1 | source 237 train / 41 val, target 168 | label mu=6.560 sd=0.789
+[   19.3s] INFO    source datasets: ['HUST', 'RWTH', 'SNL', 'Stanford', 'Tongji']
+[   19.3s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   19.3s] INFO    step     1/1500  loss=1.1104  reg=1.1104  lr=1.00e-03
+[   19.3s] INFO    step    50/1500  loss=1.1969  reg=1.1969  lr=9.97e-04
+[   19.4s] INFO    step   100/1500  loss=1.2482  reg=1.2482  lr=9.89e-04
+[   19.4s] INFO    step   100  val_mse(log-life)=0.7247  <- best
+[   19.5s] INFO    step   150/1500  loss=1.2612  reg=1.2612  lr=9.76e-04
+[   19.6s] INFO    step   200/1500  loss=0.4246  reg=0.4246  lr=9.57e-04
+[   19.6s] INFO    step   200  val_mse(log-life)=0.4640  <- best
+[   19.7s] INFO    step   250/1500  loss=0.3945  reg=0.3945  lr=9.33e-04
+[   19.8s] INFO    step   300/1500  loss=0.3896  reg=0.3896  lr=9.05e-04
+[   19.8s] INFO    step   300  val_mse(log-life)=0.4175  <- best
+[   19.9s] INFO    step   350/1500  loss=0.4036  reg=0.4036  lr=8.72e-04
+[   19.9s] INFO    step   400/1500  loss=0.3940  reg=0.3940  lr=8.35e-04
+[   19.9s] INFO    step   400  val_mse(log-life)=0.4172  <- best
+[   20.0s] INFO    step   450/1500  loss=0.3188  reg=0.3188  lr=7.94e-04
+[   20.1s] INFO    step   500/1500  loss=0.2875  reg=0.2875  lr=7.50e-04
+[   20.1s] INFO    step   500  val_mse(log-life)=0.3667  <- best
+[   20.2s] INFO    step   550/1500  loss=0.5131  reg=0.5131  lr=7.03e-04
+[   20.3s] INFO    step   600/1500  loss=0.3572  reg=0.3572  lr=6.55e-04
+[   20.3s] INFO    step   600  val_mse(log-life)=0.3549  <- best
+[   20.4s] INFO    step   650/1500  loss=0.3793  reg=0.3793  lr=6.04e-04
+[   20.5s] INFO    step   700/1500  loss=0.2628  reg=0.2628  lr=5.52e-04
+[   20.5s] INFO    step   700  val_mse(log-life)=0.3549  <- best
+[   20.5s] INFO    step   750/1500  loss=0.1725  reg=0.1725  lr=5.00e-04
+[   20.6s] INFO    step   800/1500  loss=0.1996  reg=0.1996  lr=4.48e-04
+[   20.6s] INFO    step   800  val_mse(log-life)=0.3371  <- best
+[   20.7s] INFO    step   850/1500  loss=0.1924  reg=0.1924  lr=3.96e-04
+[   20.8s] INFO    step   900/1500  loss=0.4244  reg=0.4244  lr=3.45e-04
+[   20.8s] INFO    step   900  val_mse(log-life)=0.3542
+[   20.9s] INFO    step   950/1500  loss=0.1687  reg=0.1687  lr=2.97e-04
+[   21.0s] INFO    step  1000/1500  loss=0.3685  reg=0.3685  lr=2.50e-04
+[   21.0s] INFO    step  1000  val_mse(log-life)=0.3368  <- best
+[   21.1s] INFO    step  1050/1500  loss=0.5126  reg=0.5126  lr=2.06e-04
+[   21.1s] INFO    step  1100/1500  loss=0.2147  reg=0.2147  lr=1.65e-04
+[   21.1s] INFO    step  1100  val_mse(log-life)=0.3439
+[   21.2s] INFO    step  1150/1500  loss=0.1560  reg=0.1560  lr=1.28e-04
+[   21.3s] INFO    step  1200/1500  loss=0.4256  reg=0.4256  lr=9.55e-05
+[   21.3s] INFO    step  1200  val_mse(log-life)=0.3436
+[   21.4s] INFO    step  1250/1500  loss=0.3147  reg=0.3147  lr=6.70e-05
+[   21.5s] INFO    step  1300/1500  loss=0.0973  reg=0.0973  lr=4.32e-05
+[   21.5s] INFO    step  1300  val_mse(log-life)=0.3394
+[   21.6s] INFO    step  1350/1500  loss=0.3920  reg=0.3920  lr=2.45e-05
+[   21.7s] INFO    step  1400/1500  loss=0.1488  reg=0.1488  lr=1.09e-05
+[   21.7s] INFO    step  1400  val_mse(log-life)=0.3359  <- best
+[   21.7s] INFO    step  1450/1500  loss=0.1446  reg=0.1446  lr=2.74e-06
+[   21.8s] INFO    step  1500/1500  loss=0.5463  reg=0.5463  lr=0.00e+00
+[   21.8s] INFO    step  1500  val_mse(log-life)=0.3364
+[   21.8s] INFO    restored best checkpoint from step 1400 (val_mse=0.3359)
+[   21.8s] INFO    saved checkpoint -> runs/20260726_034513/fold_MATR/seed_1/checkpoint.pt
+[   21.9s] INFO  fold=MATR seed=2 | source 237 train / 41 val, target 168 | label mu=6.597 sd=0.812
+[   21.9s] INFO    source datasets: ['HUST', 'RWTH', 'SNL', 'Stanford', 'Tongji']
+[   21.9s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   21.9s] INFO    step     1/1500  loss=1.1242  reg=1.1242  lr=1.00e-03
+[   22.0s] INFO    step    50/1500  loss=0.9671  reg=0.9671  lr=9.97e-04
+[   22.1s] INFO    step   100/1500  loss=0.9526  reg=0.9526  lr=9.89e-04
+[   22.1s] INFO    step   100  val_mse(log-life)=0.5623  <- best
+[   22.2s] INFO    step   150/1500  loss=0.6923  reg=0.6923  lr=9.76e-04
+[   22.2s] INFO    step   200/1500  loss=0.5606  reg=0.5606  lr=9.57e-04
+[   22.2s] INFO    step   200  val_mse(log-life)=0.3643  <- best
+[   22.3s] INFO    step   250/1500  loss=0.3352  reg=0.3352  lr=9.33e-04
+[   22.4s] INFO    step   300/1500  loss=0.3403  reg=0.3403  lr=9.05e-04
+[   22.4s] INFO    step   300  val_mse(log-life)=0.3284  <- best
+[   22.5s] INFO    step   350/1500  loss=0.3901  reg=0.3901  lr=8.72e-04
+[   22.6s] INFO    step   400/1500  loss=0.2586  reg=0.2586  lr=8.35e-04
+[   22.6s] INFO    step   400  val_mse(log-life)=0.3286
+[   22.7s] INFO    step   450/1500  loss=0.3631  reg=0.3631  lr=7.94e-04
+[   22.8s] INFO    step   500/1500  loss=0.3548  reg=0.3548  lr=7.50e-04
+[   22.8s] INFO    step   500  val_mse(log-life)=0.3164  <- best
+[   22.8s] INFO    step   550/1500  loss=0.3570  reg=0.3570  lr=7.03e-04
+[   22.9s] INFO    step   600/1500  loss=0.3793  reg=0.3793  lr=6.55e-04
+[   22.9s] INFO    step   600  val_mse(log-life)=0.3040  <- best
+[   23.0s] INFO    step   650/1500  loss=0.3180  reg=0.3180  lr=6.04e-04
+[   23.1s] INFO    step   700/1500  loss=0.2003  reg=0.2003  lr=5.52e-04
+[   23.1s] INFO    step   700  val_mse(log-life)=0.3088
+[   23.2s] INFO    step   750/1500  loss=0.3382  reg=0.3382  lr=5.00e-04
+[   23.3s] INFO    step   800/1500  loss=0.1789  reg=0.1789  lr=4.48e-04
+[   23.3s] INFO    step   800  val_mse(log-life)=0.3022  <- best
+[   23.4s] INFO    step   850/1500  loss=0.2682  reg=0.2682  lr=3.96e-04
+[   23.5s] INFO    step   900/1500  loss=0.2354  reg=0.2354  lr=3.45e-04
+[   23.5s] INFO    step   900  val_mse(log-life)=0.2977  <- best
+[   23.5s] INFO    step   950/1500  loss=0.1887  reg=0.1887  lr=2.97e-04
+[   23.6s] INFO    step  1000/1500  loss=0.3043  reg=0.3043  lr=2.50e-04
+[   23.6s] INFO    step  1000  val_mse(log-life)=0.3061
+[   23.7s] INFO    step  1050/1500  loss=0.1650  reg=0.1650  lr=2.06e-04
+[   23.8s] INFO    step  1100/1500  loss=0.1766  reg=0.1766  lr=1.65e-04
+[   23.8s] INFO    step  1100  val_mse(log-life)=0.3096
+[   23.9s] INFO    step  1150/1500  loss=0.4297  reg=0.4297  lr=1.28e-04
+[   24.0s] INFO    step  1200/1500  loss=0.3974  reg=0.3974  lr=9.55e-05
+[   24.0s] INFO    step  1200  val_mse(log-life)=0.3019
+[   24.1s] INFO    step  1250/1500  loss=0.1823  reg=0.1823  lr=6.70e-05
+[   24.1s] INFO    step  1300/1500  loss=0.2844  reg=0.2844  lr=4.32e-05
+[   24.1s] INFO    step  1300  val_mse(log-life)=0.3052
+[   24.1s] INFO    early stop at step 1300 (no improvement for 400)
+[   24.1s] INFO    restored best checkpoint from step 900 (val_mse=0.2977)
+[   24.1s] INFO    saved checkpoint -> runs/20260726_034513/fold_MATR/seed_2/checkpoint.pt
+[   24.2s] INFO  fold=MATR seed=3 | source 237 train / 41 val, target 168 | label mu=6.590 sd=0.807
+[   24.2s] INFO    source datasets: ['HUST', 'RWTH', 'SNL', 'Stanford', 'Tongji']
+[   24.2s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   24.2s] INFO    step     1/1500  loss=1.3073  reg=1.3073  lr=1.00e-03
+[   24.3s] INFO    step    50/1500  loss=0.9544  reg=0.9544  lr=9.97e-04
+[   24.4s] INFO    step   100/1500  loss=1.0469  reg=1.0469  lr=9.89e-04
+[   24.4s] INFO    step   100  val_mse(log-life)=0.5308  <- best
+[   24.4s] INFO    step   150/1500  loss=0.4855  reg=0.4855  lr=9.76e-04
+[   24.5s] INFO    step   200/1500  loss=0.5488  reg=0.5488  lr=9.57e-04
+[   24.5s] INFO    step   200  val_mse(log-life)=0.4015  <- best
+[   24.6s] INFO    step   250/1500  loss=0.5265  reg=0.5265  lr=9.33e-04
+[   24.7s] INFO    step   300/1500  loss=0.4290  reg=0.4290  lr=9.05e-04
+[   24.7s] INFO    step   300  val_mse(log-life)=0.4026
+[   24.8s] INFO    step   350/1500  loss=0.3707  reg=0.3707  lr=8.72e-04
+[   24.9s] INFO    step   400/1500  loss=0.4481  reg=0.4481  lr=8.35e-04
+[   24.9s] INFO    step   400  val_mse(log-life)=0.4064
+[   24.9s] INFO    step   450/1500  loss=0.5338  reg=0.5338  lr=7.94e-04
+[   25.0s] INFO    step   500/1500  loss=0.3325  reg=0.3325  lr=7.50e-04
+[   25.0s] INFO    step   500  val_mse(log-life)=0.4895
+[   25.1s] INFO    step   550/1500  loss=0.5014  reg=0.5014  lr=7.03e-04
+[   25.2s] INFO    step   600/1500  loss=0.4403  reg=0.4403  lr=6.55e-04
+[   25.2s] INFO    step   600  val_mse(log-life)=0.6907
+[   25.2s] INFO    early stop at step 600 (no improvement for 400)
+[   25.2s] INFO    restored best checkpoint from step 200 (val_mse=0.4015)
+[   25.2s] INFO    saved checkpoint -> runs/20260726_034513/fold_MATR/seed_3/checkpoint.pt
+[   25.2s] INFO  fold=MATR seed=4 | source 237 train / 41 val, target 168 | label mu=6.580 sd=0.772
+[   25.2s] INFO    source datasets: ['HUST', 'RWTH', 'SNL', 'Stanford', 'Tongji']
+[   25.2s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   25.2s] INFO    step     1/1500  loss=1.0732  reg=1.0732  lr=1.00e-03
+[   25.3s] INFO    step    50/1500  loss=1.1322  reg=1.1322  lr=9.97e-04
+[   25.4s] INFO    step   100/1500  loss=0.9713  reg=0.9713  lr=9.89e-04
+[   25.4s] INFO    step   100  val_mse(log-life)=0.8025  <- best
+[   25.5s] INFO    step   150/1500  loss=0.9760  reg=0.9760  lr=9.76e-04
+[   25.6s] INFO    step   200/1500  loss=0.6548  reg=0.6548  lr=9.57e-04
+[   25.6s] INFO    step   200  val_mse(log-life)=0.5602  <- best
+[   25.7s] INFO    step   250/1500  loss=0.4412  reg=0.4412  lr=9.33e-04
+[   25.7s] INFO    step   300/1500  loss=0.2815  reg=0.2815  lr=9.05e-04
+[   25.8s] INFO    step   300  val_mse(log-life)=0.4934  <- best
+[   25.8s] INFO    step   350/1500  loss=0.4153  reg=0.4153  lr=8.72e-04
+[   25.9s] INFO    step   400/1500  loss=0.3354  reg=0.3354  lr=8.35e-04
+[   25.9s] INFO    step   400  val_mse(log-life)=0.4776  <- best
+[   26.0s] INFO    step   450/1500  loss=0.3549  reg=0.3549  lr=7.94e-04
+[   26.1s] INFO    step   500/1500  loss=0.3680  reg=0.3680  lr=7.50e-04
+[   26.1s] INFO    step   500  val_mse(log-life)=0.4754  <- best
+[   26.2s] INFO    step   550/1500  loss=0.3576  reg=0.3576  lr=7.03e-04
+[   26.3s] INFO    step   600/1500  loss=0.3418  reg=0.3418  lr=6.55e-04
+[   26.3s] INFO    step   600  val_mse(log-life)=0.4693  <- best
+[   26.3s] INFO    step   650/1500  loss=0.1533  reg=0.1533  lr=6.04e-04
+[   26.4s] INFO    step   700/1500  loss=0.5170  reg=0.5170  lr=5.52e-04
+[   26.4s] INFO    step   700  val_mse(log-life)=0.4651  <- best
+[   26.5s] INFO    step   750/1500  loss=0.3016  reg=0.3016  lr=5.00e-04
+[   26.6s] INFO    step   800/1500  loss=0.2364  reg=0.2364  lr=4.48e-04
+[   26.6s] INFO    step   800  val_mse(log-life)=0.4490  <- best
+[   26.7s] INFO    step   850/1500  loss=0.4519  reg=0.4519  lr=3.96e-04
+[   26.8s] INFO    step   900/1500  loss=0.2787  reg=0.2787  lr=3.45e-04
+[   26.8s] INFO    step   900  val_mse(log-life)=0.4230  <- best
+[   26.9s] INFO    step   950/1500  loss=0.1941  reg=0.1941  lr=2.97e-04
+[   26.9s] INFO    step  1000/1500  loss=0.2570  reg=0.2570  lr=2.50e-04
+[   26.9s] INFO    step  1000  val_mse(log-life)=0.4094  <- best
+[   27.0s] INFO    step  1050/1500  loss=0.2588  reg=0.2588  lr=2.06e-04
+[   27.1s] INFO    step  1100/1500  loss=0.2162  reg=0.2162  lr=1.65e-04
+[   27.1s] INFO    step  1100  val_mse(log-life)=0.4154
+[   27.2s] INFO    step  1150/1500  loss=0.1596  reg=0.1596  lr=1.28e-04
+[   27.3s] INFO    step  1200/1500  loss=0.2358  reg=0.2358  lr=9.55e-05
+[   27.3s] INFO    step  1200  val_mse(log-life)=0.3981  <- best
+[   27.4s] INFO    step  1250/1500  loss=0.2222  reg=0.2222  lr=6.70e-05
+[   27.5s] INFO    step  1300/1500  loss=0.2154  reg=0.2154  lr=4.32e-05
+[   27.5s] INFO    step  1300  val_mse(log-life)=0.3970  <- best
+[   27.5s] INFO    step  1350/1500  loss=0.2810  reg=0.2810  lr=2.45e-05
+[   27.6s] INFO    step  1400/1500  loss=0.1103  reg=0.1103  lr=1.09e-05
+[   27.6s] INFO    step  1400  val_mse(log-life)=0.3966  <- best
+[   27.7s] INFO    step  1450/1500  loss=0.3223  reg=0.3223  lr=2.74e-06
+[   27.8s] INFO    step  1500/1500  loss=0.3123  reg=0.3123  lr=0.00e+00
+[   27.8s] INFO    step  1500  val_mse(log-life)=0.3959  <- best
+[   27.8s] INFO    restored best checkpoint from step 1500 (val_mse=0.3959)
+[   27.8s] INFO    saved checkpoint -> runs/20260726_034513/fold_MATR/seed_4/checkpoint.pt
+[   27.8s] INFO  -- done (11.2s): FOLD 2/6 — target = MATR
+[   27.8s] INFO  ========================================================================
+[   27.8s] INFO  [train] FOLD 3/6 — target = RWTH
+[   27.8s] INFO  ========================================================================
+[   27.8s] INFO  fold=RWTH seed=0 | source 356 train / 62 val, target 28 | label mu=6.595 sd=0.677
+[   27.8s] INFO    source datasets: ['HUST', 'MATR', 'SNL', 'Stanford', 'Tongji']
+[   27.8s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   27.8s] INFO    step     1/1500  loss=0.8938  reg=0.8938  lr=1.00e-03
+[   27.9s] INFO    step    50/1500  loss=0.8137  reg=0.8137  lr=9.97e-04
+[   28.0s] INFO    step   100/1500  loss=1.1030  reg=1.1030  lr=9.89e-04
+[   28.0s] INFO    step   100  val_mse(log-life)=0.6164  <- best
+[   28.1s] INFO    step   150/1500  loss=1.1445  reg=1.1445  lr=9.76e-04
+[   28.2s] INFO    step   200/1500  loss=2.8558  reg=2.8558  lr=9.57e-04
+[   28.2s] INFO    step   200  val_mse(log-life)=0.4275  <- best
+[   28.3s] INFO    step   250/1500  loss=0.4396  reg=0.4396  lr=9.33e-04
+[   28.3s] INFO    step   300/1500  loss=0.7478  reg=0.7478  lr=9.05e-04
+[   28.3s] INFO    step   300  val_mse(log-life)=0.4134  <- best
+[   28.4s] INFO    step   350/1500  loss=0.4175  reg=0.4175  lr=8.72e-04
+[   28.5s] INFO    step   400/1500  loss=0.5447  reg=0.5447  lr=8.35e-04
+[   28.5s] INFO    step   400  val_mse(log-life)=0.3890  <- best
+[   28.6s] INFO    step   450/1500  loss=0.5858  reg=0.5858  lr=7.94e-04
+[   28.7s] INFO    step   500/1500  loss=0.3181  reg=0.3181  lr=7.50e-04
+[   28.7s] INFO    step   500  val_mse(log-life)=0.3523  <- best
+[   28.8s] INFO    step   550/1500  loss=0.3283  reg=0.3283  lr=7.03e-04
+[   28.9s] INFO    step   600/1500  loss=0.1912  reg=0.1912  lr=6.55e-04
+[   28.9s] INFO    step   600  val_mse(log-life)=0.3382  <- best
+[   28.9s] INFO    step   650/1500  loss=0.3642  reg=0.3642  lr=6.04e-04
+[   29.0s] INFO    step   700/1500  loss=0.4767  reg=0.4767  lr=5.52e-04
+[   29.0s] INFO    step   700  val_mse(log-life)=0.3425
+[   29.1s] INFO    step   750/1500  loss=0.2431  reg=0.2431  lr=5.00e-04
+[   29.2s] INFO    step   800/1500  loss=0.2575  reg=0.2575  lr=4.48e-04
+[   29.2s] INFO    step   800  val_mse(log-life)=0.3403
+[   29.3s] INFO    step   850/1500  loss=0.2577  reg=0.2577  lr=3.96e-04
+[   29.4s] INFO    step   900/1500  loss=0.2563  reg=0.2563  lr=3.45e-04
+[   29.4s] INFO    step   900  val_mse(log-life)=0.3388
+[   29.5s] INFO    step   950/1500  loss=0.2801  reg=0.2801  lr=2.97e-04
+[   29.5s] INFO    step  1000/1500  loss=0.2670  reg=0.2670  lr=2.50e-04
+[   29.5s] INFO    step  1000  val_mse(log-life)=0.3371  <- best
+[   29.6s] INFO    step  1050/1500  loss=0.3168  reg=0.3168  lr=2.06e-04
+[   29.7s] INFO    step  1100/1500  loss=0.3300  reg=0.3300  lr=1.65e-04
+[   29.7s] INFO    step  1100  val_mse(log-life)=0.3435
+[   29.8s] INFO    step  1150/1500  loss=0.2588  reg=0.2588  lr=1.28e-04
+[   29.9s] INFO    step  1200/1500  loss=0.2302  reg=0.2302  lr=9.55e-05
+[   29.9s] INFO    step  1200  val_mse(log-life)=0.3404
+[   30.0s] INFO    step  1250/1500  loss=0.1477  reg=0.1477  lr=6.70e-05
+[   30.1s] INFO    step  1300/1500  loss=0.2515  reg=0.2515  lr=4.32e-05
+[   30.1s] INFO    step  1300  val_mse(log-life)=0.3389
+[   30.1s] INFO    step  1350/1500  loss=0.2965  reg=0.2965  lr=2.45e-05
+[   30.2s] INFO    step  1400/1500  loss=0.3519  reg=0.3519  lr=1.09e-05
+[   30.2s] INFO    step  1400  val_mse(log-life)=0.3369  <- best
+[   30.3s] INFO    step  1450/1500  loss=0.3237  reg=0.3237  lr=2.74e-06
+[   30.4s] INFO    step  1500/1500  loss=0.4252  reg=0.4252  lr=0.00e+00
+[   30.4s] INFO    step  1500  val_mse(log-life)=0.3368  <- best
+[   30.4s] INFO    restored best checkpoint from step 1500 (val_mse=0.3368)
+[   30.4s] INFO    saved checkpoint -> runs/20260726_034513/fold_RWTH/seed_0/checkpoint.pt
+[   30.4s] INFO  fold=RWTH seed=1 | source 356 train / 62 val, target 28 | label mu=6.584 sd=0.690
+[   30.4s] INFO    source datasets: ['HUST', 'MATR', 'SNL', 'Stanford', 'Tongji']
+[   30.4s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   30.4s] INFO    step     1/1500  loss=1.0606  reg=1.0606  lr=1.00e-03
+[   30.5s] INFO    step    50/1500  loss=1.2620  reg=1.2620  lr=9.97e-04
+[   30.6s] INFO    step   100/1500  loss=0.9269  reg=0.9269  lr=9.89e-04
+[   30.6s] INFO    step   100  val_mse(log-life)=0.5172  <- best
+[   30.7s] INFO    step   150/1500  loss=1.1629  reg=1.1629  lr=9.76e-04
+[   30.8s] INFO    step   200/1500  loss=0.7288  reg=0.7288  lr=9.57e-04
+[   30.8s] INFO    step   200  val_mse(log-life)=0.3412  <- best
+[   30.9s] INFO    step   250/1500  loss=0.7744  reg=0.7744  lr=9.33e-04
+[   31.0s] INFO    step   300/1500  loss=0.6219  reg=0.6219  lr=9.05e-04
+[   31.0s] INFO    step   300  val_mse(log-life)=0.2913  <- best
+[   31.1s] INFO    step   350/1500  loss=0.3938  reg=0.3938  lr=8.72e-04
+[   31.2s] INFO    step   400/1500  loss=0.3277  reg=0.3277  lr=8.35e-04
+[   31.2s] INFO    step   400  val_mse(log-life)=0.2505  <- best
+[   31.2s] INFO    step   450/1500  loss=0.3949  reg=0.3949  lr=7.94e-04
+[   31.3s] INFO    step   500/1500  loss=0.5965  reg=0.5965  lr=7.50e-04
+[   31.3s] INFO    step   500  val_mse(log-life)=0.2233  <- best
+[   31.4s] INFO    step   550/1500  loss=0.4363  reg=0.4363  lr=7.03e-04
+[   31.5s] INFO    step   600/1500  loss=0.4054  reg=0.4054  lr=6.55e-04
+[   31.5s] INFO    step   600  val_mse(log-life)=0.2325
+[   31.6s] INFO    step   650/1500  loss=0.5977  reg=0.5977  lr=6.04e-04
+[   31.7s] INFO    step   700/1500  loss=0.6215  reg=0.6215  lr=5.52e-04
+[   31.7s] INFO    step   700  val_mse(log-life)=0.1932  <- best
+[   31.8s] INFO    step   750/1500  loss=0.5689  reg=0.5689  lr=5.00e-04
+[   31.8s] INFO    step   800/1500  loss=0.4802  reg=0.4802  lr=4.48e-04
+[   31.8s] INFO    step   800  val_mse(log-life)=0.1731  <- best
+[   31.9s] INFO    step   850/1500  loss=0.3548  reg=0.3548  lr=3.96e-04
+[   32.0s] INFO    step   900/1500  loss=0.3643  reg=0.3643  lr=3.45e-04
+[   32.0s] INFO    step   900  val_mse(log-life)=0.1716  <- best
+[   32.1s] INFO    step   950/1500  loss=0.2784  reg=0.2784  lr=2.97e-04
+[   32.2s] INFO    step  1000/1500  loss=0.2933  reg=0.2933  lr=2.50e-04
+[   32.2s] INFO    step  1000  val_mse(log-life)=0.1685  <- best
+[   32.3s] INFO    step  1050/1500  loss=0.4036  reg=0.4036  lr=2.06e-04
+[   32.4s] INFO    step  1100/1500  loss=0.3716  reg=0.3716  lr=1.65e-04
+[   32.4s] INFO    step  1100  val_mse(log-life)=0.1627  <- best
+[   32.5s] INFO    step  1150/1500  loss=0.2770  reg=0.2770  lr=1.28e-04
+[   32.5s] INFO    step  1200/1500  loss=0.2565  reg=0.2565  lr=9.55e-05
+[   32.5s] INFO    step  1200  val_mse(log-life)=0.1592  <- best
+[   32.6s] INFO    step  1250/1500  loss=0.2260  reg=0.2260  lr=6.70e-05
+[   32.7s] INFO    step  1300/1500  loss=0.3615  reg=0.3615  lr=4.32e-05
+[   32.7s] INFO    step  1300  val_mse(log-life)=0.1566  <- best
+[   32.8s] INFO    step  1350/1500  loss=0.3924  reg=0.3924  lr=2.45e-05
+[   32.9s] INFO    step  1400/1500  loss=0.2800  reg=0.2800  lr=1.09e-05
+[   32.9s] INFO    step  1400  val_mse(log-life)=0.1577
+[   33.0s] INFO    step  1450/1500  loss=0.3068  reg=0.3068  lr=2.74e-06
+[   33.1s] INFO    step  1500/1500  loss=0.4135  reg=0.4135  lr=0.00e+00
+[   33.1s] INFO    step  1500  val_mse(log-life)=0.1577
+[   33.1s] INFO    restored best checkpoint from step 1300 (val_mse=0.1566)
+[   33.1s] INFO    saved checkpoint -> runs/20260726_034513/fold_RWTH/seed_1/checkpoint.pt
+[   33.1s] INFO  fold=RWTH seed=2 | source 356 train / 62 val, target 28 | label mu=6.610 sd=0.707
+[   33.1s] INFO    source datasets: ['HUST', 'MATR', 'SNL', 'Stanford', 'Tongji']
+[   33.1s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   33.1s] INFO    step     1/1500  loss=0.6933  reg=0.6933  lr=1.00e-03
+[   33.2s] INFO    step    50/1500  loss=0.9563  reg=0.9563  lr=9.97e-04
+[   33.3s] INFO    step   100/1500  loss=1.0823  reg=1.0823  lr=9.89e-04
+[   33.3s] INFO    step   100  val_mse(log-life)=0.3851  <- best
+[   33.4s] INFO    step   150/1500  loss=0.5351  reg=0.5351  lr=9.76e-04
+[   33.5s] INFO    step   200/1500  loss=0.9138  reg=0.9138  lr=9.57e-04
+[   33.5s] INFO    step   200  val_mse(log-life)=0.2261  <- best
+[   33.5s] INFO    step   250/1500  loss=0.7116  reg=0.7116  lr=9.33e-04
+[   33.6s] INFO    step   300/1500  loss=0.2923  reg=0.2923  lr=9.05e-04
+[   33.6s] INFO    step   300  val_mse(log-life)=0.2252  <- best
+[   33.7s] INFO    step   350/1500  loss=0.2466  reg=0.2466  lr=8.72e-04
+[   33.8s] INFO    step   400/1500  loss=0.4173  reg=0.4173  lr=8.35e-04
+[   33.8s] INFO    step   400  val_mse(log-life)=0.2256
+[   33.9s] INFO    step   450/1500  loss=0.3147  reg=0.3147  lr=7.94e-04
+[   34.0s] INFO    step   500/1500  loss=0.6399  reg=0.6399  lr=7.50e-04
+[   34.0s] INFO    step   500  val_mse(log-life)=0.2394
+[   34.1s] INFO    step   550/1500  loss=0.7230  reg=0.7230  lr=7.03e-04
+[   34.2s] INFO    step   600/1500  loss=0.3488  reg=0.3488  lr=6.55e-04
+[   34.2s] INFO    step   600  val_mse(log-life)=0.2238  <- best
+[   34.3s] INFO    step   650/1500  loss=0.3434  reg=0.3434  lr=6.04e-04
+[   34.3s] INFO    step   700/1500  loss=0.1272  reg=0.1272  lr=5.52e-04
+[   34.3s] INFO    step   700  val_mse(log-life)=0.2209  <- best
+[   34.4s] INFO    step   750/1500  loss=0.4400  reg=0.4400  lr=5.00e-04
+[   34.5s] INFO    step   800/1500  loss=0.3419  reg=0.3419  lr=4.48e-04
+[   34.5s] INFO    step   800  val_mse(log-life)=0.1970  <- best
+[   34.6s] INFO    step   850/1500  loss=0.3164  reg=0.3164  lr=3.96e-04
+[   34.7s] INFO    step   900/1500  loss=0.2654  reg=0.2654  lr=3.45e-04
+[   34.7s] INFO    step   900  val_mse(log-life)=0.2006
+[   34.8s] INFO    step   950/1500  loss=0.4969  reg=0.4969  lr=2.97e-04
+[   34.8s] INFO    step  1000/1500  loss=0.6360  reg=0.6360  lr=2.50e-04
+[   34.8s] INFO    step  1000  val_mse(log-life)=0.1925  <- best
+[   34.9s] INFO    step  1050/1500  loss=0.2338  reg=0.2338  lr=2.06e-04
+[   35.0s] INFO    step  1100/1500  loss=0.2739  reg=0.2739  lr=1.65e-04
+[   35.0s] INFO    step  1100  val_mse(log-life)=0.1955
+[   35.1s] INFO    step  1150/1500  loss=0.2763  reg=0.2763  lr=1.28e-04
+[   35.2s] INFO    step  1200/1500  loss=0.4802  reg=0.4802  lr=9.55e-05
+[   35.2s] INFO    step  1200  val_mse(log-life)=0.1913  <- best
+[   35.3s] INFO    step  1250/1500  loss=0.4984  reg=0.4984  lr=6.70e-05
+[   35.4s] INFO    step  1300/1500  loss=0.5547  reg=0.5547  lr=4.32e-05
+[   35.4s] INFO    step  1300  val_mse(log-life)=0.1917
+[   35.4s] INFO    step  1350/1500  loss=0.3030  reg=0.3030  lr=2.45e-05
+[   35.5s] INFO    step  1400/1500  loss=0.2010  reg=0.2010  lr=1.09e-05
+[   35.5s] INFO    step  1400  val_mse(log-life)=0.1915
+[   35.6s] INFO    step  1450/1500  loss=0.2323  reg=0.2323  lr=2.74e-06
+[   35.7s] INFO    step  1500/1500  loss=0.4190  reg=0.4190  lr=0.00e+00
+[   35.7s] INFO    step  1500  val_mse(log-life)=0.1912  <- best
+[   35.7s] INFO    restored best checkpoint from step 1500 (val_mse=0.1912)
+[   35.7s] INFO    saved checkpoint -> runs/20260726_034513/fold_RWTH/seed_2/checkpoint.pt
+[   35.7s] INFO  fold=RWTH seed=3 | source 356 train / 62 val, target 28 | label mu=6.603 sd=0.711
+[   35.7s] INFO    source datasets: ['HUST', 'MATR', 'SNL', 'Stanford', 'Tongji']
+[   35.7s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   35.7s] INFO    step     1/1500  loss=1.3006  reg=1.3006  lr=1.00e-03
+[   35.8s] INFO    step    50/1500  loss=1.0422  reg=1.0422  lr=9.97e-04
+[   35.9s] INFO    step   100/1500  loss=1.0147  reg=1.0147  lr=9.89e-04
+[   35.9s] INFO    step   100  val_mse(log-life)=0.3406  <- best
+[   36.0s] INFO    step   150/1500  loss=0.6183  reg=0.6183  lr=9.76e-04
+[   36.1s] INFO    step   200/1500  loss=0.5591  reg=0.5591  lr=9.57e-04
+[   36.1s] INFO    step   200  val_mse(log-life)=0.1988  <- best
+[   36.2s] INFO    step   250/1500  loss=0.6055  reg=0.6055  lr=9.33e-04
+[   36.2s] INFO    step   300/1500  loss=0.3796  reg=0.3796  lr=9.05e-04
+[   36.2s] INFO    step   300  val_mse(log-life)=0.1622  <- best
+[   36.3s] INFO    step   350/1500  loss=0.4835  reg=0.4835  lr=8.72e-04
+[   36.4s] INFO    step   400/1500  loss=0.4007  reg=0.4007  lr=8.35e-04
+[   36.4s] INFO    step   400  val_mse(log-life)=0.1554  <- best
+[   36.5s] INFO    step   450/1500  loss=0.7963  reg=0.7963  lr=7.94e-04
+[   36.6s] INFO    step   500/1500  loss=0.4738  reg=0.4738  lr=7.50e-04
+[   36.6s] INFO    step   500  val_mse(log-life)=0.1402  <- best
+[   36.7s] INFO    step   550/1500  loss=0.4278  reg=0.4278  lr=7.03e-04
+[   36.8s] INFO    step   600/1500  loss=0.3198  reg=0.3198  lr=6.55e-04
+[   36.8s] INFO    step   600  val_mse(log-life)=0.1362  <- best
+[   36.8s] INFO    step   650/1500  loss=0.4345  reg=0.4345  lr=6.04e-04
+[   36.9s] INFO    step   700/1500  loss=0.6211  reg=0.6211  lr=5.52e-04
+[   36.9s] INFO    step   700  val_mse(log-life)=0.1257  <- best
+[   37.0s] INFO    step   750/1500  loss=0.5740  reg=0.5740  lr=5.00e-04
+[   37.1s] INFO    step   800/1500  loss=0.2314  reg=0.2314  lr=4.48e-04
+[   37.1s] INFO    step   800  val_mse(log-life)=0.1191  <- best
+[   37.2s] INFO    step   850/1500  loss=0.2416  reg=0.2416  lr=3.96e-04
+[   37.3s] INFO    step   900/1500  loss=0.2397  reg=0.2397  lr=3.45e-04
+[   37.3s] INFO    step   900  val_mse(log-life)=0.1247
+[   37.4s] INFO    step   950/1500  loss=0.1857  reg=0.1857  lr=2.97e-04
+[   37.4s] INFO    step  1000/1500  loss=0.6084  reg=0.6084  lr=2.50e-04
+[   37.4s] INFO    step  1000  val_mse(log-life)=0.1169  <- best
+[   37.5s] INFO    step  1050/1500  loss=0.3641  reg=0.3641  lr=2.06e-04
+[   37.6s] INFO    step  1100/1500  loss=0.5082  reg=0.5082  lr=1.65e-04
+[   37.6s] INFO    step  1100  val_mse(log-life)=0.1163  <- best
+[   37.7s] INFO    step  1150/1500  loss=0.2332  reg=0.2332  lr=1.28e-04
+[   37.8s] INFO    step  1200/1500  loss=0.2435  reg=0.2435  lr=9.55e-05
+[   37.8s] INFO    step  1200  val_mse(log-life)=0.1170
+[   37.9s] INFO    step  1250/1500  loss=0.1507  reg=0.1507  lr=6.70e-05
+[   38.0s] INFO    step  1300/1500  loss=0.3557  reg=0.3557  lr=4.32e-05
+[   38.0s] INFO    step  1300  val_mse(log-life)=0.1170
+[   38.0s] INFO    step  1350/1500  loss=0.3452  reg=0.3452  lr=2.45e-05
+[   38.1s] INFO    step  1400/1500  loss=0.3935  reg=0.3935  lr=1.09e-05
+[   38.1s] INFO    step  1400  val_mse(log-life)=0.1152  <- best
+[   38.2s] INFO    step  1450/1500  loss=0.3519  reg=0.3519  lr=2.74e-06
+[   38.3s] INFO    step  1500/1500  loss=0.2754  reg=0.2754  lr=0.00e+00
+[   38.3s] INFO    step  1500  val_mse(log-life)=0.1156
+[   38.3s] INFO    restored best checkpoint from step 1400 (val_mse=0.1152)
+[   38.3s] INFO    saved checkpoint -> runs/20260726_034513/fold_RWTH/seed_3/checkpoint.pt
+[   38.3s] INFO  fold=RWTH seed=4 | source 356 train / 62 val, target 28 | label mu=6.605 sd=0.687
+[   38.3s] INFO    source datasets: ['HUST', 'MATR', 'SNL', 'Stanford', 'Tongji']
+[   38.3s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   38.3s] INFO    step     1/1500  loss=1.4133  reg=1.4133  lr=1.00e-03
+[   38.4s] INFO    step    50/1500  loss=1.3767  reg=1.3767  lr=9.97e-04
+[   38.5s] INFO    step   100/1500  loss=1.2921  reg=1.2921  lr=9.89e-04
+[   38.5s] INFO    step   100  val_mse(log-life)=0.5400  <- best
+[   38.6s] INFO    step   150/1500  loss=0.5548  reg=0.5548  lr=9.76e-04
+[   38.7s] INFO    step   200/1500  loss=0.5722  reg=0.5722  lr=9.57e-04
+[   38.7s] INFO    step   200  val_mse(log-life)=0.6265
+[   38.8s] INFO    step   250/1500  loss=0.7216  reg=0.7216  lr=9.33e-04
+[   38.8s] INFO    step   300/1500  loss=0.6036  reg=0.6036  lr=9.05e-04
+[   38.8s] INFO    step   300  val_mse(log-life)=0.5988
+[   38.9s] INFO    step   350/1500  loss=0.5371  reg=0.5371  lr=8.72e-04
+[   39.0s] INFO    step   400/1500  loss=0.4227  reg=0.4227  lr=8.35e-04
+[   39.0s] INFO    step   400  val_mse(log-life)=0.5610
+[   39.1s] INFO    step   450/1500  loss=0.6044  reg=0.6044  lr=7.94e-04
+[   39.2s] INFO    step   500/1500  loss=0.5469  reg=0.5469  lr=7.50e-04
+[   39.2s] INFO    step   500  val_mse(log-life)=0.7565
+[   39.2s] INFO    early stop at step 500 (no improvement for 400)
+[   39.2s] INFO    restored best checkpoint from step 100 (val_mse=0.5400)
+[   39.2s] INFO    saved checkpoint -> runs/20260726_034513/fold_RWTH/seed_4/checkpoint.pt
+[   39.2s] INFO  -- done (11.4s): FOLD 3/6 — target = RWTH
+[   39.2s] INFO  ========================================================================
+[   39.2s] INFO  [train] FOLD 4/6 — target = SNL
+[   39.2s] INFO  ========================================================================
+[   39.2s] INFO  fold=SNL seed=0 | source 337 train / 59 val, target 50 | label mu=6.619 sd=0.651
+[   39.2s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'Stanford', 'Tongji']
+[   39.2s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   39.2s] INFO    step     1/1500  loss=0.8885  reg=0.8885  lr=1.00e-03
+[   39.3s] INFO    step    50/1500  loss=0.9454  reg=0.9454  lr=9.97e-04
+[   39.4s] INFO    step   100/1500  loss=0.9845  reg=0.9845  lr=9.89e-04
+[   39.4s] INFO    step   100  val_mse(log-life)=0.2570  <- best
+[   39.5s] INFO    step   150/1500  loss=0.6198  reg=0.6198  lr=9.76e-04
+[   39.6s] INFO    step   200/1500  loss=0.3353  reg=0.3353  lr=9.57e-04
+[   39.6s] INFO    step   200  val_mse(log-life)=0.1877  <- best
+[   39.6s] INFO    step   250/1500  loss=0.3769  reg=0.3769  lr=9.33e-04
+[   39.7s] INFO    step   300/1500  loss=0.4679  reg=0.4679  lr=9.05e-04
+[   39.7s] INFO    step   300  val_mse(log-life)=0.1602  <- best
+[   39.8s] INFO    step   350/1500  loss=0.2882  reg=0.2882  lr=8.72e-04
+[   39.9s] INFO    step   400/1500  loss=0.3522  reg=0.3522  lr=8.35e-04
+[   39.9s] INFO    step   400  val_mse(log-life)=0.1367  <- best
+[   40.0s] INFO    step   450/1500  loss=0.3064  reg=0.3064  lr=7.94e-04
+[   40.1s] INFO    step   500/1500  loss=0.4342  reg=0.4342  lr=7.50e-04
+[   40.1s] INFO    step   500  val_mse(log-life)=0.1196  <- best
+[   40.2s] INFO    step   550/1500  loss=0.2668  reg=0.2668  lr=7.03e-04
+[   40.2s] INFO    step   600/1500  loss=0.2203  reg=0.2203  lr=6.55e-04
+[   40.2s] INFO    step   600  val_mse(log-life)=0.1129  <- best
+[   40.3s] INFO    step   650/1500  loss=0.2740  reg=0.2740  lr=6.04e-04
+[   40.4s] INFO    step   700/1500  loss=0.2384  reg=0.2384  lr=5.52e-04
+[   40.4s] INFO    step   700  val_mse(log-life)=0.1073  <- best
+[   40.5s] INFO    step   750/1500  loss=0.1984  reg=0.1984  lr=5.00e-04
+[   40.6s] INFO    step   800/1500  loss=0.4868  reg=0.4868  lr=4.48e-04
+[   40.6s] INFO    step   800  val_mse(log-life)=0.1122
+[   40.7s] INFO    step   850/1500  loss=0.4174  reg=0.4174  lr=3.96e-04
+[   40.7s] INFO    step   900/1500  loss=0.1773  reg=0.1773  lr=3.45e-04
+[   40.7s] INFO    step   900  val_mse(log-life)=0.1005  <- best
+[   40.8s] INFO    step   950/1500  loss=0.2915  reg=0.2915  lr=2.97e-04
+[   40.9s] INFO    step  1000/1500  loss=0.3438  reg=0.3438  lr=2.50e-04
+[   40.9s] INFO    step  1000  val_mse(log-life)=0.0993  <- best
+[   41.0s] INFO    step  1050/1500  loss=0.3131  reg=0.3131  lr=2.06e-04
+[   41.1s] INFO    step  1100/1500  loss=0.2823  reg=0.2823  lr=1.65e-04
+[   41.1s] INFO    step  1100  val_mse(log-life)=0.1030
+[   41.2s] INFO    step  1150/1500  loss=0.2672  reg=0.2672  lr=1.28e-04
+[   41.3s] INFO    step  1200/1500  loss=0.2115  reg=0.2115  lr=9.55e-05
+[   41.3s] INFO    step  1200  val_mse(log-life)=0.0978  <- best
+[   41.3s] INFO    step  1250/1500  loss=0.1666  reg=0.1666  lr=6.70e-05
+[   41.4s] INFO    step  1300/1500  loss=0.2521  reg=0.2521  lr=4.32e-05
+[   41.4s] INFO    step  1300  val_mse(log-life)=0.0983
+[   41.5s] INFO    step  1350/1500  loss=0.3660  reg=0.3660  lr=2.45e-05
+[   41.6s] INFO    step  1400/1500  loss=0.3304  reg=0.3304  lr=1.09e-05
+[   41.6s] INFO    step  1400  val_mse(log-life)=0.0981
+[   41.7s] INFO    step  1450/1500  loss=0.2379  reg=0.2379  lr=2.74e-06
+[   41.8s] INFO    step  1500/1500  loss=0.4088  reg=0.4088  lr=0.00e+00
+[   41.8s] INFO    step  1500  val_mse(log-life)=0.0980
+[   41.8s] INFO    restored best checkpoint from step 1200 (val_mse=0.0978)
+[   41.8s] INFO    saved checkpoint -> runs/20260726_034513/fold_SNL/seed_0/checkpoint.pt
+[   41.8s] INFO  fold=SNL seed=1 | source 337 train / 59 val, target 50 | label mu=6.597 sd=0.644
+[   41.8s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'Stanford', 'Tongji']
+[   41.8s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   41.8s] INFO    step     1/1500  loss=1.3163  reg=1.3163  lr=1.00e-03
+[   41.9s] INFO    step    50/1500  loss=0.8101  reg=0.8101  lr=9.97e-04
+[   42.0s] INFO    step   100/1500  loss=0.6460  reg=0.6460  lr=9.89e-04
+[   42.0s] INFO    step   100  val_mse(log-life)=0.3668  <- best
+[   42.1s] INFO    step   150/1500  loss=0.4225  reg=0.4225  lr=9.76e-04
+[   42.2s] INFO    step   200/1500  loss=0.3741  reg=0.3741  lr=9.57e-04
+[   42.2s] INFO    step   200  val_mse(log-life)=0.2327  <- best
+[   42.2s] INFO    step   250/1500  loss=0.3292  reg=0.3292  lr=9.33e-04
+[   42.3s] INFO    step   300/1500  loss=0.4997  reg=0.4997  lr=9.05e-04
+[   42.3s] INFO    step   300  val_mse(log-life)=0.1563  <- best
+[   42.4s] INFO    step   350/1500  loss=0.3286  reg=0.3286  lr=8.72e-04
+[   42.5s] INFO    step   400/1500  loss=0.3580  reg=0.3580  lr=8.35e-04
+[   42.5s] INFO    step   400  val_mse(log-life)=0.1253  <- best
+[   42.6s] INFO    step   450/1500  loss=0.3719  reg=0.3719  lr=7.94e-04
+[   42.7s] INFO    step   500/1500  loss=0.3193  reg=0.3193  lr=7.50e-04
+[   42.7s] INFO    step   500  val_mse(log-life)=0.1161  <- best
+[   42.8s] INFO    step   550/1500  loss=0.1488  reg=0.1488  lr=7.03e-04
+[   42.8s] INFO    step   600/1500  loss=0.2597  reg=0.2597  lr=6.55e-04
+[   42.8s] INFO    step   600  val_mse(log-life)=0.0974  <- best
+[   42.9s] INFO    step   650/1500  loss=0.3470  reg=0.3470  lr=6.04e-04
+[   43.0s] INFO    step   700/1500  loss=0.1871  reg=0.1871  lr=5.52e-04
+[   43.0s] INFO    step   700  val_mse(log-life)=0.0882  <- best
+[   43.1s] INFO    step   750/1500  loss=0.2749  reg=0.2749  lr=5.00e-04
+[   43.2s] INFO    step   800/1500  loss=0.3168  reg=0.3168  lr=4.48e-04
+[   43.2s] INFO    step   800  val_mse(log-life)=0.0864  <- best
+[   43.3s] INFO    step   850/1500  loss=0.3001  reg=0.3001  lr=3.96e-04
+[   43.4s] INFO    step   900/1500  loss=0.2501  reg=0.2501  lr=3.45e-04
+[   43.4s] INFO    step   900  val_mse(log-life)=0.0874
+[   43.4s] INFO    step   950/1500  loss=0.2520  reg=0.2520  lr=2.97e-04
+[   43.5s] INFO    step  1000/1500  loss=0.2438  reg=0.2438  lr=2.50e-04
+[   43.5s] INFO    step  1000  val_mse(log-life)=0.0843  <- best
+[   43.6s] INFO    step  1050/1500  loss=0.2180  reg=0.2180  lr=2.06e-04
+[   43.7s] INFO    step  1100/1500  loss=0.3065  reg=0.3065  lr=1.65e-04
+[   43.7s] INFO    step  1100  val_mse(log-life)=0.0835  <- best
+[   43.8s] INFO    step  1150/1500  loss=0.2407  reg=0.2407  lr=1.28e-04
+[   43.9s] INFO    step  1200/1500  loss=0.2988  reg=0.2988  lr=9.55e-05
+[   43.9s] INFO    step  1200  val_mse(log-life)=0.0817  <- best
+[   43.9s] INFO    step  1250/1500  loss=0.1687  reg=0.1687  lr=6.70e-05
+[   44.0s] INFO    step  1300/1500  loss=0.2853  reg=0.2853  lr=4.32e-05
+[   44.0s] INFO    step  1300  val_mse(log-life)=0.0817  <- best
+[   44.1s] INFO    step  1350/1500  loss=0.2253  reg=0.2253  lr=2.45e-05
+[   44.2s] INFO    step  1400/1500  loss=0.2451  reg=0.2451  lr=1.09e-05
+[   44.2s] INFO    step  1400  val_mse(log-life)=0.0813  <- best
+[   44.3s] INFO    step  1450/1500  loss=0.2728  reg=0.2728  lr=2.74e-06
+[   44.4s] INFO    step  1500/1500  loss=0.3002  reg=0.3002  lr=0.00e+00
+[   44.4s] INFO    step  1500  val_mse(log-life)=0.0812  <- best
+[   44.4s] INFO    restored best checkpoint from step 1500 (val_mse=0.0812)
+[   44.4s] INFO    saved checkpoint -> runs/20260726_034513/fold_SNL/seed_1/checkpoint.pt
+[   44.4s] INFO  fold=SNL seed=2 | source 337 train / 59 val, target 50 | label mu=6.621 sd=0.650
+[   44.4s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'Stanford', 'Tongji']
+[   44.4s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   44.4s] INFO    step     1/1500  loss=1.0305  reg=1.0305  lr=1.00e-03
+[   44.5s] INFO    step    50/1500  loss=1.3325  reg=1.3325  lr=9.97e-04
+[   44.6s] INFO    step   100/1500  loss=0.9806  reg=0.9806  lr=9.89e-04
+[   44.6s] INFO    step   100  val_mse(log-life)=0.3123  <- best
+[   44.7s] INFO    step   150/1500  loss=0.5812  reg=0.5812  lr=9.76e-04
+[   44.8s] INFO    step   200/1500  loss=0.5949  reg=0.5949  lr=9.57e-04
+[   44.8s] INFO    step   200  val_mse(log-life)=0.1699  <- best
+[   44.8s] INFO    step   250/1500  loss=0.4260  reg=0.4260  lr=9.33e-04
+[   44.9s] INFO    step   300/1500  loss=0.3937  reg=0.3937  lr=9.05e-04
+[   44.9s] INFO    step   300  val_mse(log-life)=0.1490  <- best
+[   45.0s] INFO    step   350/1500  loss=0.3080  reg=0.3080  lr=8.72e-04
+[   45.1s] INFO    step   400/1500  loss=0.4682  reg=0.4682  lr=8.35e-04
+[   45.1s] INFO    step   400  val_mse(log-life)=0.1608
+[   45.2s] INFO    step   450/1500  loss=0.5245  reg=0.5245  lr=7.94e-04
+[   45.3s] INFO    step   500/1500  loss=0.2072  reg=0.2072  lr=7.50e-04
+[   45.3s] INFO    step   500  val_mse(log-life)=0.1476  <- best
+[   45.4s] INFO    step   550/1500  loss=0.3208  reg=0.3208  lr=7.03e-04
+[   45.4s] INFO    step   600/1500  loss=0.3105  reg=0.3105  lr=6.55e-04
+[   45.4s] INFO    step   600  val_mse(log-life)=0.1456  <- best
+[   45.5s] INFO    step   650/1500  loss=0.4656  reg=0.4656  lr=6.04e-04
+[   45.6s] INFO    step   700/1500  loss=0.3193  reg=0.3193  lr=5.52e-04
+[   45.6s] INFO    step   700  val_mse(log-life)=0.1326  <- best
+[   45.7s] INFO    step   750/1500  loss=0.2098  reg=0.2098  lr=5.00e-04
+[   45.8s] INFO    step   800/1500  loss=0.2916  reg=0.2916  lr=4.48e-04
+[   45.8s] INFO    step   800  val_mse(log-life)=0.1287  <- best
+[   45.9s] INFO    step   850/1500  loss=0.2366  reg=0.2366  lr=3.96e-04
+[   46.0s] INFO    step   900/1500  loss=0.1683  reg=0.1683  lr=3.45e-04
+[   46.0s] INFO    step   900  val_mse(log-life)=0.1297
+[   46.0s] INFO    step   950/1500  loss=0.3492  reg=0.3492  lr=2.97e-04
+[   46.1s] INFO    step  1000/1500  loss=0.3875  reg=0.3875  lr=2.50e-04
+[   46.1s] INFO    step  1000  val_mse(log-life)=0.1228  <- best
+[   46.2s] INFO    step  1050/1500  loss=0.3297  reg=0.3297  lr=2.06e-04
+[   46.3s] INFO    step  1100/1500  loss=0.2484  reg=0.2484  lr=1.65e-04
+[   46.3s] INFO    step  1100  val_mse(log-life)=0.1235
+[   46.4s] INFO    step  1150/1500  loss=0.2506  reg=0.2506  lr=1.28e-04
+[   46.5s] INFO    step  1200/1500  loss=0.2821  reg=0.2821  lr=9.55e-05
+[   46.5s] INFO    step  1200  val_mse(log-life)=0.1230
+[   46.6s] INFO    step  1250/1500  loss=0.3070  reg=0.3070  lr=6.70e-05
+[   46.6s] INFO    step  1300/1500  loss=0.1596  reg=0.1596  lr=4.32e-05
+[   46.6s] INFO    step  1300  val_mse(log-life)=0.1197  <- best
+[   46.7s] INFO    step  1350/1500  loss=0.1947  reg=0.1947  lr=2.45e-05
+[   46.8s] INFO    step  1400/1500  loss=0.3147  reg=0.3147  lr=1.09e-05
+[   46.8s] INFO    step  1400  val_mse(log-life)=0.1199
+[   46.9s] INFO    step  1450/1500  loss=0.3182  reg=0.3182  lr=2.74e-06
+[   47.0s] INFO    step  1500/1500  loss=0.2702  reg=0.2702  lr=0.00e+00
+[   47.0s] INFO    step  1500  val_mse(log-life)=0.1202
+[   47.0s] INFO    restored best checkpoint from step 1300 (val_mse=0.1197)
+[   47.0s] INFO    saved checkpoint -> runs/20260726_034513/fold_SNL/seed_2/checkpoint.pt
+[   47.0s] INFO  fold=SNL seed=3 | source 337 train / 59 val, target 50 | label mu=6.615 sd=0.647
+[   47.0s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'Stanford', 'Tongji']
+[   47.0s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   47.0s] INFO    step     1/1500  loss=1.0425  reg=1.0425  lr=1.00e-03
+[   47.1s] INFO    step    50/1500  loss=0.8381  reg=0.8381  lr=9.97e-04
+[   47.2s] INFO    step   100/1500  loss=0.6421  reg=0.6421  lr=9.89e-04
+[   47.2s] INFO    step   100  val_mse(log-life)=0.2956  <- best
+[   47.3s] INFO    step   150/1500  loss=0.6207  reg=0.6207  lr=9.76e-04
+[   47.4s] INFO    step   200/1500  loss=0.6066  reg=0.6066  lr=9.57e-04
+[   47.4s] INFO    step   200  val_mse(log-life)=0.1800  <- best
+[   47.4s] INFO    step   250/1500  loss=0.4315  reg=0.4315  lr=9.33e-04
+[   47.5s] INFO    step   300/1500  loss=0.3646  reg=0.3646  lr=9.05e-04
+[   47.5s] INFO    step   300  val_mse(log-life)=0.1366  <- best
+[   47.6s] INFO    step   350/1500  loss=0.3776  reg=0.3776  lr=8.72e-04
+[   47.7s] INFO    step   400/1500  loss=0.3120  reg=0.3120  lr=8.35e-04
+[   47.7s] INFO    step   400  val_mse(log-life)=0.1283  <- best
+[   47.8s] INFO    step   450/1500  loss=0.3504  reg=0.3504  lr=7.94e-04
+[   47.9s] INFO    step   500/1500  loss=0.2719  reg=0.2719  lr=7.50e-04
+[   47.9s] INFO    step   500  val_mse(log-life)=0.1190  <- best
+[   48.0s] INFO    step   550/1500  loss=0.3288  reg=0.3288  lr=7.03e-04
+[   48.0s] INFO    step   600/1500  loss=0.3180  reg=0.3180  lr=6.55e-04
+[   48.0s] INFO    step   600  val_mse(log-life)=0.1135  <- best
+[   48.1s] INFO    step   650/1500  loss=0.2780  reg=0.2780  lr=6.04e-04
+[   48.2s] INFO    step   700/1500  loss=0.2286  reg=0.2286  lr=5.52e-04
+[   48.2s] INFO    step   700  val_mse(log-life)=0.1046  <- best
+[   48.3s] INFO    step   750/1500  loss=0.2069  reg=0.2069  lr=5.00e-04
+[   48.4s] INFO    step   800/1500  loss=0.2485  reg=0.2485  lr=4.48e-04
+[   48.4s] INFO    step   800  val_mse(log-life)=0.1009  <- best
+[   48.5s] INFO    step   850/1500  loss=0.3007  reg=0.3007  lr=3.96e-04
+[   48.6s] INFO    step   900/1500  loss=0.2638  reg=0.2638  lr=3.45e-04
+[   48.6s] INFO    step   900  val_mse(log-life)=0.0971  <- best
+[   48.6s] INFO    step   950/1500  loss=0.2565  reg=0.2565  lr=2.97e-04
+[   48.7s] INFO    step  1000/1500  loss=0.3417  reg=0.3417  lr=2.50e-04
+[   48.7s] INFO    step  1000  val_mse(log-life)=0.0975
+[   48.8s] INFO    step  1050/1500  loss=0.2026  reg=0.2026  lr=2.06e-04
+[   48.9s] INFO    step  1100/1500  loss=0.3187  reg=0.3187  lr=1.65e-04
+[   48.9s] INFO    step  1100  val_mse(log-life)=0.0963  <- best
+[   49.0s] INFO    step  1150/1500  loss=0.1943  reg=0.1943  lr=1.28e-04
+[   49.1s] INFO    step  1200/1500  loss=0.2894  reg=0.2894  lr=9.55e-05
+[   49.1s] INFO    step  1200  val_mse(log-life)=0.0955  <- best
+[   49.2s] INFO    step  1250/1500  loss=0.2289  reg=0.2289  lr=6.70e-05
+[   49.2s] INFO    step  1300/1500  loss=0.1533  reg=0.1533  lr=4.32e-05
+[   49.2s] INFO    step  1300  val_mse(log-life)=0.0951  <- best
+[   49.3s] INFO    step  1350/1500  loss=0.3178  reg=0.3178  lr=2.45e-05
+[   49.4s] INFO    step  1400/1500  loss=0.4003  reg=0.4003  lr=1.09e-05
+[   49.4s] INFO    step  1400  val_mse(log-life)=0.0954
+[   49.5s] INFO    step  1450/1500  loss=0.3298  reg=0.3298  lr=2.74e-06
+[   49.6s] INFO    step  1500/1500  loss=0.3910  reg=0.3910  lr=0.00e+00
+[   49.6s] INFO    step  1500  val_mse(log-life)=0.0950  <- best
+[   49.6s] INFO    restored best checkpoint from step 1500 (val_mse=0.0950)
+[   49.6s] INFO    saved checkpoint -> runs/20260726_034513/fold_SNL/seed_3/checkpoint.pt
+[   49.6s] INFO  fold=SNL seed=4 | source 337 train / 59 val, target 50 | label mu=6.606 sd=0.646
+[   49.6s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'Stanford', 'Tongji']
+[   49.6s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   49.6s] INFO    step     1/1500  loss=1.3577  reg=1.3577  lr=1.00e-03
+[   49.7s] INFO    step    50/1500  loss=0.9590  reg=0.9590  lr=9.97e-04
+[   49.8s] INFO    step   100/1500  loss=0.6986  reg=0.6986  lr=9.89e-04
+[   49.8s] INFO    step   100  val_mse(log-life)=0.3101  <- best
+[   49.9s] INFO    step   150/1500  loss=0.8273  reg=0.8273  lr=9.76e-04
+[   50.0s] INFO    step   200/1500  loss=0.5032  reg=0.5032  lr=9.57e-04
+[   50.0s] INFO    step   200  val_mse(log-life)=0.1974  <- best
+[   50.1s] INFO    step   250/1500  loss=0.3884  reg=0.3884  lr=9.33e-04
+[   50.1s] INFO    step   300/1500  loss=0.2885  reg=0.2885  lr=9.05e-04
+[   50.1s] INFO    step   300  val_mse(log-life)=0.1694  <- best
+[   50.2s] INFO    step   350/1500  loss=0.4639  reg=0.4639  lr=8.72e-04
+[   50.3s] INFO    step   400/1500  loss=0.4202  reg=0.4202  lr=8.35e-04
+[   50.3s] INFO    step   400  val_mse(log-life)=0.1579  <- best
+[   50.4s] INFO    step   450/1500  loss=0.4105  reg=0.4105  lr=7.94e-04
+[   50.5s] INFO    step   500/1500  loss=0.3616  reg=0.3616  lr=7.50e-04
+[   50.5s] INFO    step   500  val_mse(log-life)=0.1597
+[   50.6s] INFO    step   550/1500  loss=0.2421  reg=0.2421  lr=7.03e-04
+[   50.6s] INFO    step   600/1500  loss=0.3620  reg=0.3620  lr=6.55e-04
+[   50.7s] INFO    step   600  val_mse(log-life)=0.1503  <- best
+[   50.7s] INFO    step   650/1500  loss=0.2355  reg=0.2355  lr=6.04e-04
+[   50.8s] INFO    step   700/1500  loss=0.4049  reg=0.4049  lr=5.52e-04
+[   50.8s] INFO    step   700  val_mse(log-life)=0.1429  <- best
+[   50.9s] INFO    step   750/1500  loss=0.1459  reg=0.1459  lr=5.00e-04
+[   51.0s] INFO    step   800/1500  loss=0.3931  reg=0.3931  lr=4.48e-04
+[   51.0s] INFO    step   800  val_mse(log-life)=0.1464
+[   51.1s] INFO    step   850/1500  loss=0.1952  reg=0.1952  lr=3.96e-04
+[   51.2s] INFO    step   900/1500  loss=0.3495  reg=0.3495  lr=3.45e-04
+[   51.2s] INFO    step   900  val_mse(log-life)=0.1421  <- best
+[   51.2s] INFO    step   950/1500  loss=0.1339  reg=0.1339  lr=2.97e-04
+[   51.3s] INFO    step  1000/1500  loss=0.3617  reg=0.3617  lr=2.50e-04
+[   51.3s] INFO    step  1000  val_mse(log-life)=0.1406  <- best
+[   51.4s] INFO    step  1050/1500  loss=0.2753  reg=0.2753  lr=2.06e-04
+[   51.5s] INFO    step  1100/1500  loss=0.2155  reg=0.2155  lr=1.65e-04
+[   51.5s] INFO    step  1100  val_mse(log-life)=0.1390  <- best
+[   51.6s] INFO    step  1150/1500  loss=0.2628  reg=0.2628  lr=1.28e-04
+[   51.7s] INFO    step  1200/1500  loss=0.3602  reg=0.3602  lr=9.55e-05
+[   51.7s] INFO    step  1200  val_mse(log-life)=0.1389  <- best
+[   51.8s] INFO    step  1250/1500  loss=0.2481  reg=0.2481  lr=6.70e-05
+[   51.8s] INFO    step  1300/1500  loss=0.1875  reg=0.1875  lr=4.32e-05
+[   51.8s] INFO    step  1300  val_mse(log-life)=0.1380  <- best
+[   51.9s] INFO    step  1350/1500  loss=0.2306  reg=0.2306  lr=2.45e-05
+[   52.0s] INFO    step  1400/1500  loss=0.1975  reg=0.1975  lr=1.09e-05
+[   52.0s] INFO    step  1400  val_mse(log-life)=0.1372  <- best
+[   52.1s] INFO    step  1450/1500  loss=0.3522  reg=0.3522  lr=2.74e-06
+[   52.2s] INFO    step  1500/1500  loss=0.2062  reg=0.2062  lr=0.00e+00
+[   52.2s] INFO    step  1500  val_mse(log-life)=0.1372
+[   52.2s] INFO    restored best checkpoint from step 1400 (val_mse=0.1372)
+[   52.2s] INFO    saved checkpoint -> runs/20260726_034513/fold_SNL/seed_4/checkpoint.pt
+[   52.2s] INFO  -- done (13.0s): FOLD 4/6 — target = SNL
+[   52.2s] INFO  ========================================================================
+[   52.2s] INFO  [train] FOLD 5/6 — target = Stanford
+[   52.2s] INFO  ========================================================================
+[   52.2s] INFO  fold=Stanford seed=0 | source 345 train / 60 val, target 41 | label mu=6.597 sd=0.727
+[   52.2s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'SNL', 'Tongji']
+[   52.2s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   52.2s] INFO    step     1/1500  loss=1.0226  reg=1.0226  lr=1.00e-03
+[   52.3s] INFO    step    50/1500  loss=0.8275  reg=0.8275  lr=9.97e-04
+[   52.4s] INFO    step   100/1500  loss=0.9934  reg=0.9934  lr=9.89e-04
+[   52.4s] INFO    step   100  val_mse(log-life)=0.3027  <- best
+[   52.5s] INFO    step   150/1500  loss=0.9707  reg=0.9707  lr=9.76e-04
+[   52.6s] INFO    step   200/1500  loss=0.9114  reg=0.9114  lr=9.57e-04
+[   52.6s] INFO    step   200  val_mse(log-life)=0.1954  <- best
+[   52.7s] INFO    step   250/1500  loss=0.4829  reg=0.4829  lr=9.33e-04
+[   52.7s] INFO    step   300/1500  loss=0.3244  reg=0.3244  lr=9.05e-04
+[   52.7s] INFO    step   300  val_mse(log-life)=0.1523  <- best
+[   52.8s] INFO    step   350/1500  loss=0.3674  reg=0.3674  lr=8.72e-04
+[   52.9s] INFO    step   400/1500  loss=0.4577  reg=0.4577  lr=8.35e-04
+[   52.9s] INFO    step   400  val_mse(log-life)=0.0809  <- best
+[   53.0s] INFO    step   450/1500  loss=0.3557  reg=0.3557  lr=7.94e-04
+[   53.1s] INFO    step   500/1500  loss=0.2256  reg=0.2256  lr=7.50e-04
+[   53.1s] INFO    step   500  val_mse(log-life)=0.0631  <- best
+[   53.2s] INFO    step   550/1500  loss=0.3844  reg=0.3844  lr=7.03e-04
+[   53.3s] INFO    step   600/1500  loss=0.2893  reg=0.2893  lr=6.55e-04
+[   53.3s] INFO    step   600  val_mse(log-life)=0.0744
+[   53.3s] INFO    step   650/1500  loss=0.7633  reg=0.7633  lr=6.04e-04
+[   53.4s] INFO    step   700/1500  loss=0.4629  reg=0.4629  lr=5.52e-04
+[   53.4s] INFO    step   700  val_mse(log-life)=0.0749
+[   53.5s] INFO    step   750/1500  loss=0.3548  reg=0.3548  lr=5.00e-04
+[   53.6s] INFO    step   800/1500  loss=0.3965  reg=0.3965  lr=4.48e-04
+[   53.6s] INFO    step   800  val_mse(log-life)=0.1388
+[   53.7s] INFO    step   850/1500  loss=0.3322  reg=0.3322  lr=3.96e-04
+[   53.8s] INFO    step   900/1500  loss=0.2777  reg=0.2777  lr=3.45e-04
+[   53.8s] INFO    step   900  val_mse(log-life)=0.1180
+[   53.8s] INFO    early stop at step 900 (no improvement for 400)
+[   53.8s] INFO    restored best checkpoint from step 500 (val_mse=0.0631)
+[   53.8s] INFO    saved checkpoint -> runs/20260726_034513/fold_Stanford/seed_0/checkpoint.pt
+[   53.8s] INFO  fold=Stanford seed=1 | source 345 train / 60 val, target 41 | label mu=6.580 sd=0.710
+[   53.8s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'SNL', 'Tongji']
+[   53.8s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   53.8s] INFO    step     1/1500  loss=0.7132  reg=0.7132  lr=1.00e-03
+[   53.9s] INFO    step    50/1500  loss=1.4396  reg=1.4396  lr=9.97e-04
+[   54.0s] INFO    step   100/1500  loss=1.2279  reg=1.2279  lr=9.89e-04
+[   54.0s] INFO    step   100  val_mse(log-life)=0.4386  <- best
+[   54.1s] INFO    step   150/1500  loss=0.6488  reg=0.6488  lr=9.76e-04
+[   54.1s] INFO    step   200/1500  loss=0.5688  reg=0.5688  lr=9.57e-04
+[   54.1s] INFO    step   200  val_mse(log-life)=0.3602  <- best
+[   54.2s] INFO    step   250/1500  loss=0.6373  reg=0.6373  lr=9.33e-04
+[   54.3s] INFO    step   300/1500  loss=0.5258  reg=0.5258  lr=9.05e-04
+[   54.3s] INFO    step   300  val_mse(log-life)=0.3151  <- best
+[   54.4s] INFO    step   350/1500  loss=0.3482  reg=0.3482  lr=8.72e-04
+[   54.5s] INFO    step   400/1500  loss=0.4196  reg=0.4196  lr=8.35e-04
+[   54.5s] INFO    step   400  val_mse(log-life)=0.2921  <- best
+[   54.6s] INFO    step   450/1500  loss=0.3509  reg=0.3509  lr=7.94e-04
+[   54.7s] INFO    step   500/1500  loss=0.4135  reg=0.4135  lr=7.50e-04
+[   54.7s] INFO    step   500  val_mse(log-life)=0.3275
+[   54.7s] INFO    step   550/1500  loss=0.4870  reg=0.4870  lr=7.03e-04
+[   54.8s] INFO    step   600/1500  loss=0.3817  reg=0.3817  lr=6.55e-04
+[   54.8s] INFO    step   600  val_mse(log-life)=0.4688
+[   54.9s] INFO    step   650/1500  loss=0.4504  reg=0.4504  lr=6.04e-04
+[   55.0s] INFO    step   700/1500  loss=0.1980  reg=0.1980  lr=5.52e-04
+[   55.0s] INFO    step   700  val_mse(log-life)=0.5226
+[   55.1s] INFO    step   750/1500  loss=0.3030  reg=0.3030  lr=5.00e-04
+[   55.2s] INFO    step   800/1500  loss=0.2329  reg=0.2329  lr=4.48e-04
+[   55.2s] INFO    step   800  val_mse(log-life)=0.5309
+[   55.2s] INFO    early stop at step 800 (no improvement for 400)
+[   55.2s] INFO    restored best checkpoint from step 400 (val_mse=0.2921)
+[   55.2s] INFO    saved checkpoint -> runs/20260726_034513/fold_Stanford/seed_1/checkpoint.pt
+[   55.2s] INFO  fold=Stanford seed=2 | source 345 train / 60 val, target 41 | label mu=6.622 sd=0.707
+[   55.2s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'SNL', 'Tongji']
+[   55.2s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   55.2s] INFO    step     1/1500  loss=0.8271  reg=0.8271  lr=1.00e-03
+[   55.3s] INFO    step    50/1500  loss=1.1432  reg=1.1432  lr=9.97e-04
+[   55.4s] INFO    step   100/1500  loss=1.1285  reg=1.1285  lr=9.89e-04
+[   55.4s] INFO    step   100  val_mse(log-life)=0.4767  <- best
+[   55.5s] INFO    step   150/1500  loss=0.9797  reg=0.9797  lr=9.76e-04
+[   55.5s] INFO    step   200/1500  loss=0.7477  reg=0.7477  lr=9.57e-04
+[   55.5s] INFO    step   200  val_mse(log-life)=0.4067  <- best
+[   55.6s] INFO    step   250/1500  loss=0.8673  reg=0.8673  lr=9.33e-04
+[   55.7s] INFO    step   300/1500  loss=0.6217  reg=0.6217  lr=9.05e-04
+[   55.7s] INFO    step   300  val_mse(log-life)=0.3828  <- best
+[   55.8s] INFO    step   350/1500  loss=0.5623  reg=0.5623  lr=8.72e-04
+[   55.9s] INFO    step   400/1500  loss=0.3607  reg=0.3607  lr=8.35e-04
+[   55.9s] INFO    step   400  val_mse(log-life)=0.2432  <- best
+[   56.0s] INFO    step   450/1500  loss=0.4061  reg=0.4061  lr=7.94e-04
+[   56.1s] INFO    step   500/1500  loss=0.2373  reg=0.2373  lr=7.50e-04
+[   56.1s] INFO    step   500  val_mse(log-life)=0.2356  <- best
+[   56.1s] INFO    step   550/1500  loss=0.2464  reg=0.2464  lr=7.03e-04
+[   56.2s] INFO    step   600/1500  loss=0.2458  reg=0.2458  lr=6.55e-04
+[   56.2s] INFO    step   600  val_mse(log-life)=0.2165  <- best
+[   56.3s] INFO    step   650/1500  loss=0.3306  reg=0.3306  lr=6.04e-04
+[   56.4s] INFO    step   700/1500  loss=0.3214  reg=0.3214  lr=5.52e-04
+[   56.4s] INFO    step   700  val_mse(log-life)=0.1845  <- best
+[   56.5s] INFO    step   750/1500  loss=0.3411  reg=0.3411  lr=5.00e-04
+[   56.6s] INFO    step   800/1500  loss=0.2984  reg=0.2984  lr=4.48e-04
+[   56.6s] INFO    step   800  val_mse(log-life)=0.1896
+[   56.7s] INFO    step   850/1500  loss=0.3925  reg=0.3925  lr=3.96e-04
+[   56.7s] INFO    step   900/1500  loss=0.4299  reg=0.4299  lr=3.45e-04
+[   56.7s] INFO    step   900  val_mse(log-life)=0.1613  <- best
+[   56.8s] INFO    step   950/1500  loss=0.3724  reg=0.3724  lr=2.97e-04
+[   56.9s] INFO    step  1000/1500  loss=0.4435  reg=0.4435  lr=2.50e-04
+[   56.9s] INFO    step  1000  val_mse(log-life)=0.1668
+[   57.0s] INFO    step  1050/1500  loss=0.2028  reg=0.2028  lr=2.06e-04
+[   57.1s] INFO    step  1100/1500  loss=0.3727  reg=0.3727  lr=1.65e-04
+[   57.1s] INFO    step  1100  val_mse(log-life)=0.1675
+[   57.2s] INFO    step  1150/1500  loss=0.2658  reg=0.2658  lr=1.28e-04
+[   57.3s] INFO    step  1200/1500  loss=0.1156  reg=0.1156  lr=9.55e-05
+[   57.3s] INFO    step  1200  val_mse(log-life)=0.1611  <- best
+[   57.3s] INFO    step  1250/1500  loss=0.1874  reg=0.1874  lr=6.70e-05
+[   57.4s] INFO    step  1300/1500  loss=0.1866  reg=0.1866  lr=4.32e-05
+[   57.4s] INFO    step  1300  val_mse(log-life)=0.1614
+[   57.5s] INFO    step  1350/1500  loss=0.1618  reg=0.1618  lr=2.45e-05
+[   57.6s] INFO    step  1400/1500  loss=0.3965  reg=0.3965  lr=1.09e-05
+[   57.6s] INFO    step  1400  val_mse(log-life)=0.1616
+[   57.7s] INFO    step  1450/1500  loss=0.5074  reg=0.5074  lr=2.74e-06
+[   57.8s] INFO    step  1500/1500  loss=0.3113  reg=0.3113  lr=0.00e+00
+[   57.8s] INFO    step  1500  val_mse(log-life)=0.1617
+[   57.8s] INFO    restored best checkpoint from step 1200 (val_mse=0.1611)
+[   57.8s] INFO    saved checkpoint -> runs/20260726_034513/fold_Stanford/seed_2/checkpoint.pt
+[   57.8s] INFO  fold=Stanford seed=3 | source 345 train / 60 val, target 41 | label mu=6.571 sd=0.710
+[   57.8s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'SNL', 'Tongji']
+[   57.8s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   57.8s] INFO    step     1/1500  loss=1.1815  reg=1.1815  lr=1.00e-03
+[   57.9s] INFO    step    50/1500  loss=0.9945  reg=0.9945  lr=9.97e-04
+[   58.0s] INFO    step   100/1500  loss=0.5632  reg=0.5632  lr=9.89e-04
+[   58.0s] INFO    step   100  val_mse(log-life)=0.4497  <- best
+[   58.1s] INFO    step   150/1500  loss=0.5485  reg=0.5485  lr=9.76e-04
+[   58.2s] INFO    step   200/1500  loss=1.0015  reg=1.0015  lr=9.57e-04
+[   58.2s] INFO    step   200  val_mse(log-life)=0.5382
+[   58.2s] INFO    step   250/1500  loss=0.4801  reg=0.4801  lr=9.33e-04
+[   58.3s] INFO    step   300/1500  loss=0.3909  reg=0.3909  lr=9.05e-04
+[   58.3s] INFO    step   300  val_mse(log-life)=0.4164  <- best
+[   58.4s] INFO    step   350/1500  loss=0.4065  reg=0.4065  lr=8.72e-04
+[   58.5s] INFO    step   400/1500  loss=0.3163  reg=0.3163  lr=8.35e-04
+[   58.5s] INFO    step   400  val_mse(log-life)=0.3308  <- best
+[   58.6s] INFO    step   450/1500  loss=0.2902  reg=0.2902  lr=7.94e-04
+[   58.7s] INFO    step   500/1500  loss=0.4105  reg=0.4105  lr=7.50e-04
+[   58.7s] INFO    step   500  val_mse(log-life)=0.2844  <- best
+[   58.7s] INFO    step   550/1500  loss=0.3303  reg=0.3303  lr=7.03e-04
+[   58.8s] INFO    step   600/1500  loss=0.1468  reg=0.1468  lr=6.55e-04
+[   58.8s] INFO    step   600  val_mse(log-life)=0.2841  <- best
+[   58.9s] INFO    step   650/1500  loss=0.4118  reg=0.4118  lr=6.04e-04
+[   59.0s] INFO    step   700/1500  loss=0.1151  reg=0.1151  lr=5.52e-04
+[   59.0s] INFO    step   700  val_mse(log-life)=0.3213
+[   59.1s] INFO    step   750/1500  loss=0.3419  reg=0.3419  lr=5.00e-04
+[   59.2s] INFO    step   800/1500  loss=0.3030  reg=0.3030  lr=4.48e-04
+[   59.2s] INFO    step   800  val_mse(log-life)=0.2694  <- best
+[   59.3s] INFO    step   850/1500  loss=0.3216  reg=0.3216  lr=3.96e-04
+[   59.3s] INFO    step   900/1500  loss=0.2286  reg=0.2286  lr=3.45e-04
+[   59.3s] INFO    step   900  val_mse(log-life)=0.2599  <- best
+[   59.4s] INFO    step   950/1500  loss=0.2565  reg=0.2565  lr=2.97e-04
+[   59.5s] INFO    step  1000/1500  loss=0.1383  reg=0.1383  lr=2.50e-04
+[   59.5s] INFO    step  1000  val_mse(log-life)=0.2772
+[   59.6s] INFO    step  1050/1500  loss=0.3126  reg=0.3126  lr=2.06e-04
+[   59.7s] INFO    step  1100/1500  loss=0.2516  reg=0.2516  lr=1.65e-04
+[   59.7s] INFO    step  1100  val_mse(log-life)=0.2759
+[   59.8s] INFO    step  1150/1500  loss=0.3555  reg=0.3555  lr=1.28e-04
+[   59.9s] INFO    step  1200/1500  loss=0.3714  reg=0.3714  lr=9.55e-05
+[   59.9s] INFO    step  1200  val_mse(log-life)=0.2609
+[   59.9s] INFO    step  1250/1500  loss=0.1884  reg=0.1884  lr=6.70e-05
+[   60.0s] INFO    step  1300/1500  loss=0.3259  reg=0.3259  lr=4.32e-05
+[   60.0s] INFO    step  1300  val_mse(log-life)=0.2605
+[   60.0s] INFO    early stop at step 1300 (no improvement for 400)
+[   60.0s] INFO    restored best checkpoint from step 900 (val_mse=0.2599)
+[   60.0s] INFO    saved checkpoint -> runs/20260726_034513/fold_Stanford/seed_3/checkpoint.pt
+[   60.1s] INFO  fold=Stanford seed=4 | source 345 train / 60 val, target 41 | label mu=6.593 sd=0.699
+[   60.1s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'SNL', 'Tongji']
+[   60.1s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   60.1s] INFO    step     1/1500  loss=0.7179  reg=0.7179  lr=1.00e-03
+[   60.1s] INFO    step    50/1500  loss=1.1709  reg=1.1709  lr=9.97e-04
+[   60.2s] INFO    step   100/1500  loss=0.7977  reg=0.7977  lr=9.89e-04
+[   60.2s] INFO    step   100  val_mse(log-life)=0.5128  <- best
+[   60.3s] INFO    step   150/1500  loss=0.4966  reg=0.4966  lr=9.76e-04
+[   60.4s] INFO    step   200/1500  loss=0.6028  reg=0.6028  lr=9.57e-04
+[   60.4s] INFO    step   200  val_mse(log-life)=0.3361  <- best
+[   60.5s] INFO    step   250/1500  loss=0.5013  reg=0.5013  lr=9.33e-04
+[   60.6s] INFO    step   300/1500  loss=0.4716  reg=0.4716  lr=9.05e-04
+[   60.6s] INFO    step   300  val_mse(log-life)=0.2304  <- best
+[   60.7s] INFO    step   350/1500  loss=0.3706  reg=0.3706  lr=8.72e-04
+[   60.7s] INFO    step   400/1500  loss=0.2835  reg=0.2835  lr=8.35e-04
+[   60.7s] INFO    step   400  val_mse(log-life)=0.2027  <- best
+[   60.8s] INFO    step   450/1500  loss=0.4994  reg=0.4994  lr=7.94e-04
+[   60.9s] INFO    step   500/1500  loss=0.2166  reg=0.2166  lr=7.50e-04
+[   60.9s] INFO    step   500  val_mse(log-life)=0.1831  <- best
+[   61.0s] INFO    step   550/1500  loss=0.4203  reg=0.4203  lr=7.03e-04
+[   61.1s] INFO    step   600/1500  loss=0.4414  reg=0.4414  lr=6.55e-04
+[   61.1s] INFO    step   600  val_mse(log-life)=0.1953
+[   61.2s] INFO    step   650/1500  loss=0.2420  reg=0.2420  lr=6.04e-04
+[   61.3s] INFO    step   700/1500  loss=0.4733  reg=0.4733  lr=5.52e-04
+[   61.3s] INFO    step   700  val_mse(log-life)=0.1857
+[   61.3s] INFO    step   750/1500  loss=0.5270  reg=0.5270  lr=5.00e-04
+[   61.4s] INFO    step   800/1500  loss=0.8502  reg=0.8502  lr=4.48e-04
+[   61.4s] INFO    step   800  val_mse(log-life)=0.1829  <- best
+[   61.5s] INFO    step   850/1500  loss=0.2349  reg=0.2349  lr=3.96e-04
+[   61.6s] INFO    step   900/1500  loss=0.3370  reg=0.3370  lr=3.45e-04
+[   61.6s] INFO    step   900  val_mse(log-life)=0.1796  <- best
+[   61.7s] INFO    step   950/1500  loss=0.3685  reg=0.3685  lr=2.97e-04
+[   61.8s] INFO    step  1000/1500  loss=0.3117  reg=0.3117  lr=2.50e-04
+[   61.8s] INFO    step  1000  val_mse(log-life)=0.1803
+[   61.8s] INFO    step  1050/1500  loss=0.4833  reg=0.4833  lr=2.06e-04
+[   61.9s] INFO    step  1100/1500  loss=0.1830  reg=0.1830  lr=1.65e-04
+[   61.9s] INFO    step  1100  val_mse(log-life)=0.1745  <- best
+[   62.0s] INFO    step  1150/1500  loss=0.4433  reg=0.4433  lr=1.28e-04
+[   62.1s] INFO    step  1200/1500  loss=0.4764  reg=0.4764  lr=9.55e-05
+[   62.1s] INFO    step  1200  val_mse(log-life)=0.1784
+[   62.2s] INFO    step  1250/1500  loss=0.3684  reg=0.3684  lr=6.70e-05
+[   62.3s] INFO    step  1300/1500  loss=0.5219  reg=0.5219  lr=4.32e-05
+[   62.3s] INFO    step  1300  val_mse(log-life)=0.1736  <- best
+[   62.4s] INFO    step  1350/1500  loss=0.2513  reg=0.2513  lr=2.45e-05
+[   62.5s] INFO    step  1400/1500  loss=0.4240  reg=0.4240  lr=1.09e-05
+[   62.5s] INFO    step  1400  val_mse(log-life)=0.1740
+[   62.5s] INFO    step  1450/1500  loss=0.2186  reg=0.2186  lr=2.74e-06
+[   62.6s] INFO    step  1500/1500  loss=0.3378  reg=0.3378  lr=0.00e+00
+[   62.6s] INFO    step  1500  val_mse(log-life)=0.1745
+[   62.6s] INFO    restored best checkpoint from step 1300 (val_mse=0.1736)
+[   62.6s] INFO    saved checkpoint -> runs/20260726_034513/fold_Stanford/seed_4/checkpoint.pt
+[   62.7s] INFO  -- done (10.4s): FOLD 5/6 — target = Stanford
+[   62.7s] INFO  ========================================================================
+[   62.7s] INFO  [train] FOLD 6/6 — target = Tongji
+[   62.7s] INFO  ========================================================================
+[   62.7s] INFO  fold=Tongji seed=0 | source 310 train / 54 val, target 82 | label mu=6.759 sd=0.603
+[   62.7s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'SNL', 'Stanford']
+[   62.7s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   62.7s] INFO    step     1/1500  loss=1.1569  reg=1.1569  lr=1.00e-03
+[   62.8s] INFO    step    50/1500  loss=1.1220  reg=1.1220  lr=9.97e-04
+[   62.8s] INFO    step   100/1500  loss=0.6441  reg=0.6441  lr=9.89e-04
+[   62.8s] INFO    step   100  val_mse(log-life)=0.3016  <- best
+[   62.9s] INFO    step   150/1500  loss=1.3649  reg=1.3649  lr=9.76e-04
+[   63.0s] INFO    step   200/1500  loss=0.9824  reg=0.9824  lr=9.57e-04
+[   63.0s] INFO    step   200  val_mse(log-life)=0.2950  <- best
+[   63.1s] INFO    step   250/1500  loss=0.9635  reg=0.9635  lr=9.33e-04
+[   63.2s] INFO    step   300/1500  loss=0.8188  reg=0.8188  lr=9.05e-04
+[   63.2s] INFO    step   300  val_mse(log-life)=0.2382  <- best
+[   63.3s] INFO    step   350/1500  loss=0.7779  reg=0.7779  lr=8.72e-04
+[   63.4s] INFO    step   400/1500  loss=0.5555  reg=0.5555  lr=8.35e-04
+[   63.4s] INFO    step   400  val_mse(log-life)=0.2067  <- best
+[   63.4s] INFO    step   450/1500  loss=0.8033  reg=0.8033  lr=7.94e-04
+[   63.5s] INFO    step   500/1500  loss=0.3532  reg=0.3532  lr=7.50e-04
+[   63.5s] INFO    step   500  val_mse(log-life)=0.1837  <- best
+[   63.6s] INFO    step   550/1500  loss=1.1729  reg=1.1729  lr=7.03e-04
+[   63.7s] INFO    step   600/1500  loss=0.7675  reg=0.7675  lr=6.55e-04
+[   63.7s] INFO    step   600  val_mse(log-life)=0.1705  <- best
+[   63.8s] INFO    step   650/1500  loss=0.4331  reg=0.4331  lr=6.04e-04
+[   63.9s] INFO    step   700/1500  loss=0.3976  reg=0.3976  lr=5.52e-04
+[   63.9s] INFO    step   700  val_mse(log-life)=0.1747
+[   63.9s] INFO    step   750/1500  loss=0.4133  reg=0.4133  lr=5.00e-04
+[   64.0s] INFO    step   800/1500  loss=0.6258  reg=0.6258  lr=4.48e-04
+[   64.0s] INFO    step   800  val_mse(log-life)=0.1666  <- best
+[   64.1s] INFO    step   850/1500  loss=0.6041  reg=0.6041  lr=3.96e-04
+[   64.2s] INFO    step   900/1500  loss=0.5897  reg=0.5897  lr=3.45e-04
+[   64.2s] INFO    step   900  val_mse(log-life)=0.1626  <- best
+[   64.3s] INFO    step   950/1500  loss=0.2830  reg=0.2830  lr=2.97e-04
+[   64.4s] INFO    step  1000/1500  loss=0.2731  reg=0.2731  lr=2.50e-04
+[   64.4s] INFO    step  1000  val_mse(log-life)=0.1613  <- best
+[   64.5s] INFO    step  1050/1500  loss=0.6402  reg=0.6402  lr=2.06e-04
+[   64.5s] INFO    step  1100/1500  loss=0.2802  reg=0.2802  lr=1.65e-04
+[   64.5s] INFO    step  1100  val_mse(log-life)=0.1603  <- best
+[   64.6s] INFO    step  1150/1500  loss=0.2807  reg=0.2807  lr=1.28e-04
+[   64.7s] INFO    step  1200/1500  loss=0.2867  reg=0.2867  lr=9.55e-05
+[   64.7s] INFO    step  1200  val_mse(log-life)=0.1581  <- best
+[   64.8s] INFO    step  1250/1500  loss=0.6521  reg=0.6521  lr=6.70e-05
+[   64.9s] INFO    step  1300/1500  loss=0.5937  reg=0.5937  lr=4.32e-05
+[   64.9s] INFO    step  1300  val_mse(log-life)=0.1589
+[   65.0s] INFO    step  1350/1500  loss=0.3963  reg=0.3963  lr=2.45e-05
+[   65.1s] INFO    step  1400/1500  loss=0.6317  reg=0.6317  lr=1.09e-05
+[   65.1s] INFO    step  1400  val_mse(log-life)=0.1588
+[   65.1s] INFO    step  1450/1500  loss=0.5224  reg=0.5224  lr=2.74e-06
+[   65.2s] INFO    step  1500/1500  loss=0.3510  reg=0.3510  lr=0.00e+00
+[   65.2s] INFO    step  1500  val_mse(log-life)=0.1589
+[   65.2s] INFO    restored best checkpoint from step 1200 (val_mse=0.1581)
+[   65.2s] INFO    saved checkpoint -> runs/20260726_034513/fold_Tongji/seed_0/checkpoint.pt
+[   65.3s] INFO  fold=Tongji seed=1 | source 310 train / 54 val, target 82 | label mu=6.768 sd=0.596
+[   65.3s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'SNL', 'Stanford']
+[   65.3s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   65.3s] INFO    step     1/1500  loss=0.9541  reg=0.9541  lr=1.00e-03
+[   65.4s] INFO    step    50/1500  loss=0.8053  reg=0.8053  lr=9.97e-04
+[   65.4s] INFO    step   100/1500  loss=0.8546  reg=0.8546  lr=9.89e-04
+[   65.4s] INFO    step   100  val_mse(log-life)=0.3508  <- best
+[   65.5s] INFO    step   150/1500  loss=0.8163  reg=0.8163  lr=9.76e-04
+[   65.6s] INFO    step   200/1500  loss=0.7978  reg=0.7978  lr=9.57e-04
+[   65.6s] INFO    step   200  val_mse(log-life)=0.3088  <- best
+[   65.7s] INFO    step   250/1500  loss=0.7485  reg=0.7485  lr=9.33e-04
+[   65.8s] INFO    step   300/1500  loss=0.5473  reg=0.5473  lr=9.05e-04
+[   65.8s] INFO    step   300  val_mse(log-life)=0.2758  <- best
+[   65.9s] INFO    step   350/1500  loss=0.7707  reg=0.7707  lr=8.72e-04
+[   65.9s] INFO    step   400/1500  loss=1.1203  reg=1.1203  lr=8.35e-04
+[   66.0s] INFO    step   400  val_mse(log-life)=0.2480  <- best
+[   66.0s] INFO    step   450/1500  loss=0.3949  reg=0.3949  lr=7.94e-04
+[   66.1s] INFO    step   500/1500  loss=0.7491  reg=0.7491  lr=7.50e-04
+[   66.1s] INFO    step   500  val_mse(log-life)=0.2295  <- best
+[   66.2s] INFO    step   550/1500  loss=0.3892  reg=0.3892  lr=7.03e-04
+[   66.3s] INFO    step   600/1500  loss=0.4049  reg=0.4049  lr=6.55e-04
+[   66.3s] INFO    step   600  val_mse(log-life)=0.2343
+[   66.4s] INFO    step   650/1500  loss=0.6861  reg=0.6861  lr=6.04e-04
+[   66.5s] INFO    step   700/1500  loss=0.5500  reg=0.5500  lr=5.52e-04
+[   66.5s] INFO    step   700  val_mse(log-life)=0.2321
+[   66.5s] INFO    step   750/1500  loss=0.5637  reg=0.5637  lr=5.00e-04
+[   66.6s] INFO    step   800/1500  loss=0.6233  reg=0.6233  lr=4.48e-04
+[   66.6s] INFO    step   800  val_mse(log-life)=0.2189  <- best
+[   66.7s] INFO    step   850/1500  loss=0.4404  reg=0.4404  lr=3.96e-04
+[   66.8s] INFO    step   900/1500  loss=0.7381  reg=0.7381  lr=3.45e-04
+[   66.8s] INFO    step   900  val_mse(log-life)=0.2164  <- best
+[   66.9s] INFO    step   950/1500  loss=0.7666  reg=0.7666  lr=2.97e-04
+[   67.0s] INFO    step  1000/1500  loss=0.3685  reg=0.3685  lr=2.50e-04
+[   67.0s] INFO    step  1000  val_mse(log-life)=0.2184
+[   67.1s] INFO    step  1050/1500  loss=0.2989  reg=0.2989  lr=2.06e-04
+[   67.1s] INFO    step  1100/1500  loss=0.3484  reg=0.3484  lr=1.65e-04
+[   67.1s] INFO    step  1100  val_mse(log-life)=0.2170
+[   67.2s] INFO    step  1150/1500  loss=0.5640  reg=0.5640  lr=1.28e-04
+[   67.3s] INFO    step  1200/1500  loss=0.3046  reg=0.3046  lr=9.55e-05
+[   67.3s] INFO    step  1200  val_mse(log-life)=0.2178
+[   67.4s] INFO    step  1250/1500  loss=0.4768  reg=0.4768  lr=6.70e-05
+[   67.5s] INFO    step  1300/1500  loss=0.5493  reg=0.5493  lr=4.32e-05
+[   67.5s] INFO    step  1300  val_mse(log-life)=0.2178
+[   67.5s] INFO    early stop at step 1300 (no improvement for 400)
+[   67.5s] INFO    restored best checkpoint from step 900 (val_mse=0.2164)
+[   67.5s] INFO    saved checkpoint -> runs/20260726_034513/fold_Tongji/seed_1/checkpoint.pt
+[   67.5s] INFO  fold=Tongji seed=2 | source 310 train / 54 val, target 82 | label mu=6.771 sd=0.595
+[   67.5s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'SNL', 'Stanford']
+[   67.5s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   67.5s] INFO    step     1/1500  loss=1.4160  reg=1.4160  lr=1.00e-03
+[   67.6s] INFO    step    50/1500  loss=0.8590  reg=0.8590  lr=9.97e-04
+[   67.7s] INFO    step   100/1500  loss=0.7829  reg=0.7829  lr=9.89e-04
+[   67.7s] INFO    step   100  val_mse(log-life)=0.3518  <- best
+[   67.8s] INFO    step   150/1500  loss=0.5752  reg=0.5752  lr=9.76e-04
+[   67.9s] INFO    step   200/1500  loss=0.9840  reg=0.9840  lr=9.57e-04
+[   67.9s] INFO    step   200  val_mse(log-life)=1.8026
+[   68.0s] INFO    step   250/1500  loss=0.5946  reg=0.5946  lr=9.33e-04
+[   68.0s] INFO    step   300/1500  loss=0.6605  reg=0.6605  lr=9.05e-04
+[   68.0s] INFO    step   300  val_mse(log-life)=3.6159
+[   68.1s] INFO    step   350/1500  loss=0.7425  reg=0.7425  lr=8.72e-04
+[   68.2s] INFO    step   400/1500  loss=0.8396  reg=0.8396  lr=8.35e-04
+[   68.2s] INFO    step   400  val_mse(log-life)=0.3923
+[   68.3s] INFO    step   450/1500  loss=0.5648  reg=0.5648  lr=7.94e-04
+[   68.4s] INFO    step   500/1500  loss=0.5713  reg=0.5713  lr=7.50e-04
+[   68.4s] INFO    step   500  val_mse(log-life)=0.2382  <- best
+[   68.5s] INFO    step   550/1500  loss=0.7238  reg=0.7238  lr=7.03e-04
+[   68.6s] INFO    step   600/1500  loss=0.4692  reg=0.4692  lr=6.55e-04
+[   68.6s] INFO    step   600  val_mse(log-life)=0.3850
+[   68.6s] INFO    step   650/1500  loss=0.7263  reg=0.7263  lr=6.04e-04
+[   68.7s] INFO    step   700/1500  loss=0.4995  reg=0.4995  lr=5.52e-04
+[   68.7s] INFO    step   700  val_mse(log-life)=0.7524
+[   68.8s] INFO    step   750/1500  loss=0.6447  reg=0.6447  lr=5.00e-04
+[   68.9s] INFO    step   800/1500  loss=0.5526  reg=0.5526  lr=4.48e-04
+[   68.9s] INFO    step   800  val_mse(log-life)=2.2278
+[   69.0s] INFO    step   850/1500  loss=0.6361  reg=0.6361  lr=3.96e-04
+[   69.1s] INFO    step   900/1500  loss=0.6601  reg=0.6601  lr=3.45e-04
+[   69.1s] INFO    step   900  val_mse(log-life)=4.5814
+[   69.1s] INFO    early stop at step 900 (no improvement for 400)
+[   69.1s] INFO    restored best checkpoint from step 500 (val_mse=0.2382)
+[   69.1s] INFO    saved checkpoint -> runs/20260726_034513/fold_Tongji/seed_2/checkpoint.pt
+[   69.1s] INFO  fold=Tongji seed=3 | source 310 train / 54 val, target 82 | label mu=6.785 sd=0.607
+[   69.1s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'SNL', 'Stanford']
+[   69.1s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   69.1s] INFO    step     1/1500  loss=0.9349  reg=0.9349  lr=1.00e-03
+[   69.2s] INFO    step    50/1500  loss=0.9907  reg=0.9907  lr=9.97e-04
+[   69.3s] INFO    step   100/1500  loss=0.8867  reg=0.8867  lr=9.89e-04
+[   69.3s] INFO    step   100  val_mse(log-life)=0.2756  <- best
+[   69.4s] INFO    step   150/1500  loss=0.9141  reg=0.9141  lr=9.76e-04
+[   69.5s] INFO    step   200/1500  loss=1.4948  reg=1.4948  lr=9.57e-04
+[   69.5s] INFO    step   200  val_mse(log-life)=0.2094  <- best
+[   69.5s] INFO    step   250/1500  loss=0.4327  reg=0.4327  lr=9.33e-04
+[   69.6s] INFO    step   300/1500  loss=0.7184  reg=0.7184  lr=9.05e-04
+[   69.6s] INFO    step   300  val_mse(log-life)=0.2097
+[   69.7s] INFO    step   350/1500  loss=0.6527  reg=0.6527  lr=8.72e-04
+[   69.8s] INFO    step   400/1500  loss=0.5606  reg=0.5606  lr=8.35e-04
+[   69.8s] INFO    step   400  val_mse(log-life)=0.1745  <- best
+[   69.9s] INFO    step   450/1500  loss=0.7608  reg=0.7608  lr=7.94e-04
+[   70.0s] INFO    step   500/1500  loss=0.3587  reg=0.3587  lr=7.50e-04
+[   70.0s] INFO    step   500  val_mse(log-life)=0.1445  <- best
+[   70.1s] INFO    step   550/1500  loss=0.5121  reg=0.5121  lr=7.03e-04
+[   70.1s] INFO    step   600/1500  loss=0.4101  reg=0.4101  lr=6.55e-04
+[   70.1s] INFO    step   600  val_mse(log-life)=0.1494
+[   70.2s] INFO    step   650/1500  loss=0.4194  reg=0.4194  lr=6.04e-04
+[   70.3s] INFO    step   700/1500  loss=0.3996  reg=0.3996  lr=5.52e-04
+[   70.3s] INFO    step   700  val_mse(log-life)=0.1607
+[   70.4s] INFO    step   750/1500  loss=0.8865  reg=0.8865  lr=5.00e-04
+[   70.5s] INFO    step   800/1500  loss=0.4034  reg=0.4034  lr=4.48e-04
+[   70.5s] INFO    step   800  val_mse(log-life)=0.1517
+[   70.6s] INFO    step   850/1500  loss=0.6470  reg=0.6470  lr=3.96e-04
+[   70.7s] INFO    step   900/1500  loss=0.4156  reg=0.4156  lr=3.45e-04
+[   70.7s] INFO    step   900  val_mse(log-life)=0.1459
+[   70.7s] INFO    early stop at step 900 (no improvement for 400)
+[   70.7s] INFO    restored best checkpoint from step 500 (val_mse=0.1445)
+[   70.7s] INFO    saved checkpoint -> runs/20260726_034513/fold_Tongji/seed_3/checkpoint.pt
+[   70.7s] INFO  fold=Tongji seed=4 | source 310 train / 54 val, target 82 | label mu=6.774 sd=0.603
+[   70.7s] INFO    source datasets: ['HUST', 'MATR', 'RWTH', 'SNL', 'Stanford']
+[   70.7s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   70.7s] INFO    step     1/1500  loss=0.9294  reg=0.9294  lr=1.00e-03
+[   70.8s] INFO    step    50/1500  loss=1.2297  reg=1.2297  lr=9.97e-04
+[   70.9s] INFO    step   100/1500  loss=1.0114  reg=1.0114  lr=9.89e-04
+[   70.9s] INFO    step   100  val_mse(log-life)=0.3027  <- best
+[   70.9s] INFO    step   150/1500  loss=1.1011  reg=1.1011  lr=9.76e-04
+[   71.0s] INFO    step   200/1500  loss=1.0153  reg=1.0153  lr=9.57e-04
+[   71.0s] INFO    step   200  val_mse(log-life)=0.2973  <- best
+[   71.1s] INFO    step   250/1500  loss=0.4953  reg=0.4953  lr=9.33e-04
+[   71.2s] INFO    step   300/1500  loss=0.8990  reg=0.8990  lr=9.05e-04
+[   71.2s] INFO    step   300  val_mse(log-life)=0.2336  <- best
+[   71.3s] INFO    step   350/1500  loss=1.0682  reg=1.0682  lr=8.72e-04
+[   71.4s] INFO    step   400/1500  loss=0.4102  reg=0.4102  lr=8.35e-04
+[   71.4s] INFO    step   400  val_mse(log-life)=0.2078  <- best
+[   71.5s] INFO    step   450/1500  loss=0.6793  reg=0.6793  lr=7.94e-04
+[   71.5s] INFO    step   500/1500  loss=0.5129  reg=0.5129  lr=7.50e-04
+[   71.5s] INFO    step   500  val_mse(log-life)=0.2034  <- best
+[   71.6s] INFO    step   550/1500  loss=0.4967  reg=0.4967  lr=7.03e-04
+[   71.7s] INFO    step   600/1500  loss=0.6320  reg=0.6320  lr=6.55e-04
+[   71.7s] INFO    step   600  val_mse(log-life)=0.1878  <- best
+[   71.8s] INFO    step   650/1500  loss=0.6252  reg=0.6252  lr=6.04e-04
+[   71.9s] INFO    step   700/1500  loss=0.4408  reg=0.4408  lr=5.52e-04
+[   71.9s] INFO    step   700  val_mse(log-life)=0.1840  <- best
+[   72.0s] INFO    step   750/1500  loss=0.4791  reg=0.4791  lr=5.00e-04
+[   72.1s] INFO    step   800/1500  loss=0.6928  reg=0.6928  lr=4.48e-04
+[   72.1s] INFO    step   800  val_mse(log-life)=0.1782  <- best
+[   72.1s] INFO    step   850/1500  loss=0.4588  reg=0.4588  lr=3.96e-04
+[   72.2s] INFO    step   900/1500  loss=0.5742  reg=0.5742  lr=3.45e-04
+[   72.2s] INFO    step   900  val_mse(log-life)=0.2041
+[   72.3s] INFO    step   950/1500  loss=0.5117  reg=0.5117  lr=2.97e-04
+[   72.4s] INFO    step  1000/1500  loss=0.4681  reg=0.4681  lr=2.50e-04
+[   72.4s] INFO    step  1000  val_mse(log-life)=0.1953
+[   72.5s] INFO    step  1050/1500  loss=0.3973  reg=0.3973  lr=2.06e-04
+[   72.6s] INFO    step  1100/1500  loss=0.4920  reg=0.4920  lr=1.65e-04
+[   72.6s] INFO    step  1100  val_mse(log-life)=0.2092
+[   72.7s] INFO    step  1150/1500  loss=0.4535  reg=0.4535  lr=1.28e-04
+[   72.7s] INFO    step  1200/1500  loss=0.6538  reg=0.6538  lr=9.55e-05
+[   72.7s] INFO    step  1200  val_mse(log-life)=0.2131
+[   72.7s] INFO    early stop at step 1200 (no improvement for 400)
+[   72.7s] INFO    restored best checkpoint from step 800 (val_mse=0.1782)
+[   72.7s] INFO    saved checkpoint -> runs/20260726_034513/fold_Tongji/seed_4/checkpoint.pt
+[   72.8s] INFO  -- done (10.1s): FOLD 6/6 — target = Tongji
+[   72.8s] INFO  -- done (68.9s): TRAIN — leave-one-dataset-out
+[   72.8s] INFO  ========================================================================
+[   72.8s] INFO  [4/4] EVALUATE
+[   72.8s] INFO  ========================================================================
+[   72.8s] INFO  
+[   72.8s] INFO  PER-FOLD RESULTS
+[   72.8s] INFO    target    method    n    MAPE%                                 MAE_RUL                              RMSE_log
+[   72.8s] INFO    ------------------------------------------------------------------------------------------------------------
+[   72.8s] INFO    HUST      dummy     77   68.28                                 1359.5                               1.1888  
+[   72.8s] INFO    HUST      L0_ridge  77   63.47                                 1282.0                               1.1273  
+[   72.8s] INFO    HUST      model     77   58.75                                 1183.8                               0.9514  
+[   72.8s] INFO    MATR      dummy     168  29.80                                 236.7                                0.3716  
+[   72.8s] INFO    MATR      L0_ridge  168  30.53                                 243.1                                0.3940  
+[   72.8s] INFO    MATR      model     168  46.78                                 381.9                                0.6905  
+[   72.8s] INFO    RWTH      dummy     28   13.26                                 80.8                                 0.1487  
+[   72.8s] INFO    RWTH      L0_ridge  28   8.47                                  51.7                                 0.1052  
+[   72.8s] INFO    RWTH      model     28   133.03                                848.9                                0.7991  
+[   72.8s] INFO    SNL       dummy     50   92.49                                 719.0                                0.8996  
+[   72.8s] INFO    SNL       L0_ridge  50   190830758439334432.00                 1129717957140761344.0                41.1738 
+[   72.8s] INFO    SNL       model     50   134415035135585227832310422831104.00  672075216870471912062232467341312.0  8.0703  
+[   72.8s] INFO    Stanford  dummy     41   15.81                                 107.2                                0.1728  
+[   72.8s] INFO    Stanford  L0_ridge  41   68.66                                 451.7                                0.5361  
+[   72.8s] INFO    Stanford  model     41   119.69                                800.1                                0.7951  
+[   72.8s] INFO    Tongji    dummy     82   181.21                                515.9                                1.0285  
+[   72.8s] INFO    Tongji    L0_ridge  82   177.36                                505.0                                1.0155  
+[   72.8s] INFO    Tongji    model     82   78.58                                 185.9                                0.6558  
+[   72.8s] INFO  
+[   72.8s] INFO  MEAN OVER FOLDS
+[   72.8s] INFO    method    folds  MAPE% mean                           sd                                 
+[   72.8s] INFO    -----------------------------------------------------------------------------------------
+[   72.8s] INFO    dummy     6      66.81                                58.58                              
+[   72.8s] INFO    L0_ridge  6      31805126406555796.00                 71118424678032216.00               
+[   72.8s] INFO    model     6      22402505855930872806584946262016.00  50093525960198538103008121585664.00
+[   72.8s] INFO  
+[   72.8s] INFO  MODEL ERROR STRATIFIED BY OBSERVATION LENGTH
+[   72.8s] INFO    target    bucket     n   MAPE%         
+[   72.8s] INFO    ---------------------------------------
+[   72.8s] INFO    HUST      L[20,40)   16  61.31         
+[   72.8s] INFO    HUST      L[40,60)   17  62.36         
+[   72.8s] INFO    HUST      L[60,80)   25  57.56         
+[   72.8s] INFO    HUST      L[80,101)  19  57.55         
+[   72.8s] INFO    MATR      L[20,40)   39  55.19         
+[   72.8s] INFO    MATR      L[40,60)   37  48.69         
+[   72.8s] INFO    MATR      L[60,80)   39  33.04         
+[   72.8s] INFO    MATR      L[80,101)  53  47.87         
+[   72.8s] INFO    RWTH      L[20,40)   8   124.92        
+[   72.8s] INFO    RWTH      L[40,60)   8   171.40        
+[   72.8s] INFO    RWTH      L[60,80)   4   207.00        
+[   72.8s] INFO    RWTH      L[80,101)  8   274.11        
+[   72.8s] INFO    SNL       L[20,40)   14  57446711168.66
+[   72.8s] INFO    SNL       L[40,60)   10  94.51         
+[   72.8s] INFO    SNL       L[60,80)   10  61.82         
+[   72.8s] INFO    SNL       L[80,101)  16  141.60        
+[   72.8s] INFO    Stanford  L[20,40)   4   41.58         
+[   72.8s] INFO    Stanford  L[40,60)   12  138.31        
+[   72.8s] INFO    Stanford  L[60,80)   11  172.23        
+[   72.8s] INFO    Stanford  L[80,101)  14  159.84        
+[   72.8s] INFO    Tongji    L[20,40)   19  78.92         
+[   72.8s] INFO    Tongji    L[40,60)   12  45.36         
+[   72.8s] INFO    Tongji    L[60,80)   28  56.40         
+[   72.8s] INFO    Tongji    L[80,101)  23  38.68         
+[   72.8s] INFO  results written -> runs/20260726_034513/results.json
+[   72.8s] INFO  -- done (0.0s): EVALUATE
+[   72.8s] INFO  total elapsed 72.8s

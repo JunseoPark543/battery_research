@@ -1,0 +1,706 @@
+[    0.0s] INFO  run directory: /home/JunseoPark/바탕화면/battery/runs/20260726_034229
+[    0.0s] INFO  device: cuda  (NVIDIA GeForce RTX 5080, 15.5 GiB, torch 2.13.0+cu130)
+[    0.0s] INFO  config: {"data_root": "data", "cache_root": "cache", "run_root": "runs", "labels_path": "data/1. Life labels", "label_source": "auto", "grid_points": 128, "ref_cycle": 10, "cache_max_cycle": 300, "seg_min_points": 30, "crate_bin": 0.25, "seg_min_vspan": 0.05, "datasets": ["MATR", "Tongji", "HUST", "SNL", "RWTH", "Stanford"], "charge_segment": true, "relative_q": true, "grid_inset": 0.02, "eol_frac": 0.8, "eol_reference": "nominal", "init_cycles": 5, "min_life": 150, "L_min": 20, "L_max": 100, "truncate_source": true, "seed": 0, "n_seeds": 5, "ref_grid": [20, 35, 50, 65, 80], "d_cycle": 16, "enc_hidden": 32, "d_attn": 16, "n_fourier": 8, "m_bottleneck": 8, "head_hidden": 64, "dropout": 0.2, "lambda_align": 0.0, "align_warmup": 300, "gamma_ssl": 0.0, "lr": 0.001, "weight_decay": 0.0001, "grad_clip": 1.0, "batch_source": 32, "batch_target": 16, "max_steps": 1500, "log_every": 50, "eval_every": 100, "patience": 400, "val_frac": 0.15, "device": "cuda", "strat_edges": [20, 40, 60, 80, 101]}
+[    0.0s] INFO  ========================================================================
+[    0.0s] INFO  [1/4] PREPARE — parse pkl files and cache features
+[    0.0s] INFO  ========================================================================
+[    0.0s] INFO  datasets found: ['MATR', 'Tongji', 'HUST', 'SNL', 'RWTH', 'Stanford']
+[    0.0s] INFO  [MATR] 169 cell files, segment profile = discharge
+[    0.4s] INFO    (1/169) MATR_b1c0.pkl: 290 curves, C0=1.0724Ah, c_eol=None, discharge V=[2.037,3.428] (0.4s)
+[    0.8s] INFO    (2/169) MATR_b1c1.pkl: 290 curves, C0=1.0772Ah, c_eol=None, discharge V=[2.037,3.426] (0.4s)
+[    1.0s] INFO    (3/169) MATR_b1c11.pkl: 290 curves, C0=1.0556Ah, c_eol=None, discharge V=[2.037,3.428] (0.2s)
+[    1.2s] INFO    (4/169) MATR_b1c14.pkl: 290 curves, C0=1.0726Ah, c_eol=None, discharge V=[2.037,3.426] (0.2s)
+[    1.3s] INFO    (5/169) MATR_b1c15.pkl: 290 curves, C0=1.0635Ah, c_eol=None, discharge V=[2.037,3.423] (0.1s)
+[    1.5s] INFO    (6/169) MATR_b1c16.pkl: 290 curves, C0=1.0831Ah, c_eol=None, discharge V=[2.428,3.435] (0.2s)
+[    1.6s] INFO    (7/169) MATR_b1c17.pkl: 290 curves, C0=1.0737Ah, c_eol=None, discharge V=[2.167,3.424] (0.2s)
+[    1.8s] INFO    (8/169) MATR_b1c18.pkl: 290 curves, C0=1.0673Ah, c_eol=None, discharge V=[2.036,3.427] (0.2s)
+[    2.0s] INFO    (9/169) MATR_b1c19.pkl: 290 curves, C0=1.0867Ah, c_eol=None, discharge V=[2.037,3.426] (0.2s)
+[    2.4s] INFO    (10/169) MATR_b1c2.pkl: 290 curves, C0=1.0818Ah, c_eol=None, discharge V=[2.037,3.430] (0.4s)
+[    2.5s] INFO    (11/169) MATR_b1c20.pkl: 290 curves, C0=1.0742Ah, c_eol=None, discharge V=[2.037,3.428] (0.1s)
+[    2.6s] INFO    (12/169) MATR_b1c21.pkl: 290 curves, C0=1.0841Ah, c_eol=None, discharge V=[2.033,3.209] (0.1s)
+[    2.8s] INFO    (13/169) MATR_b1c23.pkl: 290 curves, C0=1.0810Ah, c_eol=None, discharge V=[2.037,3.426] (0.2s)
+[    3.0s] INFO    (14/169) MATR_b1c24.pkl: 290 curves, C0=1.0759Ah, c_eol=None, discharge V=[2.037,3.429] (0.2s)
+[    3.2s] INFO    (15/169) MATR_b1c25.pkl: 290 curves, C0=1.0766Ah, c_eol=None, discharge V=[2.037,3.429] (0.2s)
+[    3.3s] INFO    (16/169) MATR_b1c26.pkl: 290 curves, C0=1.0893Ah, c_eol=None, discharge V=[2.483,3.437] (0.2s)
+[    3.5s] INFO    (17/169) MATR_b1c27.pkl: 290 curves, C0=1.0805Ah, c_eol=None, discharge V=[2.036,3.428] (0.2s)
+[    3.7s] INFO    (18/169) MATR_b1c28.pkl: 290 curves, C0=1.0794Ah, c_eol=None, discharge V=[2.036,3.421] (0.2s)
+[    3.9s] INFO    (19/169) MATR_b1c29.pkl: 290 curves, C0=1.0811Ah, c_eol=None, discharge V=[2.037,3.427] (0.2s)
+[    4.1s] INFO    (20/169) MATR_b1c3.pkl: 290 curves, C0=1.0818Ah, c_eol=None, discharge V=[2.033,3.215] (0.3s)
+[    4.3s] INFO    (21/169) MATR_b1c30.pkl: 290 curves, C0=1.0815Ah, c_eol=None, discharge V=[2.037,3.429] (0.1s)
+[    4.5s] INFO    (22/169) MATR_b1c31.pkl: 290 curves, C0=1.0964Ah, c_eol=None, discharge V=[2.035,3.311] (0.2s)
+[    4.6s] INFO    (23/169) MATR_b1c32.pkl: 290 curves, C0=1.0794Ah, c_eol=None, discharge V=[2.037,3.425] (0.1s)
+[    4.8s] INFO    (24/169) MATR_b1c33.pkl: 290 curves, C0=1.0943Ah, c_eol=None, discharge V=[2.037,3.417] (0.2s)
+[    4.9s] INFO    (25/169) MATR_b1c34.pkl: 290 curves, C0=1.0780Ah, c_eol=None, discharge V=[2.037,3.427] (0.2s)
+[    5.1s] INFO    (26/169) MATR_b1c35.pkl: 290 curves, C0=1.0724Ah, c_eol=None, discharge V=[2.036,3.418] (0.2s)
+[    5.3s] INFO    (27/169) MATR_b1c36.pkl: 290 curves, C0=1.0796Ah, c_eol=None, discharge V=[2.037,3.429] (0.2s)
+[    5.4s] INFO    (28/169) MATR_b1c37.pkl: 290 curves, C0=1.0764Ah, c_eol=None, discharge V=[2.033,3.232] (0.1s)
+[    5.5s] INFO    (29/169) MATR_b1c38.pkl: 290 curves, C0=1.0743Ah, c_eol=None, discharge V=[2.037,3.426] (0.1s)
+[    5.7s] INFO    (30/169) MATR_b1c39.pkl: 290 curves, C0=1.0836Ah, c_eol=None, discharge V=[2.037,3.420] (0.1s)
+[    6.0s] INFO    (31/169) MATR_b1c4.pkl: 290 curves, C0=1.0797Ah, c_eol=None, discharge V=[2.037,3.426] (0.3s)
+[    6.2s] INFO    (32/169) MATR_b1c40.pkl: 290 curves, C0=1.0851Ah, c_eol=None, discharge V=[2.033,3.229] (0.2s)
+[    6.4s] INFO    (33/169) MATR_b1c41.pkl: 290 curves, C0=1.0808Ah, c_eol=None, discharge V=[2.037,3.427] (0.2s)
+[    6.6s] INFO    (34/169) MATR_b1c42.pkl: 290 curves, C0=1.0818Ah, c_eol=None, discharge V=[2.553,3.437] (0.2s)
+[    6.7s] INFO    (35/169) MATR_b1c43.pkl: 290 curves, C0=1.0698Ah, c_eol=None, discharge V=[2.037,3.427] (0.1s)
+[    6.8s] INFO    (36/169) MATR_b1c44.pkl: 290 curves, C0=1.0865Ah, c_eol=None, discharge V=[2.037,3.419] (0.1s)
+[    7.0s] INFO    (37/169) MATR_b1c45.pkl: 290 curves, C0=1.0857Ah, c_eol=None, discharge V=[2.037,3.420] (0.1s)
+[    7.2s] INFO    (38/169) MATR_b1c5.pkl: 290 curves, C0=1.0776Ah, c_eol=None, discharge V=[2.038,3.429] (0.2s)
+[    7.3s] INFO    (39/169) MATR_b1c6.pkl: 290 curves, C0=1.0781Ah, c_eol=None, discharge V=[2.037,3.425] (0.1s)
+[    7.5s] INFO    (40/169) MATR_b1c7.pkl: 290 curves, C0=1.0957Ah, c_eol=None, discharge V=[2.037,3.427] (0.2s)
+[    7.8s] INFO    (41/169) MATR_b1c9.pkl: 290 curves, C0=1.0842Ah, c_eol=None, discharge V=[2.037,3.428] (0.2s)
+[    7.9s] INFO    (42/169) MATR_b2c0.pkl: 290 curves, C0=1.0720Ah, c_eol=299, discharge V=[2.036,3.408] (0.1s)
+[    7.9s] INFO    (43/169) MATR_b2c1.pkl: 159 curves, C0=1.0723Ah, c_eol=147, discharge V=[2.037,3.418] (0.1s)
+[    8.1s] INFO    (44/169) MATR_b2c10.pkl: 290 curves, C0=1.0711Ah, c_eol=560, discharge V=[2.037,3.423] (0.2s)
+[    8.2s] INFO    (45/169) MATR_b2c11.pkl: 290 curves, C0=1.0735Ah, c_eol=476, discharge V=[2.037,3.426] (0.1s)
+[    8.4s] INFO    (46/169) MATR_b2c12.pkl: 290 curves, C0=1.0728Ah, c_eol=456, discharge V=[2.037,3.426] (0.1s)
+[    8.5s] INFO    (47/169) MATR_b2c13.pkl: 290 curves, C0=1.0820Ah, c_eol=482, discharge V=[2.035,3.300] (0.1s)
+[    8.7s] INFO    (48/169) MATR_b2c14.pkl: 290 curves, C0=1.0800Ah, c_eol=484, discharge V=[2.037,3.428] (0.1s)
+[    8.8s] INFO    (49/169) MATR_b2c17.pkl: 290 curves, C0=1.0696Ah, c_eol=493, discharge V=[2.037,3.421] (0.2s)
+[    9.0s] INFO    (50/169) MATR_b2c18.pkl: 290 curves, C0=1.0653Ah, c_eol=486, discharge V=[2.037,3.423] (0.2s)
+[    9.1s] INFO    (51/169) MATR_b2c19.pkl: 290 curves, C0=1.0488Ah, c_eol=460, discharge V=[2.037,3.421] (0.1s)
+[    9.3s] INFO    (52/169) MATR_b2c2.pkl: 290 curves, C0=1.0757Ah, c_eol=437, discharge V=[2.037,3.424] (0.1s)
+[    9.4s] INFO    (53/169) MATR_b2c20.pkl: 290 curves, C0=1.0853Ah, c_eol=501, discharge V=[2.037,3.427] (0.1s)
+[    9.6s] INFO    (54/169) MATR_b2c21.pkl: 290 curves, C0=1.0789Ah, c_eol=488, discharge V=[2.037,3.421] (0.1s)
+[    9.7s] INFO    (55/169) MATR_b2c22.pkl: 290 curves, C0=1.0818Ah, c_eol=512, discharge V=[2.036,3.421] (0.2s)
+[    9.9s] INFO    (56/169) MATR_b2c23.pkl: 290 curves, C0=1.0765Ah, c_eol=526, discharge V=[2.037,3.426] (0.2s)
+[   10.0s] INFO    (57/169) MATR_b2c24.pkl: 290 curves, C0=1.0697Ah, c_eol=494, discharge V=[2.037,3.426] (0.1s)
+[   10.1s] INFO    (58/169) MATR_b2c25.pkl: 290 curves, C0=1.0692Ah, c_eol=460, discharge V=[2.037,3.422] (0.1s)
+[   10.3s] INFO    (59/169) MATR_b2c26.pkl: 290 curves, C0=1.0792Ah, c_eol=470, discharge V=[2.037,3.423] (0.1s)
+[   10.4s] INFO    (60/169) MATR_b2c27.pkl: 289 curves, C0=1.0679Ah, c_eol=467, discharge V=[2.037,3.424] (0.1s)
+[   10.6s] INFO    (61/169) MATR_b2c28.pkl: 290 curves, C0=1.0737Ah, c_eol=508, discharge V=[2.037,3.427] (0.2s)
+[   10.7s] INFO    (62/169) MATR_b2c29.pkl: 290 curves, C0=1.0741Ah, c_eol=497, discharge V=[2.037,3.425] (0.1s)
+[   10.8s] INFO    (63/169) MATR_b2c3.pkl: 290 curves, C0=1.0680Ah, c_eol=334, discharge V=[2.037,3.417] (0.1s)
+[   11.0s] INFO    (64/169) MATR_b2c30.pkl: 290 curves, C0=1.0689Ah, c_eol=480, discharge V=[2.037,3.425] (0.1s)
+[   11.1s] INFO    (65/169) MATR_b2c31.pkl: 290 curves, C0=1.0756Ah, c_eol=491, discharge V=[2.037,3.426] (0.1s)
+[   11.3s] INFO    (66/169) MATR_b2c32.pkl: 290 curves, C0=1.0764Ah, c_eol=518, discharge V=[2.037,3.425] (0.1s)
+[   11.4s] INFO    (67/169) MATR_b2c33.pkl: 290 curves, C0=1.0811Ah, c_eol=519, discharge V=[2.036,3.424] (0.1s)
+[   11.5s] INFO    (68/169) MATR_b2c34.pkl: 290 curves, C0=1.0710Ah, c_eol=498, discharge V=[2.037,3.423] (0.1s)
+[   11.7s] INFO    (69/169) MATR_b2c35.pkl: 290 curves, C0=1.0705Ah, c_eol=462, discharge V=[2.037,3.427] (0.1s)
+[   11.8s] INFO    (70/169) MATR_b2c36.pkl: 290 curves, C0=1.0808Ah, c_eol=534, discharge V=[2.037,3.413] (0.2s)
+[   12.0s] INFO    (71/169) MATR_b2c37.pkl: 290 curves, C0=1.0765Ah, c_eol=477, discharge V=[2.037,3.418] (0.1s)
+[   12.1s] INFO    (72/169) MATR_b2c38.pkl: 290 curves, C0=1.0717Ah, c_eol=464, discharge V=[2.037,3.423] (0.1s)
+[   12.2s] INFO    (73/169) MATR_b2c39.pkl: 290 curves, C0=1.0809Ah, c_eol=458, discharge V=[2.037,3.418] (0.1s)
+[   12.4s] INFO    (74/169) MATR_b2c4.pkl: 290 curves, C0=1.0744Ah, c_eol=443, discharge V=[2.037,3.427] (0.1s)
+[   12.5s] INFO    (75/169) MATR_b2c40.pkl: 290 curves, C0=1.0792Ah, c_eol=498, discharge V=[2.037,3.424] (0.2s)
+[   12.7s] INFO    (76/169) MATR_b2c41.pkl: 290 curves, C0=1.0708Ah, c_eol=428, discharge V=[2.037,3.421] (0.1s)
+[   12.8s] INFO    (77/169) MATR_b2c42.pkl: 290 curves, C0=1.0802Ah, c_eol=465, discharge V=[2.037,3.423] (0.1s)
+[   12.9s] INFO    (78/169) MATR_b2c43.pkl: 290 curves, C0=1.0759Ah, c_eol=461, discharge V=[2.037,3.418] (0.1s)
+[   13.1s] INFO    (79/169) MATR_b2c44.pkl: 290 curves, C0=1.0728Ah, c_eol=455, discharge V=[2.037,3.419] (0.1s)
+[   13.2s] INFO    (80/169) MATR_b2c45.pkl: 290 curves, C0=1.0723Ah, c_eol=486, discharge V=[2.037,3.427] (0.1s)
+[   13.4s] INFO    (81/169) MATR_b2c46.pkl: 290 curves, C0=1.0748Ah, c_eol=428, discharge V=[2.037,3.422] (0.1s)
+[   13.6s] INFO    (82/169) MATR_b2c47.pkl: 290 curves, C0=1.0448Ah, c_eol=712, discharge V=[2.037,3.424] (0.2s)
+[   13.7s] INFO    (83/169) MATR_b2c5.pkl: 290 curves, C0=1.0696Ah, c_eol=479, discharge V=[2.037,3.424] (0.1s)
+[   13.9s] INFO    (84/169) MATR_b2c6.pkl: 290 curves, C0=1.0707Ah, c_eol=510, discharge V=[2.037,3.427] (0.2s)
+[   14.1s] INFO    (85/169) MATR_b3c0.pkl: 290 curves, C0=1.0686Ah, c_eol=None, discharge V=[2.036,3.414] (0.2s)
+[   14.2s] INFO    (86/169) MATR_b3c1.pkl: 290 curves, C0=1.0665Ah, c_eol=None, discharge V=[2.037,3.424] (0.2s)
+[   14.4s] INFO    (87/169) MATR_b3c10.pkl: 290 curves, C0=1.0628Ah, c_eol=None, discharge V=[2.037,3.413] (0.2s)
+[   14.5s] INFO    (88/169) MATR_b3c11.pkl: 290 curves, C0=1.0690Ah, c_eol=None, discharge V=[2.037,3.426] (0.1s)
+[   14.7s] INFO    (89/169) MATR_b3c12.pkl: 290 curves, C0=1.0753Ah, c_eol=None, discharge V=[2.037,3.425] (0.2s)
+[   14.8s] INFO    (90/169) MATR_b3c13.pkl: 290 curves, C0=1.0669Ah, c_eol=None, discharge V=[2.037,3.427] (0.1s)
+[   15.0s] INFO    (91/169) MATR_b3c14.pkl: 290 curves, C0=1.0745Ah, c_eol=None, discharge V=[2.037,3.426] (0.2s)
+[   15.1s] INFO    (92/169) MATR_b3c15.pkl: 290 curves, C0=1.0695Ah, c_eol=None, discharge V=[2.037,3.426] (0.1s)
+[   15.4s] INFO    (93/169) MATR_b3c16.pkl: 290 curves, C0=1.0621Ah, c_eol=None, discharge V=[2.036,3.428] (0.2s)
+[   15.6s] INFO    (94/169) MATR_b3c17.pkl: 290 curves, C0=1.0676Ah, c_eol=None, discharge V=[2.037,3.430] (0.2s)
+[   15.7s] INFO    (95/169) MATR_b3c18.pkl: 290 curves, C0=1.0689Ah, c_eol=None, discharge V=[2.037,3.430] (0.2s)
+[   15.9s] INFO    (96/169) MATR_b3c19.pkl: 290 curves, C0=1.0729Ah, c_eol=None, discharge V=[2.037,3.427] (0.2s)
+[   16.1s] INFO    (97/169) MATR_b3c20.pkl: 290 curves, C0=1.0661Ah, c_eol=None, discharge V=[2.036,3.428] (0.1s)
+[   16.2s] INFO    (98/169) MATR_b3c21.pkl: 290 curves, C0=1.0681Ah, c_eol=None, discharge V=[2.036,3.424] (0.1s)
+[   16.4s] INFO    (99/169) MATR_b3c22.pkl: 290 curves, C0=1.0573Ah, c_eol=None, discharge V=[2.037,3.427] (0.2s)
+[   16.5s] INFO    (100/169) MATR_b3c24.pkl: 290 curves, C0=1.0478Ah, c_eol=None, discharge V=[2.036,3.426] (0.1s)
+[   16.7s] INFO    (101/169) MATR_b3c25.pkl: 290 curves, C0=1.0624Ah, c_eol=None, discharge V=[2.037,3.427] (0.2s)
+[   16.8s] INFO    (102/169) MATR_b3c26.pkl: 290 curves, C0=1.0731Ah, c_eol=None, discharge V=[2.076,3.427] (0.2s)
+[   17.0s] INFO    (103/169) MATR_b3c27.pkl: 290 curves, C0=1.0618Ah, c_eol=None, discharge V=[2.036,3.429] (0.1s)
+[   17.1s] INFO    (104/169) MATR_b3c28.pkl: 290 curves, C0=1.0524Ah, c_eol=None, discharge V=[2.036,3.431] (0.1s)
+[   17.2s] INFO    (105/169) MATR_b3c29.pkl: 290 curves, C0=1.0678Ah, c_eol=None, discharge V=[2.037,3.428] (0.1s)
+[   17.4s] INFO    (106/169) MATR_b3c3.pkl: 290 curves, C0=1.0637Ah, c_eol=None, discharge V=[2.037,3.429] (0.2s)
+[   17.5s] INFO    (107/169) MATR_b3c30.pkl: 290 curves, C0=1.0700Ah, c_eol=None, discharge V=[2.037,3.426] (0.1s)
+[   17.7s] INFO    (108/169) MATR_b3c31.pkl: 290 curves, C0=1.0694Ah, c_eol=None, discharge V=[2.038,3.418] (0.1s)
+[   17.9s] INFO    (109/169) MATR_b3c33.pkl: 290 curves, C0=1.0612Ah, c_eol=None, discharge V=[2.037,3.429] (0.2s)
+[   18.1s] INFO    (110/169) MATR_b3c34.pkl: 290 curves, C0=1.0625Ah, c_eol=None, discharge V=[2.037,3.429] (0.2s)
+[   18.2s] INFO    (111/169) MATR_b3c35.pkl: 290 curves, C0=1.0641Ah, c_eol=None, discharge V=[2.037,3.428] (0.2s)
+[   18.4s] INFO    (112/169) MATR_b3c36.pkl: 290 curves, C0=1.0585Ah, c_eol=None, discharge V=[2.037,3.424] (0.1s)
+[   18.7s] INFO    (113/169) MATR_b3c38.pkl: 290 curves, C0=1.0711Ah, c_eol=None, discharge V=[2.037,3.426] (0.3s)
+[   18.8s] INFO    (114/169) MATR_b3c39.pkl: 290 curves, C0=1.0485Ah, c_eol=None, discharge V=[2.037,3.426] (0.2s)
+[   19.0s] INFO    (115/169) MATR_b3c4.pkl: 290 curves, C0=1.0734Ah, c_eol=None, discharge V=[2.037,3.427] (0.2s)
+[   19.2s] INFO    (116/169) MATR_b3c40.pkl: 290 curves, C0=1.0607Ah, c_eol=None, discharge V=[2.036,3.426] (0.1s)
+[   19.3s] INFO    (117/169) MATR_b3c41.pkl: 290 curves, C0=1.0519Ah, c_eol=None, discharge V=[2.036,3.415] (0.1s)
+[   19.5s] INFO    (118/169) MATR_b3c44.pkl: 290 curves, C0=1.0709Ah, c_eol=None, discharge V=[2.037,3.427] (0.2s)
+[   19.7s] INFO    (119/169) MATR_b3c45.pkl: 290 curves, C0=1.0703Ah, c_eol=None, discharge V=[2.037,3.419] (0.3s)
+[   19.9s] INFO    (120/169) MATR_b3c5.pkl: 290 curves, C0=1.0525Ah, c_eol=None, discharge V=[2.036,3.426] (0.1s)
+[   20.0s] INFO    (121/169) MATR_b3c6.pkl: 290 curves, C0=1.0629Ah, c_eol=None, discharge V=[2.036,3.431] (0.1s)
+[   20.3s] INFO    (122/169) MATR_b3c7.pkl: 290 curves, C0=1.0686Ah, c_eol=None, discharge V=[2.037,3.426] (0.3s)
+[   20.4s] INFO    (123/169) MATR_b3c8.pkl: 290 curves, C0=1.0660Ah, c_eol=None, discharge V=[2.036,3.427] (0.1s)
+[   20.6s] INFO    (124/169) MATR_b3c9.pkl: 290 curves, C0=1.0708Ah, c_eol=None, discharge V=[2.037,3.423] (0.2s)
+[   20.7s] INFO    (125/169) MATR_b4c0.pkl: 290 curves, C0=1.0416Ah, c_eol=856, discharge V=[2.037,3.425] (0.2s)
+[   20.9s] INFO    (126/169) MATR_b4c1.pkl: 290 curves, C0=1.0492Ah, c_eol=760, discharge V=[2.037,3.427] (0.2s)
+[   21.1s] INFO    (127/169) MATR_b4c10.pkl: 290 curves, C0=1.0633Ah, c_eol=872, discharge V=[2.037,3.429] (0.2s)
+[   21.2s] INFO    (128/169) MATR_b4c11.pkl: 290 curves, C0=1.0606Ah, c_eol=863, discharge V=[2.036,3.425] (0.2s)
+[   21.4s] INFO    (129/169) MATR_b4c12.pkl: 290 curves, C0=1.0594Ah, c_eol=818, discharge V=[2.037,3.425] (0.1s)
+[   21.6s] INFO    (130/169) MATR_b4c13.pkl: 290 curves, C0=1.0672Ah, c_eol=771, discharge V=[2.037,3.424] (0.2s)
+[   21.7s] INFO    (131/169) MATR_b4c14.pkl: 290 curves, C0=1.0618Ah, c_eol=607, discharge V=[2.037,3.422] (0.2s)
+[   21.9s] INFO    (132/169) MATR_b4c15.pkl: 290 curves, C0=1.0632Ah, c_eol=675, discharge V=[2.036,3.425] (0.2s)
+[   22.0s] INFO    (133/169) MATR_b4c16.pkl: 290 curves, C0=1.0578Ah, c_eol=909, discharge V=[2.037,3.430] (0.2s)
+[   22.2s] INFO    (134/169) MATR_b4c17.pkl: 290 curves, C0=1.0407Ah, c_eol=827, discharge V=[2.036,3.427] (0.1s)
+[   22.4s] INFO    (135/169) MATR_b4c18.pkl: 290 curves, C0=1.0522Ah, c_eol=906, discharge V=[2.037,3.429] (0.2s)
+[   22.6s] INFO    (136/169) MATR_b4c19.pkl: 290 curves, C0=1.0511Ah, c_eol=991, discharge V=[2.037,3.428] (0.2s)
+[   22.7s] INFO    (137/169) MATR_b4c2.pkl: 290 curves, C0=1.0538Ah, c_eol=742, discharge V=[2.036,3.428] (0.1s)
+[   22.8s] INFO    (138/169) MATR_b4c20.pkl: 290 curves, C0=1.0458Ah, c_eol=747, discharge V=[2.037,3.427] (0.1s)
+[   23.0s] INFO    (139/169) MATR_b4c21.pkl: 290 curves, C0=1.0566Ah, c_eol=773, discharge V=[2.036,3.428] (0.2s)
+[   23.1s] INFO    (140/169) MATR_b4c22.pkl: 290 curves, C0=1.0519Ah, c_eol=671, discharge V=[2.036,3.425] (0.1s)
+[   23.3s] INFO    (141/169) MATR_b4c23.pkl: 290 curves, C0=1.0493Ah, c_eol=1038, discharge V=[2.037,3.423] (0.2s)
+[   23.5s] INFO    (142/169) MATR_b4c24.pkl: 290 curves, C0=1.0466Ah, c_eol=988, discharge V=[2.037,3.426] (0.2s)
+[   23.6s] INFO    (143/169) MATR_b4c25.pkl: 290 curves, C0=1.0342Ah, c_eol=453, discharge V=[2.036,3.423] (0.1s)
+[   23.7s] INFO    (144/169) MATR_b4c26.pkl: 290 curves, C0=1.0378Ah, c_eol=476, discharge V=[2.036,3.427] (0.1s)
+[   23.8s] INFO    (145/169) MATR_b4c27.pkl: 290 curves, C0=1.0382Ah, c_eol=500, discharge V=[2.036,3.423] (0.1s)
+[   24.0s] INFO    (146/169) MATR_b4c28.pkl: 290 curves, C0=1.0657Ah, c_eol=828, discharge V=[2.037,3.421] (0.2s)
+[   24.2s] INFO    (147/169) MATR_b4c29.pkl: 290 curves, C0=1.0668Ah, c_eol=887, discharge V=[2.037,3.429] (0.2s)
+[   24.3s] INFO    (148/169) MATR_b4c3.pkl: 290 curves, C0=1.0484Ah, c_eol=777, discharge V=[2.036,3.428] (0.2s)
+[   24.5s] INFO    (149/169) MATR_b4c30.pkl: 290 curves, C0=1.0505Ah, c_eol=615, discharge V=[2.037,3.423] (0.1s)
+[   24.6s] INFO    (150/169) MATR_b4c31.pkl: 290 curves, C0=1.0531Ah, c_eol=559, discharge V=[2.036,3.425] (0.2s)
+[   24.8s] INFO    (151/169) MATR_b4c32.pkl: 290 curves, C0=1.0560Ah, c_eol=754, discharge V=[2.036,3.424] (0.2s)
+[   24.9s] INFO    (152/169) MATR_b4c33.pkl: 290 curves, C0=1.0652Ah, c_eol=505, discharge V=[2.036,3.424] (0.1s)
+[   25.0s] INFO    (153/169) MATR_b4c34.pkl: 290 curves, C0=1.0509Ah, c_eol=891, discharge V=[2.037,3.429] (0.2s)
+[   25.2s] INFO    (154/169) MATR_b4c35.pkl: 290 curves, C0=1.0551Ah, c_eol=1081, discharge V=[2.037,3.427] (0.2s)
+[   25.4s] INFO    (155/169) MATR_b4c36.pkl: 290 curves, C0=1.0602Ah, c_eol=599, discharge V=[2.037,3.427] (0.1s)
+[   25.6s] INFO    (156/169) MATR_b4c37.pkl: 290 curves, C0=1.0441Ah, c_eol=863, discharge V=[2.036,3.429] (0.2s)
+[   25.8s] INFO    (157/169) MATR_b4c38.pkl: 290 curves, C0=1.0585Ah, c_eol=1055, discharge V=[2.037,3.426] (0.2s)
+[   25.9s] INFO    (158/169) MATR_b4c39.pkl: 290 curves, C0=1.0494Ah, c_eol=738, discharge V=[2.036,3.421] (0.1s)
+[   26.0s] INFO    (159/169) MATR_b4c4.pkl: 290 curves, C0=1.0418Ah, c_eol=656, discharge V=[2.036,3.426] (0.2s)
+[   26.2s] INFO    (160/169) MATR_b4c40.pkl: 290 curves, C0=1.0597Ah, c_eol=871, discharge V=[2.036,3.427] (0.2s)
+[   26.4s] INFO    (161/169) MATR_b4c41.pkl: 290 curves, C0=1.0577Ah, c_eol=836, discharge V=[2.036,3.425] (0.2s)
+[   26.6s] INFO    (162/169) MATR_b4c42.pkl: 290 curves, C0=1.0509Ah, c_eol=774, discharge V=[2.036,3.429] (0.2s)
+[   26.7s] INFO    (163/169) MATR_b4c43.pkl: 290 curves, C0=1.0429Ah, c_eol=750, discharge V=[2.036,3.426] (0.2s)
+[   26.9s] INFO    (164/169) MATR_b4c44.pkl: 290 curves, C0=1.0451Ah, c_eol=942, discharge V=[2.036,3.422] (0.2s)
+[   27.1s] INFO    (165/169) MATR_b4c5.pkl: 290 curves, C0=1.0379Ah, c_eol=913, discharge V=[2.036,3.432] (0.2s)
+[   27.2s] INFO    (166/169) MATR_b4c6.pkl: 290 curves, C0=1.0375Ah, c_eol=706, discharge V=[2.036,3.427] (0.1s)
+[   27.3s] INFO    (167/169) MATR_b4c7.pkl: 290 curves, C0=1.0532Ah, c_eol=529, discharge V=[2.036,3.423] (0.1s)
+[   27.5s] INFO    (168/169) MATR_b4c8.pkl: 290 curves, C0=1.0502Ah, c_eol=677, discharge V=[2.036,3.425] (0.1s)
+[   27.6s] INFO    (169/169) MATR_b4c9.pkl: 290 curves, C0=1.0594Ah, c_eol=442, discharge V=[2.036,3.410] (0.1s)
+[   27.6s] INFO  [MATR] cached 169 cells
+[   27.6s] INFO  [Tongji] 130 cell files, segment profile = auto
+[   27.9s] INFO    (1/130) Tongji1_CY25-025_1--1.pkl: 290 curves, C0=3.2470Ah, c_eol=300, discharge V=[2.678,4.010] (0.4s)
+[   28.1s] INFO    (2/130) Tongji1_CY25-025_1--2.pkl: 225 curves, C0=3.2656Ah, c_eol=None, discharge V=[2.678,4.017] (0.2s)
+[   28.2s] INFO    (3/130) Tongji1_CY25-025_1--3.pkl: 279 curves, C0=3.2061Ah, c_eol=221, discharge V=[2.678,4.002] (0.1s)
+[   28.4s] INFO    (4/130) Tongji1_CY25-025_1--4.pkl: 279 curves, C0=3.1874Ah, c_eol=238, discharge V=[2.678,4.007] (0.1s)
+[   28.5s] INFO    (5/130) Tongji1_CY25-025_1--5.pkl: 279 curves, C0=3.1776Ah, c_eol=224, discharge V=[2.678,4.001] (0.1s)
+[   28.6s] INFO    (6/130) Tongji1_CY25-025_1--6.pkl: 236 curves, C0=3.2267Ah, c_eol=204, discharge V=[2.677,3.992] (0.1s)
+[   28.7s] INFO    (7/130) Tongji1_CY25-025_1--7.pkl: 242 curves, C0=3.2322Ah, c_eol=210, discharge V=[2.677,3.994] (0.1s)
+[   28.8s] INFO    (8/130) Tongji1_CY25-05_1--1.pkl: 136 curves, C0=3.2403Ah, c_eol=120, discharge V=[2.678,4.007] (0.1s)
+[   28.9s] INFO    (9/130) Tongji1_CY25-05_1--10.pkl: 198 curves, C0=3.2691Ah, c_eol=174, discharge V=[2.678,4.006] (0.1s)
+[   28.9s] INFO    (10/130) Tongji1_CY25-05_1--11.pkl: 148 curves, C0=3.2398Ah, c_eol=135, discharge V=[2.678,4.002] (0.1s)
+[   29.0s] INFO    (11/130) Tongji1_CY25-05_1--12.pkl: 146 curves, C0=3.2428Ah, c_eol=132, discharge V=[2.678,4.004] (0.1s)
+[   29.0s] INFO    (12/130) Tongji1_CY25-05_1--13.pkl: 184 curves, C0=3.2701Ah, c_eol=139, discharge V=[2.678,4.004] (0.1s)
+[   29.1s] INFO    (13/130) Tongji1_CY25-05_1--14.pkl: 183 curves, C0=3.2645Ah, c_eol=161, discharge V=[2.678,3.997] (0.1s)
+[   29.2s] INFO    (14/130) Tongji1_CY25-05_1--15.pkl: 182 curves, C0=3.2722Ah, c_eol=166, discharge V=[2.678,4.005] (0.1s)
+[   29.3s] INFO    (15/130) Tongji1_CY25-05_1--16.pkl: 152 curves, C0=3.2345Ah, c_eol=124, discharge V=[2.678,4.004] (0.1s)
+[   29.3s] INFO    (16/130) Tongji1_CY25-05_1--17.pkl: 183 curves, C0=3.2502Ah, c_eol=149, discharge V=[2.678,4.007] (0.1s)
+[   29.4s] INFO    (17/130) Tongji1_CY25-05_1--18.pkl: 179 curves, C0=3.2587Ah, c_eol=150, discharge V=[2.678,4.002] (0.1s)
+[   29.5s] INFO    (18/130) Tongji1_CY25-05_1--19.pkl: 144 curves, C0=3.2515Ah, c_eol=127, discharge V=[2.678,4.004] (0.1s)
+[   29.5s] INFO    (19/130) Tongji1_CY25-05_1--2.pkl: 169 curves, C0=3.2448Ah, c_eol=138, discharge V=[2.678,4.004] (0.1s)
+[   29.6s] INFO    (20/130) Tongji1_CY25-05_1--3.pkl: 183 curves, C0=3.2464Ah, c_eol=169, discharge V=[2.678,4.012] (0.1s)
+[   29.7s] INFO    (21/130) Tongji1_CY25-05_1--4.pkl: 184 curves, C0=3.2517Ah, c_eol=160, discharge V=[2.678,4.011] (0.1s)
+[   29.7s] INFO    (22/130) Tongji1_CY25-05_1--5.pkl: 184 curves, C0=3.2486Ah, c_eol=150, discharge V=[2.678,4.009] (0.1s)
+[   29.8s] INFO    (23/130) Tongji1_CY25-05_1--6.pkl: 173 curves, C0=3.2616Ah, c_eol=155, discharge V=[2.678,4.002] (0.1s)
+[   29.9s] INFO    (24/130) Tongji1_CY25-05_1--7.pkl: 163 curves, C0=3.2567Ah, c_eol=143, discharge V=[2.678,4.002] (0.1s)
+[   29.9s] INFO    (25/130) Tongji1_CY25-05_1--8.pkl: 99 curves, C0=3.2842Ah, c_eol=None, discharge V=[2.678,4.022] (0.0s)
+[   29.9s] INFO    (26/130) Tongji1_CY25-05_1--9.pkl: 98 curves, C0=3.2723Ah, c_eol=None, discharge V=[2.678,4.023] (0.0s)
+[   30.0s] WARNING     skip Tongji1_CY25-1_1--1.pkl: only 34 cycles
+[   30.0s] WARNING     skip Tongji1_CY25-1_1--2.pkl: only 35 cycles
+[   30.0s] WARNING     skip Tongji1_CY25-1_1--3.pkl: only 27 cycles
+[   30.0s] WARNING     skip Tongji1_CY25-1_1--4.pkl: only 29 cycles
+[   30.0s] WARNING     skip Tongji1_CY25-1_1--5.pkl: only 31 cycles
+[   30.0s] WARNING     skip Tongji1_CY25-1_1--6.pkl: only 27 cycles
+[   30.0s] WARNING     skip Tongji1_CY25-1_1--7.pkl: only 33 cycles
+[   30.0s] WARNING     skip Tongji1_CY25-1_1--8.pkl: only 28 cycles
+[   30.0s] WARNING     skip Tongji1_CY25-1_1--9.pkl: only 32 cycles
+[   30.2s] INFO    (36/130) Tongji1_CY35-05_1--1.pkl: 279 curves, C0=3.2847Ah, c_eol=420, discharge V=[2.678,4.024] (0.2s)
+[   30.4s] INFO    (37/130) Tongji1_CY35-05_1--2.pkl: 278 curves, C0=3.3082Ah, c_eol=384, discharge V=[2.678,4.023] (0.2s)
+[   30.4s] WARNING     skip Tongji1_CY35-05_1--3.pkl: only 30 cycles
+[   30.6s] INFO    (39/130) Tongji1_CY45-05_1--1.pkl: 279 curves, C0=3.3406Ah, c_eol=449, discharge V=[2.678,4.031] (0.2s)
+[   30.8s] INFO    (40/130) Tongji1_CY45-05_1--10.pkl: 279 curves, C0=3.3228Ah, c_eol=334, discharge V=[2.678,4.024] (0.1s)
+[   31.0s] INFO    (41/130) Tongji1_CY45-05_1--11.pkl: 290 curves, C0=3.3307Ah, c_eol=296, discharge V=[2.678,4.024] (0.2s)
+[   31.2s] INFO    (42/130) Tongji1_CY45-05_1--12.pkl: 290 curves, C0=3.3400Ah, c_eol=472, discharge V=[2.678,4.028] (0.3s)
+[   31.5s] INFO    (43/130) Tongji1_CY45-05_1--13.pkl: 290 curves, C0=3.3342Ah, c_eol=415, discharge V=[2.678,4.026] (0.2s)
+[   31.7s] INFO    (44/130) Tongji1_CY45-05_1--14.pkl: 290 curves, C0=3.3335Ah, c_eol=433, discharge V=[2.678,4.028] (0.2s)
+[   31.9s] INFO    (45/130) Tongji1_CY45-05_1--15.pkl: 290 curves, C0=3.3422Ah, c_eol=210, discharge V=[2.678,4.020] (0.2s)
+[   32.0s] INFO    (46/130) Tongji1_CY45-05_1--16.pkl: 290 curves, C0=3.3516Ah, c_eol=219, discharge V=[2.678,4.020] (0.2s)
+[   32.2s] INFO    (47/130) Tongji1_CY45-05_1--17.pkl: 289 curves, C0=3.3505Ah, c_eol=183, discharge V=[2.678,4.017] (0.2s)
+[   32.4s] INFO    (48/130) Tongji1_CY45-05_1--18.pkl: 290 curves, C0=3.3480Ah, c_eol=322, discharge V=[2.678,4.021] (0.2s)
+[   32.6s] INFO    (49/130) Tongji1_CY45-05_1--19.pkl: 289 curves, C0=3.3483Ah, c_eol=202, discharge V=[2.673,3.791] (0.2s)
+[   32.8s] INFO    (50/130) Tongji1_CY45-05_1--2.pkl: 279 curves, C0=3.3411Ah, c_eol=404, discharge V=[2.678,4.030] (0.2s)
+[   33.1s] INFO    (51/130) Tongji1_CY45-05_1--20.pkl: 290 curves, C0=3.3293Ah, c_eol=409, discharge V=[2.678,4.027] (0.2s)
+[   33.3s] INFO    (52/130) Tongji1_CY45-05_1--21.pkl: 289 curves, C0=3.3429Ah, c_eol=277, discharge V=[2.678,4.020] (0.2s)
+[   33.4s] INFO    (53/130) Tongji1_CY45-05_1--22.pkl: 289 curves, C0=3.3499Ah, c_eol=224, discharge V=[2.678,4.019] (0.2s)
+[   33.7s] INFO    (54/130) Tongji1_CY45-05_1--23.pkl: 290 curves, C0=3.3438Ah, c_eol=451, discharge V=[2.678,4.030] (0.2s)
+[   33.9s] INFO    (55/130) Tongji1_CY45-05_1--24.pkl: 290 curves, C0=3.3459Ah, c_eol=330, discharge V=[2.678,4.022] (0.2s)
+[   34.1s] INFO    (56/130) Tongji1_CY45-05_1--25.pkl: 290 curves, C0=3.3333Ah, c_eol=440, discharge V=[2.678,4.014] (0.2s)
+[   34.3s] INFO    (57/130) Tongji1_CY45-05_1--26.pkl: 290 curves, C0=3.3539Ah, c_eol=355, discharge V=[2.678,4.025] (0.2s)
+[   34.6s] INFO    (58/130) Tongji1_CY45-05_1--27.pkl: 289 curves, C0=3.3375Ah, c_eol=300, discharge V=[2.678,4.018] (0.2s)
+[   34.8s] INFO    (59/130) Tongji1_CY45-05_1--28.pkl: 290 curves, C0=3.3462Ah, c_eol=434, discharge V=[2.678,4.021] (0.2s)
+[   34.8s] INFO    (60/130) Tongji1_CY45-05_1--3.pkl: 190 curves, C0=3.3323Ah, c_eol=None, discharge V=[2.678,4.029] (0.1s)
+[   34.9s] INFO    (61/130) Tongji1_CY45-05_1--4.pkl: 190 curves, C0=3.3257Ah, c_eol=None, discharge V=[2.678,4.029] (0.1s)
+[   35.0s] INFO    (62/130) Tongji1_CY45-05_1--5.pkl: 190 curves, C0=3.3356Ah, c_eol=None, discharge V=[2.678,4.022] (0.1s)
+[   35.1s] INFO    (63/130) Tongji1_CY45-05_1--6.pkl: 190 curves, C0=3.3363Ah, c_eol=None, discharge V=[2.678,4.022] (0.1s)
+[   35.2s] INFO    (64/130) Tongji1_CY45-05_1--7.pkl: 279 curves, C0=3.3236Ah, c_eol=None, discharge V=[2.678,4.029] (0.1s)
+[   35.3s] INFO    (65/130) Tongji1_CY45-05_1--8.pkl: 279 curves, C0=3.3319Ah, c_eol=215, discharge V=[2.678,4.016] (0.1s)
+[   35.4s] INFO    (66/130) Tongji1_CY45-05_1--9.pkl: 279 curves, C0=3.3373Ah, c_eol=None, discharge V=[2.678,4.028] (0.1s)
+[   35.5s] INFO    (67/130) Tongji2_CY25-05_1--1.pkl: 183 curves, C0=3.2182Ah, c_eol=None, discharge V=[2.531,3.992] (0.1s)
+[   35.6s] INFO    (68/130) Tongji2_CY25-05_1--10.pkl: 190 curves, C0=3.1840Ah, c_eol=None, discharge V=[2.530,3.988] (0.1s)
+[   35.7s] INFO    (69/130) Tongji2_CY25-05_1--11.pkl: 190 curves, C0=3.1942Ah, c_eol=None, discharge V=[2.530,3.988] (0.1s)
+[   35.7s] INFO    (70/130) Tongji2_CY25-05_1--12.pkl: 190 curves, C0=3.1501Ah, c_eol=199, discharge V=[2.530,3.981] (0.1s)
+[   35.9s] INFO    (71/130) Tongji2_CY25-05_1--13.pkl: 285 curves, C0=3.1771Ah, c_eol=327, discharge V=[2.530,3.988] (0.2s)
+[   35.9s] WARNING     skip Tongji2_CY25-05_1--14.pkl: only 42 cycles
+[   36.0s] INFO    (73/130) Tongji2_CY25-05_1--15.pkl: 285 curves, C0=3.1758Ah, c_eol=232, discharge V=[2.530,3.972] (0.1s)
+[   36.2s] INFO    (74/130) Tongji2_CY25-05_1--16.pkl: 285 curves, C0=3.1816Ah, c_eol=251, discharge V=[2.530,3.977] (0.1s)
+[   36.3s] INFO    (75/130) Tongji2_CY25-05_1--17.pkl: 290 curves, C0=3.2201Ah, c_eol=329, discharge V=[2.530,3.989] (0.1s)
+[   36.4s] INFO    (76/130) Tongji2_CY25-05_1--18.pkl: 184 curves, C0=3.2310Ah, c_eol=None, discharge V=[2.530,3.991] (0.1s)
+[   36.4s] INFO    (77/130) Tongji2_CY25-05_1--19.pkl: 182 curves, C0=3.2311Ah, c_eol=None, discharge V=[2.531,3.991] (0.1s)
+[   36.5s] INFO    (78/130) Tongji2_CY25-05_1--2.pkl: 180 curves, C0=3.2396Ah, c_eol=None, discharge V=[2.530,3.976] (0.1s)
+[   36.6s] INFO    (79/130) Tongji2_CY25-05_1--20.pkl: 182 curves, C0=3.2150Ah, c_eol=None, discharge V=[2.531,3.992] (0.1s)
+[   36.6s] INFO    (80/130) Tongji2_CY25-05_1--21.pkl: 181 curves, C0=3.2301Ah, c_eol=None, discharge V=[2.530,3.985] (0.1s)
+[   36.7s] INFO    (81/130) Tongji2_CY25-05_1--22.pkl: 183 curves, C0=3.2234Ah, c_eol=None, discharge V=[2.531,3.990] (0.1s)
+[   36.8s] INFO    (82/130) Tongji2_CY25-05_1--23.pkl: 182 curves, C0=3.2318Ah, c_eol=None, discharge V=[2.531,3.991] (0.1s)
+[   36.8s] INFO    (83/130) Tongji2_CY25-05_1--3.pkl: 182 curves, C0=3.2156Ah, c_eol=None, discharge V=[2.530,3.986] (0.1s)
+[   36.9s] INFO    (84/130) Tongji2_CY25-05_1--4.pkl: 181 curves, C0=3.2091Ah, c_eol=None, discharge V=[2.531,3.991] (0.1s)
+[   37.1s] INFO    (85/130) Tongji2_CY25-05_1--5.pkl: 290 curves, C0=3.2094Ah, c_eol=339, discharge V=[2.530,3.986] (0.2s)
+[   37.2s] INFO    (86/130) Tongji2_CY25-05_1--6.pkl: 182 curves, C0=3.2280Ah, c_eol=None, discharge V=[2.531,3.992] (0.1s)
+[   37.2s] INFO    (87/130) Tongji2_CY25-05_1--7.pkl: 183 curves, C0=3.2238Ah, c_eol=None, discharge V=[2.530,3.989] (0.1s)
+[   37.4s] INFO    (88/130) Tongji2_CY25-05_1--8.pkl: 285 curves, C0=3.1535Ah, c_eol=244, discharge V=[2.530,3.983] (0.1s)
+[   37.5s] INFO    (89/130) Tongji2_CY25-05_1--9.pkl: 285 curves, C0=3.1580Ah, c_eol=314, discharge V=[2.531,3.996] (0.1s)
+[   37.9s] INFO    (90/130) Tongji2_CY35-05_1--1.pkl: 285 curves, C0=3.1876Ah, c_eol=427, discharge V=[2.531,3.999] (0.4s)
+[   38.3s] INFO    (91/130) Tongji2_CY35-05_1--2.pkl: 285 curves, C0=3.2476Ah, c_eol=580, discharge V=[2.531,4.000] (0.4s)
+[   38.7s] INFO    (92/130) Tongji2_CY35-05_1--3.pkl: 285 curves, C0=3.2141Ah, c_eol=481, discharge V=[2.531,3.996] (0.4s)
+[   39.1s] INFO    (93/130) Tongji2_CY35-05_1--4.pkl: 285 curves, C0=3.2231Ah, c_eol=469, discharge V=[2.531,3.998] (0.4s)
+[   39.3s] INFO    (94/130) Tongji2_CY45-05_1--1.pkl: 285 curves, C0=3.2898Ah, c_eol=411, discharge V=[2.531,4.001] (0.2s)
+[   39.4s] INFO    (95/130) Tongji2_CY45-05_1--10.pkl: 285 curves, C0=3.2747Ah, c_eol=407, discharge V=[2.531,4.000] (0.1s)
+[   39.7s] INFO    (96/130) Tongji2_CY45-05_1--11.pkl: 290 curves, C0=3.2856Ah, c_eol=377, discharge V=[2.531,3.997] (0.3s)
+[   39.9s] INFO    (97/130) Tongji2_CY45-05_1--12.pkl: 290 curves, C0=3.3108Ah, c_eol=435, discharge V=[2.531,3.997] (0.3s)
+[   40.2s] INFO    (98/130) Tongji2_CY45-05_1--13.pkl: 290 curves, C0=3.2937Ah, c_eol=385, discharge V=[2.531,3.997] (0.3s)
+[   40.5s] INFO    (99/130) Tongji2_CY45-05_1--14.pkl: 290 curves, C0=3.2892Ah, c_eol=387, discharge V=[2.531,4.000] (0.3s)
+[   40.7s] INFO    (100/130) Tongji2_CY45-05_1--15.pkl: 290 curves, C0=3.3162Ah, c_eol=393, discharge V=[2.531,3.997] (0.1s)
+[   40.9s] INFO    (101/130) Tongji2_CY45-05_1--16.pkl: 289 curves, C0=3.3171Ah, c_eol=405, discharge V=[2.531,3.998] (0.2s)
+[   41.1s] INFO    (102/130) Tongji2_CY45-05_1--17.pkl: 290 curves, C0=3.3261Ah, c_eol=425, discharge V=[2.531,3.997] (0.2s)
+[   41.3s] INFO    (103/130) Tongji2_CY45-05_1--18.pkl: 290 curves, C0=3.2984Ah, c_eol=384, discharge V=[2.531,3.998] (0.2s)
+[   41.5s] INFO    (104/130) Tongji2_CY45-05_1--19.pkl: 289 curves, C0=3.3112Ah, c_eol=409, discharge V=[2.531,3.998] (0.3s)
+[   41.7s] INFO    (105/130) Tongji2_CY45-05_1--2.pkl: 285 curves, C0=3.3009Ah, c_eol=421, discharge V=[2.531,4.001] (0.2s)
+[   41.9s] INFO    (106/130) Tongji2_CY45-05_1--20.pkl: 290 curves, C0=3.3063Ah, c_eol=394, discharge V=[2.531,3.995] (0.3s)
+[   42.2s] INFO    (107/130) Tongji2_CY45-05_1--21.pkl: 290 curves, C0=3.3344Ah, c_eol=435, discharge V=[2.531,3.997] (0.3s)
+[   42.5s] INFO    (108/130) Tongji2_CY45-05_1--22.pkl: 289 curves, C0=3.3073Ah, c_eol=410, discharge V=[2.531,3.996] (0.3s)
+[   42.8s] INFO    (109/130) Tongji2_CY45-05_1--23.pkl: 289 curves, C0=3.3122Ah, c_eol=433, discharge V=[2.531,4.011] (0.3s)
+[   43.1s] INFO    (110/130) Tongji2_CY45-05_1--24.pkl: 289 curves, C0=3.3070Ah, c_eol=424, discharge V=[2.531,3.999] (0.3s)
+[   43.4s] INFO    (111/130) Tongji2_CY45-05_1--25.pkl: 290 curves, C0=3.3278Ah, c_eol=453, discharge V=[2.531,3.996] (0.3s)
+[   43.7s] INFO    (112/130) Tongji2_CY45-05_1--26.pkl: 289 curves, C0=3.3108Ah, c_eol=408, discharge V=[2.531,3.997] (0.3s)
+[   44.0s] INFO    (113/130) Tongji2_CY45-05_1--27.pkl: 290 curves, C0=3.3182Ah, c_eol=450, discharge V=[2.531,3.994] (0.3s)
+[   44.3s] INFO    (114/130) Tongji2_CY45-05_1--28.pkl: 290 curves, C0=3.3124Ah, c_eol=414, discharge V=[2.531,3.996] (0.3s)
+[   44.4s] INFO    (115/130) Tongji2_CY45-05_1--3.pkl: 190 curves, C0=3.2944Ah, c_eol=None, discharge V=[2.531,4.002] (0.1s)
+[   44.4s] INFO    (116/130) Tongji2_CY45-05_1--4.pkl: 190 curves, C0=3.2785Ah, c_eol=None, discharge V=[2.531,4.007] (0.1s)
+[   44.5s] INFO    (117/130) Tongji2_CY45-05_1--5.pkl: 190 curves, C0=3.2930Ah, c_eol=None, discharge V=[2.531,4.006] (0.1s)
+[   44.6s] INFO    (118/130) Tongji2_CY45-05_1--6.pkl: 190 curves, C0=3.2720Ah, c_eol=None, discharge V=[2.531,4.015] (0.1s)
+[   44.7s] INFO    (119/130) Tongji2_CY45-05_1--7.pkl: 285 curves, C0=3.2793Ah, c_eol=406, discharge V=[2.531,3.997] (0.1s)
+[   44.8s] INFO    (120/130) Tongji2_CY45-05_1--8.pkl: 285 curves, C0=3.2863Ah, c_eol=406, discharge V=[2.531,3.997] (0.1s)
+[   45.0s] INFO    (121/130) Tongji2_CY45-05_1--9.pkl: 285 curves, C0=3.2810Ah, c_eol=None, discharge V=[2.531,3.996] (0.1s)
+[   45.5s] INFO    (122/130) Tongji3_CY25-05_1--1.pkl: 287 curves, C0=2.4804Ah, c_eol=486, discharge V=[2.530,3.945] (0.6s)
+[   46.1s] INFO    (123/130) Tongji3_CY25-05_1--2.pkl: 287 curves, C0=2.4811Ah, c_eol=463, discharge V=[2.530,3.952] (0.6s)
+[   46.7s] INFO    (124/130) Tongji3_CY25-05_1--3.pkl: 287 curves, C0=2.4793Ah, c_eol=474, discharge V=[2.530,3.950] (0.6s)
+[   47.2s] INFO    (125/130) Tongji3_CY25-05_2--1.pkl: 287 curves, C0=2.4664Ah, c_eol=451, discharge V=[2.527,3.826] (0.5s)
+[   47.7s] INFO    (126/130) Tongji3_CY25-05_2--2.pkl: 287 curves, C0=2.4637Ah, c_eol=439, discharge V=[2.527,3.825] (0.5s)
+[   48.3s] INFO    (127/130) Tongji3_CY25-05_2--3.pkl: 287 curves, C0=2.4648Ah, c_eol=475, discharge V=[2.527,3.824] (0.5s)
+[   48.8s] INFO    (128/130) Tongji3_CY25-05_4--1.pkl: 287 curves, C0=2.4962Ah, c_eol=487, discharge V=[2.524,3.655] (0.5s)
+[   49.3s] INFO    (129/130) Tongji3_CY25-05_4--2.pkl: 287 curves, C0=2.4815Ah, c_eol=474, discharge V=[2.523,3.650] (0.5s)
+[   49.7s] INFO    (130/130) Tongji3_CY25-05_4--3.pkl: 287 curves, C0=2.4808Ah, c_eol=457, discharge V=[2.523,3.641] (0.5s)
+[   49.7s] INFO  [Tongji] cached 119 cells
+[   49.7s] INFO  [HUST] 77 cell files, segment profile = charge
+[   49.9s] INFO    (1/77) HUST_1-1.pkl: 290 curves, C0=1.1864Ah, c_eol=None, charge V=[3.379,3.595] (0.1s)
+[   50.1s] INFO    (2/77) HUST_1-2.pkl: 290 curves, C0=1.2191Ah, c_eol=None, charge V=[3.379,3.595] (0.2s)
+[   50.3s] INFO    (3/77) HUST_1-3.pkl: 290 curves, C0=1.1821Ah, c_eol=None, charge V=[3.398,3.595] (0.2s)
+[   50.4s] INFO    (4/77) HUST_1-4.pkl: 290 curves, C0=1.1838Ah, c_eol=None, charge V=[3.414,3.596] (0.1s)
+[   50.6s] INFO    (5/77) HUST_1-5.pkl: 290 curves, C0=1.1782Ah, c_eol=None, charge V=[3.425,3.595] (0.2s)
+[   50.7s] INFO    (6/77) HUST_1-6.pkl: 290 curves, C0=1.2155Ah, c_eol=None, charge V=[3.382,3.594] (0.1s)
+[   50.8s] INFO    (7/77) HUST_1-7.pkl: 290 curves, C0=1.2011Ah, c_eol=None, charge V=[3.380,3.594] (0.1s)
+[   51.0s] INFO    (8/77) HUST_1-8.pkl: 290 curves, C0=1.2078Ah, c_eol=None, charge V=[3.376,3.594] (0.2s)
+[   51.1s] INFO    (9/77) HUST_10-1.pkl: 290 curves, C0=1.1936Ah, c_eol=None, charge V=[3.373,3.594] (0.1s)
+[   51.3s] INFO    (10/77) HUST_10-2.pkl: 290 curves, C0=1.2100Ah, c_eol=None, charge V=[3.383,3.591] (0.1s)
+[   51.4s] INFO    (11/77) HUST_10-3.pkl: 290 curves, C0=1.2040Ah, c_eol=None, charge V=[3.374,3.595] (0.1s)
+[   51.6s] INFO    (12/77) HUST_10-4.pkl: 290 curves, C0=1.1952Ah, c_eol=None, charge V=[3.403,3.592] (0.2s)
+[   51.8s] INFO    (13/77) HUST_10-5.pkl: 290 curves, C0=1.1988Ah, c_eol=None, charge V=[3.391,3.594] (0.2s)
+[   52.0s] INFO    (14/77) HUST_10-6.pkl: 290 curves, C0=1.2460Ah, c_eol=None, charge V=[3.375,3.593] (0.2s)
+[   52.1s] INFO    (15/77) HUST_10-7.pkl: 290 curves, C0=1.1975Ah, c_eol=None, charge V=[3.392,3.594] (0.2s)
+[   52.3s] INFO    (16/77) HUST_10-8.pkl: 290 curves, C0=1.2003Ah, c_eol=None, charge V=[3.375,3.594] (0.1s)
+[   52.5s] INFO    (17/77) HUST_2-2.pkl: 290 curves, C0=1.2411Ah, c_eol=None, charge V=[3.378,3.592] (0.2s)
+[   52.6s] INFO    (18/77) HUST_2-3.pkl: 290 curves, C0=1.1850Ah, c_eol=None, charge V=[3.405,3.593] (0.2s)
+[   52.8s] INFO    (19/77) HUST_2-4.pkl: 290 curves, C0=1.2011Ah, c_eol=None, charge V=[3.378,3.593] (0.1s)
+[   52.9s] INFO    (20/77) HUST_2-5.pkl: 290 curves, C0=1.1799Ah, c_eol=None, charge V=[3.425,3.593] (0.1s)
+[   53.0s] INFO    (21/77) HUST_2-6.pkl: 290 curves, C0=1.1968Ah, c_eol=None, charge V=[3.394,3.593] (0.1s)
+[   53.2s] INFO    (22/77) HUST_2-7.pkl: 290 curves, C0=1.2059Ah, c_eol=None, charge V=[3.398,3.593] (0.2s)
+[   53.3s] INFO    (23/77) HUST_2-8.pkl: 290 curves, C0=1.1955Ah, c_eol=None, charge V=[3.373,3.592] (0.1s)
+[   53.4s] INFO    (24/77) HUST_3-1.pkl: 290 curves, C0=1.2036Ah, c_eol=None, charge V=[3.385,3.592] (0.2s)
+[   53.6s] INFO    (25/77) HUST_3-2.pkl: 290 curves, C0=1.2088Ah, c_eol=None, charge V=[3.387,3.594] (0.2s)
+[   53.7s] INFO    (26/77) HUST_3-3.pkl: 290 curves, C0=1.1980Ah, c_eol=None, charge V=[3.385,3.592] (0.1s)
+[   53.9s] INFO    (27/77) HUST_3-4.pkl: 290 curves, C0=1.1966Ah, c_eol=None, charge V=[3.376,3.594] (0.1s)
+[   54.1s] INFO    (28/77) HUST_3-5.pkl: 290 curves, C0=1.2473Ah, c_eol=None, charge V=[3.375,3.595] (0.2s)
+[   54.3s] INFO    (29/77) HUST_3-6.pkl: 290 curves, C0=1.2020Ah, c_eol=None, charge V=[3.385,3.594] (0.2s)
+[   54.5s] INFO    (30/77) HUST_3-7.pkl: 290 curves, C0=1.1930Ah, c_eol=None, charge V=[3.374,3.594] (0.2s)
+[   54.7s] INFO    (31/77) HUST_3-8.pkl: 290 curves, C0=1.2244Ah, c_eol=None, charge V=[3.387,3.593] (0.2s)
+[   54.8s] INFO    (32/77) HUST_4-1.pkl: 290 curves, C0=1.2068Ah, c_eol=None, charge V=[3.374,3.592] (0.2s)
+[   55.0s] INFO    (33/77) HUST_4-2.pkl: 290 curves, C0=1.1929Ah, c_eol=None, charge V=[3.386,3.593] (0.2s)
+[   55.1s] INFO    (34/77) HUST_4-3.pkl: 290 curves, C0=1.1880Ah, c_eol=None, charge V=[3.376,3.593] (0.1s)
+[   55.3s] INFO    (35/77) HUST_4-4.pkl: 290 curves, C0=1.1854Ah, c_eol=None, charge V=[3.376,3.593] (0.1s)
+[   55.4s] INFO    (36/77) HUST_4-5.pkl: 290 curves, C0=1.2099Ah, c_eol=None, charge V=[3.377,3.594] (0.1s)
+[   55.5s] INFO    (37/77) HUST_4-6.pkl: 290 curves, C0=1.1875Ah, c_eol=None, charge V=[3.376,3.594] (0.1s)
+[   55.8s] INFO    (38/77) HUST_4-7.pkl: 290 curves, C0=1.2401Ah, c_eol=None, charge V=[3.378,3.594] (0.2s)
+[   55.9s] INFO    (39/77) HUST_4-8.pkl: 290 curves, C0=1.1979Ah, c_eol=None, charge V=[3.400,3.595] (0.2s)
+[   56.1s] INFO    (40/77) HUST_5-1.pkl: 290 curves, C0=1.2208Ah, c_eol=None, charge V=[3.381,3.595] (0.2s)
+[   56.3s] INFO    (41/77) HUST_5-2.pkl: 290 curves, C0=1.1883Ah, c_eol=None, charge V=[3.386,3.595] (0.2s)
+[   56.5s] INFO    (42/77) HUST_5-3.pkl: 290 curves, C0=1.2201Ah, c_eol=None, charge V=[3.380,3.596] (0.2s)
+[   56.7s] INFO    (43/77) HUST_5-4.pkl: 290 curves, C0=1.1937Ah, c_eol=None, charge V=[3.377,3.595] (0.2s)
+[   56.8s] INFO    (44/77) HUST_5-5.pkl: 290 curves, C0=1.1888Ah, c_eol=None, charge V=[3.407,3.595] (0.1s)
+[   57.0s] INFO    (45/77) HUST_5-6.pkl: 290 curves, C0=1.2199Ah, c_eol=None, charge V=[3.381,3.595] (0.2s)
+[   57.2s] INFO    (46/77) HUST_5-7.pkl: 290 curves, C0=1.1957Ah, c_eol=None, charge V=[3.378,3.595] (0.1s)
+[   57.3s] INFO    (47/77) HUST_6-1.pkl: 290 curves, C0=1.1898Ah, c_eol=None, charge V=[3.381,3.594] (0.2s)
+[   57.5s] INFO    (48/77) HUST_6-2.pkl: 290 curves, C0=1.2009Ah, c_eol=None, charge V=[3.397,3.595] (0.2s)
+[   57.6s] INFO    (49/77) HUST_6-3.pkl: 290 curves, C0=1.2001Ah, c_eol=None, charge V=[3.401,3.595] (0.1s)
+[   57.8s] INFO    (50/77) HUST_6-4.pkl: 290 curves, C0=1.1980Ah, c_eol=None, charge V=[3.375,3.593] (0.1s)
+[   57.9s] INFO    (51/77) HUST_6-5.pkl: 290 curves, C0=1.2071Ah, c_eol=None, charge V=[3.381,3.595] (0.2s)
+[   58.1s] INFO    (52/77) HUST_6-6.pkl: 290 curves, C0=1.1891Ah, c_eol=None, charge V=[3.400,3.596] (0.2s)
+[   58.3s] INFO    (53/77) HUST_6-8.pkl: 290 curves, C0=1.2266Ah, c_eol=None, charge V=[3.381,3.595] (0.2s)
+[   58.5s] INFO    (54/77) HUST_7-1.pkl: 290 curves, C0=1.2043Ah, c_eol=None, charge V=[3.372,3.592] (0.1s)
+[   58.6s] INFO    (55/77) HUST_7-2.pkl: 290 curves, C0=1.2169Ah, c_eol=None, charge V=[3.377,3.590] (0.1s)
+[   58.8s] INFO    (56/77) HUST_7-3.pkl: 290 curves, C0=1.1802Ah, c_eol=None, charge V=[3.371,3.592] (0.1s)
+[   58.9s] INFO    (57/77) HUST_7-4.pkl: 290 curves, C0=1.1835Ah, c_eol=None, charge V=[3.371,3.593] (0.1s)
+[   59.1s] INFO    (58/77) HUST_7-5.pkl: 290 curves, C0=1.2004Ah, c_eol=None, charge V=[3.376,3.590] (0.2s)
+[   59.2s] INFO    (59/77) HUST_7-6.pkl: 290 curves, C0=1.1885Ah, c_eol=None, charge V=[3.373,3.593] (0.1s)
+[   59.4s] INFO    (60/77) HUST_7-7.pkl: 290 curves, C0=1.1899Ah, c_eol=None, charge V=[3.447,3.596] (0.2s)
+[   59.6s] INFO    (61/77) HUST_7-8.pkl: 290 curves, C0=1.1951Ah, c_eol=None, charge V=[3.383,3.592] (0.2s)
+[   59.7s] INFO    (62/77) HUST_8-1.pkl: 290 curves, C0=1.1886Ah, c_eol=None, charge V=[3.375,3.594] (0.1s)
+[   59.9s] INFO    (63/77) HUST_8-2.pkl: 290 curves, C0=1.2147Ah, c_eol=None, charge V=[3.373,3.594] (0.2s)
+[   60.1s] INFO    (64/77) HUST_8-3.pkl: 290 curves, C0=1.2007Ah, c_eol=None, charge V=[3.382,3.596] (0.2s)
+[   60.3s] INFO    (65/77) HUST_8-4.pkl: 290 curves, C0=1.1961Ah, c_eol=None, charge V=[3.374,3.595] (0.2s)
+[   60.4s] INFO    (66/77) HUST_8-5.pkl: 290 curves, C0=1.1846Ah, c_eol=None, charge V=[3.373,3.595] (0.1s)
+[   60.6s] INFO    (67/77) HUST_8-6.pkl: 290 curves, C0=1.2347Ah, c_eol=None, charge V=[3.372,3.594] (0.2s)
+[   60.8s] INFO    (68/77) HUST_8-7.pkl: 290 curves, C0=1.1967Ah, c_eol=None, charge V=[3.372,3.594] (0.2s)
+[   60.9s] INFO    (69/77) HUST_8-8.pkl: 290 curves, C0=1.2056Ah, c_eol=None, charge V=[3.382,3.595] (0.1s)
+[   61.1s] INFO    (70/77) HUST_9-1.pkl: 290 curves, C0=1.2191Ah, c_eol=None, charge V=[3.381,3.592] (0.2s)
+[   61.3s] INFO    (71/77) HUST_9-2.pkl: 290 curves, C0=1.2067Ah, c_eol=None, charge V=[3.382,3.594] (0.2s)
+[   61.5s] INFO    (72/77) HUST_9-3.pkl: 290 curves, C0=1.2103Ah, c_eol=None, charge V=[3.379,3.590] (0.2s)
+[   61.6s] INFO    (73/77) HUST_9-4.pkl: 290 curves, C0=1.2133Ah, c_eol=None, charge V=[3.381,3.592] (0.2s)
+[   61.8s] INFO    (74/77) HUST_9-5.pkl: 290 curves, C0=1.2072Ah, c_eol=None, charge V=[3.381,3.594] (0.2s)
+[   62.0s] INFO    (75/77) HUST_9-6.pkl: 290 curves, C0=1.2150Ah, c_eol=None, charge V=[3.384,3.593] (0.1s)
+[   62.2s] INFO    (76/77) HUST_9-7.pkl: 290 curves, C0=1.2036Ah, c_eol=None, charge V=[3.378,3.594] (0.2s)
+[   62.4s] INFO    (77/77) HUST_9-8.pkl: 290 curves, C0=1.1947Ah, c_eol=None, charge V=[3.383,3.595] (0.2s)
+[   62.4s] INFO  [HUST] cached 77 cells
+[   62.4s] INFO  [SNL] 61 cell files, segment profile = auto
+[   62.4s] INFO    (1/61) SNL_18650_LFP_15C_0-100_0.5-2C_b.pkl: 290 curves, C0=1.0304Ah, c_eol=None, charge V=[3.010,3.588] (0.1s)
+[   62.5s] INFO    (2/61) SNL_18650_LFP_25C_0-100_0.5-0.5C_a.pkl: 290 curves, C0=1.0688Ah, c_eol=None, discharge V=[2.026,3.322] (0.1s)
+[   62.6s] INFO    (3/61) SNL_18650_LFP_25C_0-100_0.5-1C_a.pkl: 290 curves, C0=1.0332Ah, c_eol=None, charge V=[2.973,3.587] (0.1s)
+[   62.8s] INFO    (4/61) SNL_18650_LFP_25C_0-100_0.5-1C_b.pkl: 290 curves, C0=1.0370Ah, c_eol=2622, charge V=[2.972,3.587] (0.1s)
+[   62.8s] INFO    (5/61) SNL_18650_LFP_25C_0-100_0.5-1C_c.pkl: 290 curves, C0=1.0512Ah, c_eol=None, charge V=[2.974,3.587] (0.1s)
+[   62.9s] INFO    (6/61) SNL_18650_LFP_25C_0-100_0.5-1C_d.pkl: 290 curves, C0=1.0502Ah, c_eol=None, charge V=[2.976,3.587] (0.1s)
+[   63.0s] INFO    (7/61) SNL_18650_LFP_25C_0-100_0.5-2C_a.pkl: 290 curves, C0=1.0364Ah, c_eol=None, charge V=[2.985,3.587] (0.1s)
+[   63.1s] INFO    (8/61) SNL_18650_LFP_25C_0-100_0.5-2C_b.pkl: 290 curves, C0=1.0314Ah, c_eol=None, charge V=[2.980,3.587] (0.1s)
+[   63.2s] INFO    (9/61) SNL_18650_LFP_25C_0-100_0.5-3C_a.pkl: 290 curves, C0=1.0364Ah, c_eol=3212, charge V=[3.053,3.589] (0.1s)
+[   63.3s] INFO    (10/61) SNL_18650_LFP_25C_0-100_0.5-3C_b.pkl: 290 curves, C0=1.0474Ah, c_eol=2917, charge V=[3.027,3.588] (0.1s)
+[   63.4s] INFO    (11/61) SNL_18650_LFP_25C_0-100_0.5-3C_c.pkl: 290 curves, C0=1.0386Ah, c_eol=2337, charge V=[3.029,3.588] (0.1s)
+[   63.5s] INFO    (12/61) SNL_18650_LFP_25C_0-100_0.5-3C_d.pkl: 290 curves, C0=1.0606Ah, c_eol=3149, charge V=[3.030,3.588] (0.1s)
+[   63.6s] INFO    (13/61) SNL_18650_LFP_35C_0-100_0.5-1C_a.pkl: 290 curves, C0=1.0754Ah, c_eol=None, discharge V=[2.024,3.248] (0.1s)
+[   63.7s] INFO    (14/61) SNL_18650_LFP_35C_0-100_0.5-1C_b.pkl: 111 curves, C0=1.0442Ah, c_eol=3162, discharge V=[2.024,3.248] (0.1s)
+[   63.8s] INFO    (15/61) SNL_18650_LFP_35C_0-100_0.5-1C_c.pkl: 123 curves, C0=1.0560Ah, c_eol=None, discharge V=[2.025,3.249] (0.1s)
+[   64.0s] INFO    (16/61) SNL_18650_LFP_35C_0-100_0.5-1C_d.pkl: 290 curves, C0=1.0580Ah, c_eol=None, discharge V=[2.024,3.248] (0.1s)
+[   64.1s] INFO    (17/61) SNL_18650_LFP_35C_0-100_0.5-2C_a.pkl: 290 curves, C0=1.0632Ah, c_eol=3824, charge V=[2.982,3.587] (0.1s)
+[   64.2s] INFO    (18/61) SNL_18650_LFP_35C_0-100_0.5-2C_b.pkl: 290 curves, C0=1.0384Ah, c_eol=2651, charge V=[2.988,3.587] (0.1s)
+[   64.2s] INFO    (19/61) SNL_18650_NCA_15C_0-100_0.5-1C_a.pkl: 290 curves, C0=2.8934Ah, c_eol=331, charge V=[3.577,4.187] (0.0s)
+[   64.2s] INFO    (20/61) SNL_18650_NCA_15C_0-100_0.5-1C_b.pkl: 290 curves, C0=2.8410Ah, c_eol=634, charge V=[3.571,4.187] (0.0s)
+[   64.3s] INFO    (21/61) SNL_18650_NCA_15C_0-100_0.5-2C_a.pkl: 290 curves, C0=2.8428Ah, c_eol=226, charge V=[3.644,4.189] (0.0s)
+[   64.3s] INFO    (22/61) SNL_18650_NCA_15C_0-100_0.5-2C_b.pkl: 290 curves, C0=2.8752Ah, c_eol=250, charge V=[3.633,4.188] (0.0s)
+[   64.3s] INFO    (23/61) SNL_18650_NCA_25C_0-100_0.5-0.5C_a.pkl: 290 curves, C0=3.1472Ah, c_eol=296, discharge V=[2.526,3.847] (0.1s)
+[   64.4s] INFO    (24/61) SNL_18650_NCA_25C_0-100_0.5-0.5C_b.pkl: 290 curves, C0=3.1468Ah, c_eol=180, discharge V=[2.523,3.683] (0.1s)
+[   64.4s] INFO    (25/61) SNL_18650_NCA_25C_0-100_0.5-1C_a.pkl: 290 curves, C0=3.0530Ah, c_eol=378, charge V=[3.513,4.186] (0.0s)
+[   64.5s] INFO    (26/61) SNL_18650_NCA_25C_0-100_0.5-1C_b.pkl: 290 curves, C0=3.0986Ah, c_eol=310, charge V=[3.526,4.186] (0.0s)
+[   64.5s] INFO    (27/61) SNL_18650_NCA_25C_0-100_0.5-1C_c.pkl: 290 curves, C0=3.1470Ah, c_eol=334, charge V=[3.506,4.186] (0.0s)
+[   64.5s] INFO    (28/61) SNL_18650_NCA_25C_0-100_0.5-1C_d.pkl: 290 curves, C0=3.1008Ah, c_eol=383, charge V=[3.534,4.186] (0.0s)
+[   64.5s] INFO    (29/61) SNL_18650_NCA_25C_0-100_0.5-2C_a.pkl: 290 curves, C0=3.0882Ah, c_eol=336, charge V=[3.546,4.187] (0.0s)
+[   64.6s] INFO    (30/61) SNL_18650_NCA_25C_0-100_0.5-2C_b.pkl: 290 curves, C0=2.9330Ah, c_eol=320, charge V=[3.519,4.186] (0.0s)
+[   64.6s] INFO    (31/61) SNL_18650_NCA_25C_20-80_0.5-0.5C_a.pkl: 290 curves, C0=2.0180Ah, c_eol=1, discharge V=[2.719,3.651] (0.1s)
+[   64.7s] INFO    (32/61) SNL_18650_NCA_25C_20-80_0.5-0.5C_b.pkl: 290 curves, C0=2.0280Ah, c_eol=1, discharge V=[2.719,3.664] (0.1s)
+[   64.8s] INFO    (33/61) SNL_18650_NCA_25C_20-80_0.5-0.5C_c.pkl: 290 curves, C0=2.0150Ah, c_eol=1, discharge V=[2.718,3.629] (0.1s)
+[   64.9s] INFO    (34/61) SNL_18650_NCA_25C_20-80_0.5-0.5C_d.pkl: 290 curves, C0=1.9790Ah, c_eol=1, discharge V=[2.719,3.662] (0.1s)
+[   64.9s] INFO    (35/61) SNL_18650_NCA_35C_0-100_0.5-1C_a.pkl: 290 curves, C0=3.1762Ah, c_eol=395, charge V=[3.558,4.187] (0.0s)
+[   64.9s] INFO    (36/61) SNL_18650_NCA_35C_0-100_0.5-1C_b.pkl: 290 curves, C0=3.1536Ah, c_eol=337, charge V=[3.560,4.187] (0.0s)
+[   65.0s] INFO    (37/61) SNL_18650_NCA_35C_0-100_0.5-1C_c.pkl: 67 curves, C0=3.1796Ah, c_eol=407, discharge V=[2.524,3.743] (0.0s)
+[   65.0s] INFO    (38/61) SNL_18650_NCA_35C_0-100_0.5-1C_d.pkl: 87 curves, C0=3.2038Ah, c_eol=445, discharge V=[2.525,3.751] (0.0s)
+[   65.0s] INFO    (39/61) SNL_18650_NCA_35C_0-100_0.5-2C_a.pkl: 290 curves, C0=3.1254Ah, c_eol=263, charge V=[3.627,4.188] (0.0s)
+[   65.0s] INFO    (40/61) SNL_18650_NCA_35C_0-100_0.5-2C_b.pkl: 290 curves, C0=3.0806Ah, c_eol=229, charge V=[3.649,4.189] (0.0s)
+[   65.1s] INFO    (41/61) SNL_18650_NMC_15C_0-100_0.5-1C_a.pkl: 290 curves, C0=2.6856Ah, c_eol=147, charge V=[3.400,4.184] (0.0s)
+[   65.1s] INFO    (42/61) SNL_18650_NMC_15C_0-100_0.5-1C_b.pkl: 290 curves, C0=2.5410Ah, c_eol=143, charge V=[3.399,4.184] (0.0s)
+[   65.1s] INFO    (43/61) SNL_18650_NMC_15C_0-100_0.5-2C_a.pkl: 290 curves, C0=2.7182Ah, c_eol=153, charge V=[3.377,4.183] (0.0s)
+[   65.1s] INFO    (44/61) SNL_18650_NMC_15C_0-100_0.5-2C_b.pkl: 290 curves, C0=2.6700Ah, c_eol=143, charge V=[3.380,4.183] (0.0s)
+[   65.1s] INFO    (45/61) SNL_18650_NMC_25C_0-100_0.5-0.5C_b.pkl: 290 curves, C0=2.9804Ah, c_eol=506, discharge V=[2.040,3.998] (0.0s)
+[   65.2s] INFO    (46/61) SNL_18650_NMC_25C_0-100_0.5-1C_a.pkl: 290 curves, C0=2.8390Ah, c_eol=459, charge V=[3.272,4.181] (0.0s)
+[   65.2s] INFO    (47/61) SNL_18650_NMC_25C_0-100_0.5-1C_b.pkl: 290 curves, C0=2.7680Ah, c_eol=471, charge V=[3.251,4.181] (0.0s)
+[   65.2s] INFO    (48/61) SNL_18650_NMC_25C_0-100_0.5-1C_c.pkl: 290 curves, C0=2.9136Ah, c_eol=334, charge V=[3.311,4.182] (0.0s)
+[   65.2s] INFO    (49/61) SNL_18650_NMC_25C_0-100_0.5-1C_d.pkl: 290 curves, C0=2.8190Ah, c_eol=392, charge V=[3.302,4.182] (0.0s)
+[   65.3s] INFO    (50/61) SNL_18650_NMC_25C_0-100_0.5-2C_a.pkl: 290 curves, C0=2.9116Ah, c_eol=334, charge V=[3.351,4.183] (0.0s)
+[   65.3s] INFO    (51/61) SNL_18650_NMC_25C_0-100_0.5-2C_b.pkl: 290 curves, C0=2.8010Ah, c_eol=492, charge V=[3.313,4.182] (0.1s)
+[   65.3s] INFO    (52/61) SNL_18650_NMC_25C_0-100_0.5-3C_a.pkl: 290 curves, C0=2.8750Ah, c_eol=422, charge V=[3.551,4.187] (0.0s)
+[   65.4s] INFO    (53/61) SNL_18650_NMC_25C_0-100_0.5-3C_b.pkl: 290 curves, C0=2.7910Ah, c_eol=430, charge V=[3.530,4.186] (0.0s)
+[   65.4s] INFO    (54/61) SNL_18650_NMC_25C_0-100_0.5-3C_c.pkl: 290 curves, C0=2.7910Ah, c_eol=605, charge V=[3.491,4.186] (0.0s)
+[   65.4s] INFO    (55/61) SNL_18650_NMC_25C_0-100_0.5-3C_d.pkl: 290 curves, C0=2.7920Ah, c_eol=604, charge V=[3.244,4.180] (0.0s)
+[   65.4s] INFO    (56/61) SNL_18650_NMC_35C_0-100_0.5-1C_a.pkl: 21 curves, C0=2.8210Ah, c_eol=500, discharge V=[2.037,3.865] (0.0s)
+[   65.5s] INFO    (57/61) SNL_18650_NMC_35C_0-100_0.5-1C_b.pkl: 19 curves, C0=2.8220Ah, c_eol=523, discharge V=[2.037,3.851] (0.0s)
+[   65.5s] INFO    (58/61) SNL_18650_NMC_35C_0-100_0.5-1C_c.pkl: 14 curves, C0=2.8060Ah, c_eol=640, discharge V=[2.037,3.883] (0.0s)
+[   65.5s] INFO    (59/61) SNL_18650_NMC_35C_0-100_0.5-1C_d.pkl: 15 curves, C0=2.8080Ah, c_eol=600, discharge V=[2.036,3.828] (0.0s)
+[   65.6s] INFO    (60/61) SNL_18650_NMC_35C_0-100_0.5-2C_a.pkl: 290 curves, C0=2.8940Ah, c_eol=639, charge V=[3.312,4.182] (0.0s)
+[   65.6s] INFO    (61/61) SNL_18650_NMC_35C_0-100_0.5-2C_b.pkl: 290 curves, C0=2.7770Ah, c_eol=572, charge V=[3.283,4.181] (0.0s)
+[   65.6s] INFO  [SNL] cached 61 cells
+[   65.6s] INFO  [RWTH] 48 cell files, segment profile = charge
+[   65.8s] WARNING     skip RWTH_002.pkl: no usable CC segment (mode=charge)
+[   66.0s] INFO    (2/48) RWTH_003.pkl: 203 curves, C0=1.0614Ah, c_eol=1, charge V=[3.696,3.893] (0.2s)
+[   66.2s] INFO    (3/48) RWTH_004.pkl: 215 curves, C0=1.0569Ah, c_eol=1, charge V=[3.693,3.893] (0.2s)
+[   66.5s] INFO    (4/48) RWTH_005.pkl: 195 curves, C0=1.0720Ah, c_eol=1, charge V=[3.692,3.893] (0.2s)
+[   66.7s] WARNING     skip RWTH_006.pkl: no usable CC segment (mode=charge)
+[   66.9s] INFO    (6/48) RWTH_007.pkl: 210 curves, C0=1.0700Ah, c_eol=1, charge V=[3.691,3.893] (0.2s)
+[   67.1s] WARNING     skip RWTH_008.pkl: no usable CC segment (mode=charge)
+[   67.4s] WARNING     skip RWTH_009.pkl: no usable CC segment (mode=charge)
+[   67.6s] WARNING     skip RWTH_010.pkl: no usable CC segment (mode=charge)
+[   67.9s] INFO    (10/48) RWTH_011.pkl: 184 curves, C0=1.0626Ah, c_eol=1, charge V=[3.695,3.893] (0.2s)
+[   68.1s] WARNING     skip RWTH_012.pkl: no usable CC segment (mode=charge)
+[   68.3s] WARNING     skip RWTH_013.pkl: no usable CC segment (mode=charge)
+[   68.5s] WARNING     skip RWTH_014.pkl: no usable CC segment (mode=charge)
+[   68.7s] WARNING     skip RWTH_015.pkl: no usable CC segment (mode=charge)
+[   69.0s] INFO    (15/48) RWTH_016.pkl: 245 curves, C0=1.0750Ah, c_eol=1, charge V=[3.695,3.893] (0.2s)
+[   69.2s] INFO    (16/48) RWTH_017.pkl: 241 curves, C0=1.0766Ah, c_eol=1, charge V=[3.694,3.893] (0.2s)
+[   69.4s] INFO    (17/48) RWTH_018.pkl: 222 curves, C0=1.0672Ah, c_eol=1, charge V=[3.696,3.893] (0.2s)
+[   69.7s] INFO    (18/48) RWTH_019.pkl: 259 curves, C0=1.0742Ah, c_eol=1, charge V=[3.694,3.893] (0.2s)
+[   69.9s] INFO    (19/48) RWTH_020.pkl: 243 curves, C0=1.0676Ah, c_eol=1, charge V=[3.694,3.893] (0.2s)
+[   70.1s] INFO    (20/48) RWTH_021.pkl: 266 curves, C0=1.0761Ah, c_eol=1, charge V=[3.694,3.893] (0.2s)
+[   70.3s] WARNING     skip RWTH_022.pkl: no usable CC segment (mode=charge)
+[   70.5s] INFO    (22/48) RWTH_023.pkl: 215 curves, C0=1.0691Ah, c_eol=1, charge V=[3.696,3.893] (0.2s)
+[   70.8s] INFO    (23/48) RWTH_024.pkl: 170 curves, C0=1.0634Ah, c_eol=1, charge V=[3.694,3.893] (0.2s)
+[   71.0s] WARNING     skip RWTH_025.pkl: no usable CC segment (mode=charge)
+[   71.2s] WARNING     skip RWTH_026.pkl: no usable CC segment (mode=charge)
+[   71.4s] WARNING     skip RWTH_027.pkl: no usable CC segment (mode=charge)
+[   71.7s] INFO    (27/48) RWTH_028.pkl: 250 curves, C0=1.0620Ah, c_eol=1, charge V=[3.698,3.893] (0.2s)
+[   71.8s] WARNING     skip RWTH_029.pkl: no usable CC segment (mode=charge)
+[   72.0s] WARNING     skip RWTH_030.pkl: no usable CC segment (mode=charge)
+[   72.2s] INFO    (30/48) RWTH_031.pkl: 176 curves, C0=1.0728Ah, c_eol=1, charge V=[3.706,3.894] (0.2s)
+[   72.4s] INFO    (31/48) RWTH_032.pkl: 153 curves, C0=1.0735Ah, c_eol=1, charge V=[3.692,3.893] (0.2s)
+[   72.6s] WARNING     skip RWTH_033.pkl: no usable CC segment (mode=charge)
+[   72.9s] INFO    (33/48) RWTH_034.pkl: 271 curves, C0=1.0623Ah, c_eol=1, charge V=[3.694,3.893] (0.2s)
+[   73.1s] INFO    (34/48) RWTH_035.pkl: 249 curves, C0=1.0693Ah, c_eol=1, charge V=[3.694,3.893] (0.2s)
+[   73.3s] INFO    (35/48) RWTH_036.pkl: 143 curves, C0=1.0677Ah, c_eol=1, charge V=[3.695,3.893] (0.2s)
+[   73.4s] WARNING     skip RWTH_037.pkl: no usable CC segment (mode=charge)
+[   73.7s] INFO    (37/48) RWTH_038.pkl: 266 curves, C0=1.0689Ah, c_eol=1, charge V=[3.692,3.893] (0.2s)
+[   73.8s] WARNING     skip RWTH_039.pkl: no usable CC segment (mode=charge)
+[   74.1s] INFO    (39/48) RWTH_040.pkl: 271 curves, C0=1.0693Ah, c_eol=1, charge V=[3.691,3.893] (0.2s)
+[   74.3s] INFO    (40/48) RWTH_041.pkl: 274 curves, C0=1.0812Ah, c_eol=1, charge V=[3.690,3.893] (0.2s)
+[   74.4s] INFO    (41/48) RWTH_042.pkl: 286 curves, C0=1.0731Ah, c_eol=1, charge V=[3.695,3.893] (0.2s)
+[   74.6s] INFO    (42/48) RWTH_043.pkl: 285 curves, C0=1.0773Ah, c_eol=1, charge V=[3.692,3.893] (0.2s)
+[   74.8s] INFO    (43/48) RWTH_044.pkl: 288 curves, C0=1.0808Ah, c_eol=1, charge V=[3.691,3.893] (0.2s)
+[   75.0s] INFO    (44/48) RWTH_045.pkl: 259 curves, C0=1.0818Ah, c_eol=1, charge V=[3.695,3.893] (0.2s)
+[   75.2s] WARNING     skip RWTH_046.pkl: no usable CC segment (mode=charge)
+[   75.4s] WARNING     skip RWTH_047.pkl: no usable CC segment (mode=charge)
+[   75.6s] INFO    (47/48) RWTH_048.pkl: 180 curves, C0=1.0704Ah, c_eol=1, charge V=[3.694,3.893] (0.2s)
+[   75.8s] INFO    (48/48) RWTH_049.pkl: 165 curves, C0=1.0785Ah, c_eol=1, charge V=[3.700,3.893] (0.2s)
+[   75.8s] INFO  [RWTH] cached 28 cells
+[   75.8s] INFO  [Stanford] 41 cell files, segment profile = charge
+[   76.2s] INFO    (1/41) Stanford_Nova_Regular_191.pkl: 290 curves, C0=0.2439Ah, c_eol=665, charge V=[3.577,4.383] (0.4s)
+[   76.6s] INFO    (2/41) Stanford_Nova_Regular_192.pkl: 290 curves, C0=0.2441Ah, c_eol=621, charge V=[3.523,4.380] (0.3s)
+[   76.9s] INFO    (3/41) Stanford_Nova_Regular_193.pkl: 290 curves, C0=0.2460Ah, c_eol=612, charge V=[3.535,4.381] (0.3s)
+[   77.3s] INFO    (4/41) Stanford_Nova_Regular_194.pkl: 290 curves, C0=0.2479Ah, c_eol=621, charge V=[3.541,4.381] (0.4s)
+[   77.7s] INFO    (5/41) Stanford_Nova_Regular_195.pkl: 290 curves, C0=0.2458Ah, c_eol=603, charge V=[3.530,4.381] (0.4s)
+[   78.0s] INFO    (6/41) Stanford_Nova_Regular_196.pkl: 290 curves, C0=0.2434Ah, c_eol=647, charge V=[3.547,4.382] (0.3s)
+[   78.3s] INFO    (7/41) Stanford_Nova_Regular_198.pkl: 290 curves, C0=0.2451Ah, c_eol=556, charge V=[3.527,4.380] (0.3s)
+[   78.7s] INFO    (8/41) Stanford_Nova_Regular_199.pkl: 290 curves, C0=0.2460Ah, c_eol=606, charge V=[3.532,4.381] (0.4s)
+[   79.1s] INFO    (9/41) Stanford_Nova_Regular_200.pkl: 290 curves, C0=0.2444Ah, c_eol=572, charge V=[3.528,4.381] (0.4s)
+[   79.4s] INFO    (10/41) Stanford_Nova_Regular_201.pkl: 290 curves, C0=0.2453Ah, c_eol=669, charge V=[3.551,4.382] (0.4s)
+[   79.8s] INFO    (11/41) Stanford_Nova_Regular_202.pkl: 290 curves, C0=0.2455Ah, c_eol=613, charge V=[3.548,4.382] (0.4s)
+[   80.1s] INFO    (12/41) Stanford_Nova_Regular_203.pkl: 290 curves, C0=0.2490Ah, c_eol=642, charge V=[3.539,4.381] (0.3s)
+[   80.5s] INFO    (13/41) Stanford_Nova_Regular_204.pkl: 290 curves, C0=0.2449Ah, c_eol=587, charge V=[3.541,4.381] (0.3s)
+[   80.8s] INFO    (14/41) Stanford_Nova_Regular_205.pkl: 290 curves, C0=0.2510Ah, c_eol=714, charge V=[3.519,4.381] (0.3s)
+[   81.2s] INFO    (15/41) Stanford_Nova_Regular_206.pkl: 290 curves, C0=0.2452Ah, c_eol=718, charge V=[3.540,4.382] (0.4s)
+[   81.6s] INFO    (16/41) Stanford_Nova_Regular_207.pkl: 290 curves, C0=0.2461Ah, c_eol=682, charge V=[3.521,4.380] (0.4s)
+[   81.9s] INFO    (17/41) Stanford_Nova_Regular_208.pkl: 290 curves, C0=0.2461Ah, c_eol=629, charge V=[3.522,4.381] (0.3s)
+[   82.3s] INFO    (18/41) Stanford_Nova_Regular_209.pkl: 290 curves, C0=0.2476Ah, c_eol=618, charge V=[3.524,4.381] (0.3s)
+[   82.6s] INFO    (19/41) Stanford_Nova_Regular_210.pkl: 290 curves, C0=0.2418Ah, c_eol=631, charge V=[3.536,4.381] (0.3s)
+[   82.9s] INFO    (20/41) Stanford_Nova_Regular_211.pkl: 290 curves, C0=0.2479Ah, c_eol=722, charge V=[3.527,4.381] (0.4s)
+[   83.2s] INFO    (21/41) Stanford_Nova_Regular_212.pkl: 290 curves, C0=0.2443Ah, c_eol=672, charge V=[3.535,4.381] (0.3s)
+[   83.6s] INFO    (22/41) Stanford_Nova_Regular_213.pkl: 290 curves, C0=0.2458Ah, c_eol=613, charge V=[3.536,4.381] (0.4s)
+[   84.0s] INFO    (23/41) Stanford_Nova_Regular_214.pkl: 290 curves, C0=0.2455Ah, c_eol=885, charge V=[3.470,4.380] (0.3s)
+[   84.4s] INFO    (24/41) Stanford_Nova_Regular_215.pkl: 290 curves, C0=0.2449Ah, c_eol=749, charge V=[3.479,4.380] (0.4s)
+[   84.7s] INFO    (25/41) Stanford_Nova_Regular_216.pkl: 290 curves, C0=0.2436Ah, c_eol=805, charge V=[3.477,4.379] (0.4s)
+[   85.1s] INFO    (26/41) Stanford_Nova_Regular_217.pkl: 290 curves, C0=0.2455Ah, c_eol=640, charge V=[3.526,4.381] (0.4s)
+[   85.4s] INFO    (27/41) Stanford_Nova_Regular_219.pkl: 290 curves, C0=0.2453Ah, c_eol=597, charge V=[3.532,4.381] (0.3s)
+[   85.8s] INFO    (28/41) Stanford_Nova_Regular_220.pkl: 290 curves, C0=0.2472Ah, c_eol=736, charge V=[3.548,4.381] (0.4s)
+[   86.1s] INFO    (29/41) Stanford_Nova_Regular_221.pkl: 290 curves, C0=0.2463Ah, c_eol=596, charge V=[3.538,4.381] (0.3s)
+[   86.4s] INFO    (30/41) Stanford_Nova_Regular_222.pkl: 290 curves, C0=0.2466Ah, c_eol=646, charge V=[3.549,4.381] (0.3s)
+[   86.8s] INFO    (31/41) Stanford_Nova_Regular_223.pkl: 290 curves, C0=0.2461Ah, c_eol=886, charge V=[3.541,4.381] (0.4s)
+[   87.3s] INFO    (32/41) Stanford_Nova_Regular_224.pkl: 290 curves, C0=0.2427Ah, c_eol=1004, charge V=[3.569,4.383] (0.5s)
+[   87.6s] INFO    (33/41) Stanford_Nova_Regular_225.pkl: 290 curves, C0=0.2438Ah, c_eol=859, charge V=[3.530,4.381] (0.4s)
+[   88.1s] INFO    (34/41) Stanford_Nova_Regular_226.pkl: 290 curves, C0=0.2467Ah, c_eol=824, charge V=[3.513,4.380] (0.4s)
+[   88.5s] INFO    (35/41) Stanford_Nova_Regular_227.pkl: 290 curves, C0=0.2463Ah, c_eol=909, charge V=[3.519,4.381] (0.4s)
+[   88.8s] INFO    (36/41) Stanford_Nova_Regular_228.pkl: 290 curves, C0=0.2454Ah, c_eol=917, charge V=[3.521,4.381] (0.4s)
+[   89.2s] INFO    (37/41) Stanford_Nova_Regular_229.pkl: 290 curves, C0=0.2458Ah, c_eol=834, charge V=[3.520,4.381] (0.4s)
+[   89.6s] INFO    (38/41) Stanford_Nova_Regular_230.pkl: 290 curves, C0=0.2460Ah, c_eol=881, charge V=[3.513,4.380] (0.4s)
+[   90.0s] INFO    (39/41) Stanford_Nova_Regular_Ref_100.pkl: 290 curves, C0=0.2439Ah, c_eol=668, charge V=[3.552,4.381] (0.3s)
+[   90.3s] INFO    (40/41) Stanford_Nova_Regular_Ref_101.pkl: 290 curves, C0=0.2414Ah, c_eol=665, charge V=[3.566,4.382] (0.3s)
+[   90.6s] INFO    (41/41) Stanford_Nova_Regular_Ref_102.pkl: 290 curves, C0=0.2428Ah, c_eol=473, charge V=[3.558,4.381] (0.3s)
+[   90.6s] INFO  [Stanford] cached 41 cells
+[   90.6s] INFO  -- done (90.6s): PREPARE — parse pkl files and cache features
+[   90.6s] INFO  ========================================================================
+[   90.6s] INFO  [2/4] DIAGNOSE — rank, slope consistency, label summary
+[   90.6s] INFO  ========================================================================
+[   90.8s] INFO  loaded 495 cached cells
+[   90.8s] INFO    CALB_labels.json: 27 labels (hint=CALB) e.g. [('CALB_0_B182', 108.0), ('CALB_0_B183', 105.0)]
+[   90.8s] INFO    CALCE_labels.json: 13 labels (hint=CALCE) e.g. [('CALCE_CS2_38', 568.0), ('CALCE_CX2_36', 519.0)]
+[   90.8s] INFO    HNEI_labels.json: 14 labels (hint=HNEI) e.g. [('HNEI_18650_NMC_LCO_25C_0_100_0.5_1.5C_O', 266.0), ('HNEI_18650_NMC_LCO_25C_0_100_0.5_1.5C_L', 228.0)]
+[   90.8s] INFO    HUST_labels.json: 77 labels (hint=HUST) e.g. [('HUST_10_1', 1760.0), ('HUST_1_6', 1179.0)]
+[   90.8s] INFO    ISU-ILCC_labels.json: 240 labels (hint=ISU_ILCC) e.g. [('ISU_ILCC_G41C2', 735.0), ('ISU_ILCC_G33C1', 1667.0)]
+[   90.8s] INFO    MATR_labels.json: 169 labels (hint=MATR) e.g. [('MATR_B4C36', 599.0), ('MATR_B2C46', 428.0)]
+[   90.8s] INFO    MICH_EXP_labels.json: 12 labels (hint=MICH_EXP) e.g. [('MICH_01R_POUCH_NMC_25C_0_100_0.2_0.2C', 269.0), ('MICH_02C_POUCH_NMC__5C_0_100_0.2_0.2C', 204.0)]
+[   90.8s] INFO    MICH_labels.json: 40 labels (hint=MICH) e.g. [('MICH_BLFORM10_POUCH_NMC_25C_0_100_1_1C_J', 323.0), ('MICH_BLFORM11_POUCH_NMC_25C_0_100_1_1C_A', 314.0)]
+[   90.8s] INFO    NA-ion_labels.json: 34 labels (hint=NA_ION) e.g. [('NA_ION_270040_1_2_63', 177.0), ('NA_ION_270040_1_3_62', 268.0)]
+[   90.8s] INFO    RWTH_labels.json: 48 labels (hint=RWTH) e.g. [('RWTH_021', 614.0), ('RWTH_032', 667.0)]
+[   90.8s] INFO    SDU_labels.json: 70 labels (hint=SDU) e.g. [('SDU_BATTERY_1', 820.0), ('SDU_BATTERY_10', 399.0)]
+[   90.8s] INFO    SNL_labels.json: 52 labels (hint=SNL) e.g. [('SNL_18650_NCA_15C_0_100_0.5_1C_A', 331.0), ('SNL_18650_NCA_25C_20_80_0.5_0.5C_D', 840.0)]
+[   90.8s] INFO    Stanford_2_labels.json: 181 labels (hint=STANFORD_2) e.g. [('STANFORD_NOVA_REGULAR_100', 470.0), ('STANFORD_NOVA_REGULAR_101', 533.0)]
+[   90.8s] INFO    Stanford_labels.json: 41 labels (hint=STANFORD) e.g. [('STANFORD_NOVA_REGULAR_225', 859.0), ('STANFORD_NOVA_REGULAR_191', 665.0)]
+[   90.8s] INFO    Tongji_labels.json: 108 labels (hint=TONGJI) e.g. [('TONGJI1_CY25_05_1_#19', 127.0), ('TONGJI2_CY35_05_1_#4', 460.0)]
+[   90.8s] INFO    UL-PUR_labels.json: 2 labels (hint=UL_PUR) e.g. [('UL_PUR_N10_NA7_18650_NCA_23C_0_100_0.5_0.5C_G', 159.0), ('UL_PUR_N15_NA10_18650_NCA_23C_0_100_0.5_0.5C_J', 259.0)]
+[   90.8s] INFO    XJTU_labels.json: 23 labels (hint=XJTU) e.g. [('XJTU_2C_BATTERY_1', 389.0), ('XJTU_2C_BATTERY_2', 405.0)]
+[   90.8s] INFO    ZN-coin_labels.json: 121 labels (hint=ZN_COIN) e.g. [('ZN_COIN_202_20231213213655_03_3', 359.0), ('ZN_COIN_202_20231213213655_03_4', 223.0)]
+[   90.8s] INFO    total_MICH_labels.json: 52 labels (hint=TOTAL_MICH) e.g. [('MICH_BLFORM9_POUCH_NMC_45C_0_100_1_1C_I', 191.0), ('MICH_MCFORM21_POUCH_NMC_25C_0_100_1_1C_A', 362.0)]
+[   90.8s] INFO  official life labels: 1324 entries across 19 files
+[   90.8s] INFO  label source: mixed (367/495 cells matched an official label)
+[   90.8s] WARNING 128 cells fell back to a DERIVED life. Stored records can stop before the EOL threshold is crossed, in which case the derived value is missing or wrong (HUST_1-1: official 1542, record ends at cycle 1504). Check that the cell ids in the label json match the pkl file names.
+[   90.8s] INFO    official vs derived: median |rel diff| = 0.000%, max = 99.898%
+[   90.8s] WARNING dropped 49 cells (no life or life < 150): [('MATR_b2c1', 147), ('SNL_18650_LFP_15C_0-100_0.5-2C_b', None), ('SNL_18650_LFP_25C_0-100_0.5-0.5C_a', None), ('SNL_18650_LFP_25C_0-100_0.5-1C_a', None), ('SNL_18650_LFP_25C_0-100_0.5-1C_c', None), ('SNL_18650_LFP_25C_0-100_0.5-1C_d', None), ('SNL_18650_LFP_25C_0-100_0.5-2C_a', None), ('SNL_18650_LFP_25C_0-100_0.5-2C_b', None)]...
+[   90.8s] INFO  [HUST] 77 cells, branch=charge, common V=[3.447,3.590]
+[   90.8s] INFO  [MATR] 168 cells, branch=discharge, common V=[2.553,3.209]
+[   90.8s] INFO  [RWTH] 28 cells, branch=charge, common V=[3.706,3.893]
+[   90.8s] INFO  [SNL] 50 cells, branch=charge/discharge, common V=[3.649,3.248]
+[   90.8s] WARNING [SNL] cells disagree on the branch (['charge', 'discharge']); pin it in DATASET_PROFILES or the curves are not comparable
+[   90.8s] INFO  [Stanford] 41 cells, branch=charge, common V=[3.577,4.379]
+[   90.8s] INFO  [Tongji] 82 cells, branch=discharge, common V=[2.678,3.641]
+[   90.9s] INFO  regridded 446 cells onto the common grids (0.0s)
+[   90.9s] INFO  LEAK CHECK  corr(L_i, log c_eol) = -0.0022 (must be ~0; |r|>0.2 invalidates the protocol)
+[   90.9s] INFO  
+[   90.9s] INFO  [A] effective rank of the difference curves (per cell)
+[   90.9s] INFO    cell       cycles  PC1     cum2    cum3  
+[   90.9s] INFO    -----------------------------------------
+[   90.9s] INFO    HUST_1-1   90      0.9834  0.9983  0.9987
+[   90.9s] INFO    HUST_1-2   90      0.9400  0.9968  0.9976
+[   90.9s] INFO    HUST_1-3   90      0.9052  0.9972  0.9987
+[   90.9s] INFO    HUST_1-4   90      0.9769  0.9991  0.9995
+[   90.9s] INFO    HUST_1-5   90      0.9874  0.9995  0.9996
+[   90.9s] INFO    HUST_1-6   90      0.9949  0.9990  0.9993
+[   90.9s] INFO    HUST_1-7   90      0.9897  0.9977  0.9986
+[   90.9s] INFO    HUST_1-8   90      0.9829  0.9975  0.9985
+[   90.9s] INFO    HUST_10-1  90      0.9901  0.9983  0.9987
+[   90.9s] INFO    HUST_10-2  90      0.9542  0.9974  0.9988
+[   90.9s] INFO    HUST_10-3  90      0.9804  0.9969  0.9983
+[   90.9s] INFO    HUST_10-4  90      0.9741  0.9987  0.9994
+[   90.9s] INFO  
+[   90.9s] INFO  [B] slope consistency across window lengths (divergence => length-dependent bias, which a linear summary cannot absorb)
+[   90.9s] INFO    cell       L=20      L=50      L=100     L=200   
+[   90.9s] INFO    -------------------------------------------------
+[   90.9s] INFO    HUST_1-1   2.82e-01  7.94e-02  2.88e-02  1.35e-02
+[   90.9s] INFO    HUST_1-2   3.54e-01  9.73e-02  3.31e-02  1.30e-02
+[   90.9s] INFO    HUST_1-3   3.65e-01  9.43e-02  3.33e-02  1.32e-02
+[   90.9s] INFO    HUST_1-4   3.69e-01  9.79e-02  3.39e-02  1.24e-02
+[   90.9s] INFO    HUST_1-5   3.96e-01  1.00e-01  3.54e-02  1.30e-02
+[   90.9s] INFO    HUST_1-6   2.99e-01  8.71e-02  3.62e-02  1.62e-02
+[   90.9s] INFO    HUST_1-7   3.07e-01  8.19e-02  3.25e-02  1.55e-02
+[   90.9s] INFO    HUST_1-8   3.73e-01  8.12e-02  2.91e-02  1.30e-02
+[   90.9s] INFO    HUST_10-1  3.22e-01  8.96e-02  3.57e-02  1.50e-02
+[   90.9s] INFO    HUST_10-2  4.98e-01  9.89e-02  3.53e-02  1.28e-02
+[   90.9s] INFO    HUST_10-3  2.10e-01  9.55e-02  3.85e-02  1.57e-02
+[   90.9s] INFO    HUST_10-4  5.49e-01  1.21e-01  4.01e-02  1.36e-02
+[   90.9s] INFO  
+[   90.9s] INFO  [C] label and protocol summary
+[   90.9s] INFO    dataset   cells  life min  med   max   mean L
+[   90.9s] INFO    ---------------------------------------------
+[   90.9s] INFO    HUST      77     1164      1911  2768  61.1  
+[   90.9s] INFO    MATR      168    299       765   2237  62.5  
+[   90.9s] INFO    RWTH      28     510       660   761   57.5  
+[   90.9s] INFO    SNL       50     152       480   3842  60.1  
+[   90.9s] INFO    Stanford  41     473       665   1004  66.4  
+[   90.9s] INFO    Tongji    82     150       394   580   62.2  
+[   90.9s] INFO  -- done (0.3s): DIAGNOSE — rank, slope consistency, label summary
+[   90.9s] INFO  ========================================================================
+[   90.9s] INFO  [3/4] TRAIN — leave-one-dataset-out
+[   90.9s] INFO  ========================================================================
+[   91.2s] INFO  loaded 495 cached cells
+[   91.2s] INFO    CALB_labels.json: 27 labels (hint=CALB) e.g. [('CALB_0_B182', 108.0), ('CALB_0_B183', 105.0)]
+[   91.2s] INFO    CALCE_labels.json: 13 labels (hint=CALCE) e.g. [('CALCE_CS2_38', 568.0), ('CALCE_CX2_36', 519.0)]
+[   91.2s] INFO    HNEI_labels.json: 14 labels (hint=HNEI) e.g. [('HNEI_18650_NMC_LCO_25C_0_100_0.5_1.5C_O', 266.0), ('HNEI_18650_NMC_LCO_25C_0_100_0.5_1.5C_L', 228.0)]
+[   91.2s] INFO    HUST_labels.json: 77 labels (hint=HUST) e.g. [('HUST_10_1', 1760.0), ('HUST_1_6', 1179.0)]
+[   91.2s] INFO    ISU-ILCC_labels.json: 240 labels (hint=ISU_ILCC) e.g. [('ISU_ILCC_G41C2', 735.0), ('ISU_ILCC_G33C1', 1667.0)]
+[   91.2s] INFO    MATR_labels.json: 169 labels (hint=MATR) e.g. [('MATR_B4C36', 599.0), ('MATR_B2C46', 428.0)]
+[   91.2s] INFO    MICH_EXP_labels.json: 12 labels (hint=MICH_EXP) e.g. [('MICH_01R_POUCH_NMC_25C_0_100_0.2_0.2C', 269.0), ('MICH_02C_POUCH_NMC__5C_0_100_0.2_0.2C', 204.0)]
+[   91.2s] INFO    MICH_labels.json: 40 labels (hint=MICH) e.g. [('MICH_BLFORM10_POUCH_NMC_25C_0_100_1_1C_J', 323.0), ('MICH_BLFORM11_POUCH_NMC_25C_0_100_1_1C_A', 314.0)]
+[   91.2s] INFO    NA-ion_labels.json: 34 labels (hint=NA_ION) e.g. [('NA_ION_270040_1_2_63', 177.0), ('NA_ION_270040_1_3_62', 268.0)]
+[   91.2s] INFO    RWTH_labels.json: 48 labels (hint=RWTH) e.g. [('RWTH_021', 614.0), ('RWTH_032', 667.0)]
+[   91.2s] INFO    SDU_labels.json: 70 labels (hint=SDU) e.g. [('SDU_BATTERY_1', 820.0), ('SDU_BATTERY_10', 399.0)]
+[   91.2s] INFO    SNL_labels.json: 52 labels (hint=SNL) e.g. [('SNL_18650_NCA_15C_0_100_0.5_1C_A', 331.0), ('SNL_18650_NCA_25C_20_80_0.5_0.5C_D', 840.0)]
+[   91.2s] INFO    Stanford_2_labels.json: 181 labels (hint=STANFORD_2) e.g. [('STANFORD_NOVA_REGULAR_100', 470.0), ('STANFORD_NOVA_REGULAR_101', 533.0)]
+[   91.2s] INFO    Stanford_labels.json: 41 labels (hint=STANFORD) e.g. [('STANFORD_NOVA_REGULAR_225', 859.0), ('STANFORD_NOVA_REGULAR_191', 665.0)]
+[   91.2s] INFO    Tongji_labels.json: 108 labels (hint=TONGJI) e.g. [('TONGJI1_CY25_05_1_#19', 127.0), ('TONGJI2_CY35_05_1_#4', 460.0)]
+[   91.2s] INFO    UL-PUR_labels.json: 2 labels (hint=UL_PUR) e.g. [('UL_PUR_N10_NA7_18650_NCA_23C_0_100_0.5_0.5C_G', 159.0), ('UL_PUR_N15_NA10_18650_NCA_23C_0_100_0.5_0.5C_J', 259.0)]
+[   91.2s] INFO    XJTU_labels.json: 23 labels (hint=XJTU) e.g. [('XJTU_2C_BATTERY_1', 389.0), ('XJTU_2C_BATTERY_2', 405.0)]
+[   91.2s] INFO    ZN-coin_labels.json: 121 labels (hint=ZN_COIN) e.g. [('ZN_COIN_202_20231213213655_03_3', 359.0), ('ZN_COIN_202_20231213213655_03_4', 223.0)]
+[   91.2s] INFO    total_MICH_labels.json: 52 labels (hint=TOTAL_MICH) e.g. [('MICH_BLFORM9_POUCH_NMC_45C_0_100_1_1C_I', 191.0), ('MICH_MCFORM21_POUCH_NMC_25C_0_100_1_1C_A', 362.0)]
+[   91.2s] INFO  official life labels: 1324 entries across 19 files
+[   91.2s] INFO  label source: mixed (367/495 cells matched an official label)
+[   91.2s] WARNING 128 cells fell back to a DERIVED life. Stored records can stop before the EOL threshold is crossed, in which case the derived value is missing or wrong (HUST_1-1: official 1542, record ends at cycle 1504). Check that the cell ids in the label json match the pkl file names.
+[   91.2s] INFO    official vs derived: median |rel diff| = 0.000%, max = 99.898%
+[   91.2s] WARNING dropped 49 cells (no life or life < 150): [('MATR_b2c1', 147), ('SNL_18650_LFP_15C_0-100_0.5-2C_b', None), ('SNL_18650_LFP_25C_0-100_0.5-0.5C_a', None), ('SNL_18650_LFP_25C_0-100_0.5-1C_a', None), ('SNL_18650_LFP_25C_0-100_0.5-1C_c', None), ('SNL_18650_LFP_25C_0-100_0.5-1C_d', None), ('SNL_18650_LFP_25C_0-100_0.5-2C_a', None), ('SNL_18650_LFP_25C_0-100_0.5-2C_b', None)]...
+[   91.2s] INFO  [HUST] 77 cells, branch=charge, common V=[3.447,3.590]
+[   91.2s] INFO  [MATR] 168 cells, branch=discharge, common V=[2.553,3.209]
+[   91.2s] INFO  [RWTH] 28 cells, branch=charge, common V=[3.706,3.893]
+[   91.2s] INFO  [SNL] 50 cells, branch=charge/discharge, common V=[3.649,3.248]
+[   91.2s] WARNING [SNL] cells disagree on the branch (['charge', 'discharge']); pin it in DATASET_PROFILES or the curves are not comparable
+[   91.2s] INFO  [Stanford] 41 cells, branch=charge, common V=[3.577,4.379]
+[   91.2s] INFO  [Tongji] 82 cells, branch=discharge, common V=[2.678,3.641]
+[   91.2s] INFO  regridded 446 cells onto the common grids (0.0s)
+[   91.2s] INFO  LEAK CHECK  corr(L_i, log c_eol) = -0.0022 (must be ~0; |r|>0.2 invalidates the protocol)
+[   91.2s] INFO  leave-one-dataset-out over 6 folds: ['HUST', 'MATR', 'RWTH', 'SNL', 'Stanford', 'Tongji']
+[   91.2s] INFO  ========================================================================
+[   91.2s] INFO  [train] FOLD 1/6 — target = HUST
+[   91.2s] INFO  ========================================================================
+[   91.2s] INFO  fold=HUST seed=0 | source 314 train / 55 val, target 77 | label mu=6.371 sd=0.541
+[   91.2s] INFO    source datasets: ['MATR', 'RWTH', 'SNL', 'Stanford', 'Tongji']
+[   91.3s] INFO    params: {'encoder': 4656, 'attn': 816, 'head': 4977, 'ssl': 2176, 'total': 12625}
+[   92.0s] INFO    step     1/1500  loss=0.6871  reg=0.6871  lr=1.00e-03
+[   92.1s] INFO    step    50/1500  loss=0.8467  reg=0.8467  lr=9.97e-04
+[   92.2s] INFO    step   100/1500  loss=1.1157  reg=1.1157  lr=9.89e-04
+[   92.2s] INFO    step   100  val_mse(log-life)=0.3491  <- best
+[   92.3s] INFO    step   150/1500  loss=0.5889  reg=0.5889  lr=9.76e-04
+[   92.4s] INFO    step   200/1500  loss=0.4040  reg=0.4040  lr=9.57e-04
+[   92.4s] INFO    step   200  val_mse(log-life)=0.3537
+[   92.5s] INFO    step   250/1500  loss=0.9268  reg=0.9268  lr=9.33e-04
+[   92.6s] INFO    step   300/1500  loss=0.7743  reg=0.7743  lr=9.05e-04
+[   92.6s] INFO    step   300  val_mse(log-life)=0.5633
+[   92.7s] INFO    step   350/1500  loss=0.6082  reg=0.6082  lr=8.72e-04
+[   92.8s] INFO    step   400/1500  loss=0.7959  reg=0.7959  lr=8.35e-04
+[   92.8s] INFO    step   400  val_mse(log-life)=0.3396  <- best
+[   92.9s] INFO    step   450/1500  loss=0.4194  reg=0.4194  lr=7.94e-04
+[   93.0s] INFO    step   500/1500  loss=0.9013  reg=0.9013  lr=7.50e-04
+[   93.0s] INFO    step   500  val_mse(log-life)=0.2939  <- best
+[   93.0s] INFO    step   550/1500  loss=0.2201  reg=0.2201  lr=7.03e-04
+[   93.1s] INFO    step   600/1500  loss=0.6702  reg=0.6702  lr=6.55e-04
+[   93.1s] INFO    step   600  val_mse(log-life)=0.2916  <- best
+[   93.2s] INFO    step   650/1500  loss=0.4241  reg=0.4241  lr=6.04e-04
+[   93.3s] INFO    step   700/1500  loss=0.9671  reg=0.9671  lr=5.52e-04
+[   93.3s] INFO    step   700  val_mse(log-life)=0.3454
+[   93.4s] INFO    step   750/1500  loss=0.2072  reg=0.2072  lr=5.00e-04
+[   93.5s] INFO    step   800/1500  loss=0.6038  reg=0.6038  lr=4.48e-04
+[   93.5s] INFO    step   800  val_mse(log-life)=0.3967
+[   93.6s] INFO    step   850/1500  loss=0.8086  reg=0.8086  lr=3.96e-04
+[   93.7s] INFO    step   900/1500  loss=0.4391  reg=0.4391  lr=3.45e-04
+[   93.7s] INFO    step   900  val_mse(log-life)=0.6510
+[   93.8s] INFO    step   950/1500  loss=0.6579  reg=0.6579  lr=2.97e-04
+[   93.9s] INFO    step  1000/1500  loss=0.7636  reg=0.7636  lr=2.50e-04
+[   93.9s] INFO    step  1000  val_mse(log-life)=1.0994
+[   93.9s] INFO    early stop at step 1000 (no improvement for 400)
+[   93.9s] INFO    restored best checkpoint from step 600 (val_mse=0.2916)
+[   93.9s] INFO    saved checkpoint -> runs/20260726_034229/fold_HUST/seed_0/checkpoint.pt
+[   93.9s] INFO  -- done (2.7s): FOLD 1/6 — target = HUST
+[   93.9s] INFO  -- done (3.0s): TRAIN — leave-one-dataset-out
