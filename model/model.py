@@ -42,7 +42,7 @@ for i in pkl_files:
     
     plt.xlabel("time_in_s")
     plt.ylabel("current_in_A")
-    plt.savefig(f"{PLOT_DIR}/plot.png", dpi=300, bbox_inches="tight")
+    # plt.savefig(f"{PLOT_DIR}/plot.png", dpi=300, bbox_inches="tight")
     '''
     cycle_number                    int
     current_in_A                    list 
