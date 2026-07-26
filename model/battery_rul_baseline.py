@@ -1,0 +1,1542 @@
+#!/usr/bin/env python
+"""
+BatteryLife multi-source RUL baseline
+=====================================
+
+Baseline:
+    Per-cycle curve -> 1D CNN -> variable-length GRU -> RUL regression
+
+Evaluation:
+    Leave-One-Dataset-Out (LODO)
+    - The target dataset is completely excluded from supervised training.
+    - Target life labels are opened only inside the evaluation stage.
+    - Every prediction uses all cycles available up to the selected observation point.
+
+Expected project structure:
+    project/
+    ├─ data/
+    │  ├─ HUST/
+    │  │  ├─ HUST_1-1.pkl
+    │  │  └─ ...
+    │  ├─ CALCE/
+    │  └─ ...
+    ├─ 1. Life lables/
+    │  ├─ HUST_labels.json
+    │  ├─ CALCE_labels.json
+    │  └─ ...
+    ├─ model/
+    └─ battery_rul_baseline.py
+
+Example:
+    python battery_rul_baseline.py --project-root . --target HUST
+
+Useful quick test:
+    python battery_rul_baseline.py --project-root . --target HUST \
+        --epochs 2 --prefixes-per-battery 3 --max-batteries-per-dataset 5
+
+Notes:
+    1. The JSON value is assumed to be the battery life/EOL cycle.
+    2. cycle_data is assumed to be a list of dictionaries.
+    3. The default input channels are:
+       current, voltage, charge capacity, discharge capacity.
+    4. temperature and internal resistance are excluded because they can be None.
+    5. Interpolated cycle tensors are cached as float16 .npy files.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import math
+import pickle
+import random
+import sys
+import time
+from dataclasses import asdict, dataclass
+from pathlib import Path
+from typing import Dict, Iterable, List, Optional, Sequence, Tuple
+
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.nn.utils.rnn import pack_padded_sequence
+from torch.utils.data import DataLoader, Dataset
+
+
+FEATURE_KEYS: Tuple[str, ...] = (
+    "current_in_A",
+    "voltage_in_V",
+    "charge_capacity_in_Ah",
+    "discharge_capacity_in_Ah",
+)
+TIME_KEY = "time_in_s"
+
+
+@dataclass(frozen=True)
+class BatteryRecord:
+    dataset: str
+    file_path: Path
+    file_name: str
+    life: int
+
+
+@dataclass(frozen=True)
+class PrefixSample:
+    record: BatteryRecord
+    prefix_length: int
+    current_cycle: int
+    rul: float
+
+
+@dataclass
+class ChannelScaler:
+    mean: np.ndarray
+    std: np.ndarray
+
+    def normalize(self, x: np.ndarray) -> np.ndarray:
+        # x: [T, C, L]
+        return (x - self.mean[None, :, None]) / self.std[None, :, None]
+
+    def to_dict(self) -> Dict[str, List[float]]:
+        return {
+            "mean": self.mean.astype(float).tolist(),
+            "std": self.std.astype(float).tolist(),
+        }
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="BatteryLife LODO baseline: 1D CNN + GRU for RUL prediction.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+
+    parser.add_argument("--project-root", type=Path, default=Path("."))
+    parser.add_argument("--data-dir", type=str, default="data")
+    parser.add_argument("--label-dir", type=str, default="1. Life lables")
+    parser.add_argument("--model-dir", type=str, default="model")
+    parser.add_argument("--cache-dir", type=str, default=".cache_battery_rul")
+    parser.add_argument("--target", type=str, required=True)
+
+    parser.add_argument("--interp-length", type=int, default=128)
+    parser.add_argument("--min-prefix-cycles", type=int, default=20)
+    parser.add_argument("--prefixes-per-battery", type=int, default=12)
+    parser.add_argument(
+        "--target-observation",
+        choices=("available", "fraction"),
+        default="available",
+        help="'available': use all stored cycles; 'fraction': use target-fraction of stored cycles.",
+    )
+    parser.add_argument("--target-fraction", type=float, default=0.20)
+    parser.add_argument(
+        "--max-sequence-cycles",
+        type=int,
+        default=0,
+        help="0 keeps every observed cycle. A positive value uniformly subsamples long sequences.",
+    )
+    parser.add_argument(
+        "--max-batteries-per-dataset",
+        type=int,
+        default=0,
+        help="Debug option. 0 uses every battery.",
+    )
+
+    parser.add_argument("--val-ratio", type=float, default=0.20)
+    parser.add_argument("--batch-size", type=int, default=2)
+    parser.add_argument("--epochs", type=int, default=30)
+    parser.add_argument("--learning-rate", type=float, default=1e-3)
+    parser.add_argument("--weight-decay", type=float, default=1e-4)
+    parser.add_argument("--grad-clip", type=float, default=5.0)
+    parser.add_argument("--patience", type=int, default=8)
+
+    parser.add_argument("--cycle-embedding-dim", type=int, default=128)
+    parser.add_argument("--gru-hidden-dim", type=int, default=128)
+    parser.add_argument("--gru-layers", type=int, default=1)
+    parser.add_argument("--dropout", type=float, default=0.20)
+
+    parser.add_argument(
+        "--scaler-cycles-per-battery",
+        type=int,
+        default=32,
+        help="Number of source cycles sampled per battery to fit normalization. 0 uses all cycles.",
+    )
+    parser.add_argument("--num-workers", type=int, default=0)
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--device", type=str, default="auto")
+    parser.add_argument("--rebuild-cache", action="store_true")
+    return parser.parse_args()
+
+
+def set_seed(seed: int) -> None:
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+
+
+def resolve_device(device_arg: str) -> torch.device:
+    if device_arg != "auto":
+        return torch.device(device_arg)
+    return torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
+def read_json(path: Path) -> Dict[str, int]:
+    try:
+        with path.open("r", encoding="utf-8") as f:
+            raw = json.load(f)
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"Failed to read label JSON: {path}\n{exc}") from exc
+
+    if not isinstance(raw, dict):
+        raise ValueError(f"Label JSON must be a dictionary: {path}")
+
+    labels: Dict[str, int] = {}
+    for key, value in raw.items():
+        try:
+            labels[str(key)] = int(value)
+        except (TypeError, ValueError) as exc:
+            raise ValueError(f"Invalid life label in {path}: {key} -> {value}") from exc
+    return labels
+
+
+def find_label_file(label_root: Path, dataset_name: str) -> Path:
+    preferred = label_root / f"{dataset_name}_labels.json"
+    if preferred.exists():
+        return preferred
+
+    candidates = [
+        p
+        for p in label_root.glob("*.json")
+        if p.stem.lower() == f"{dataset_name}_labels".lower()
+    ]
+    if len(candidates) == 1:
+        return candidates[0]
+
+    fuzzy = [
+        p
+        for p in label_root.glob("*.json")
+        if dataset_name.lower() in p.stem.lower()
+    ]
+    if len(fuzzy) == 1:
+        return fuzzy[0]
+
+    raise FileNotFoundError(
+        f"Could not uniquely find a label JSON for dataset '{dataset_name}' "
+        f"under: {label_root}"
+    )
+
+
+def discover_records(
+    data_root: Path,
+    label_root: Path,
+    max_batteries_per_dataset: int,
+    target_dataset: str,
+) -> Dict[str, List[BatteryRecord]]:
+    if not data_root.exists():
+        raise FileNotFoundError(f"Data directory does not exist: {data_root}")
+    if not label_root.exists():
+        raise FileNotFoundError(f"Label directory does not exist: {label_root}")
+
+    dataset_dirs = sorted(p for p in data_root.iterdir() if p.is_dir())
+    if not dataset_dirs:
+        raise RuntimeError(f"No dataset directories found under: {data_root}")
+
+    all_records: Dict[str, List[BatteryRecord]] = {}
+
+    for dataset_dir in dataset_dirs:
+        dataset_name = dataset_dir.name
+        pkl_files = sorted(dataset_dir.glob("*.pkl"))
+        is_target = dataset_name.lower() == target_dataset.lower()
+
+        # Strict LODO rule: target labels are not opened during discovery/training.
+        if is_target:
+            records = [
+                BatteryRecord(
+                    dataset=dataset_name,
+                    file_path=pkl_path.resolve(),
+                    file_name=pkl_path.name,
+                    life=-1,
+                )
+                for pkl_path in pkl_files
+            ]
+            if max_batteries_per_dataset > 0:
+                records = records[:max_batteries_per_dataset]
+            if records:
+                all_records[dataset_name] = records
+                print(
+                    f"[dataset] {dataset_name}: {len(records)} unlabeled target batteries "
+                    "(target JSON not opened)"
+                )
+            continue
+
+        try:
+            label_file = find_label_file(label_root, dataset_name)
+        except FileNotFoundError:
+            print(f"[skip] No unique label file for source dataset: {dataset_name}")
+            continue
+
+        labels = read_json(label_file)
+        records: List[BatteryRecord] = []
+        missing_labels: List[str] = []
+
+        for pkl_path in pkl_files:
+            if pkl_path.name not in labels:
+                missing_labels.append(pkl_path.name)
+                continue
+            records.append(
+                BatteryRecord(
+                    dataset=dataset_name,
+                    file_path=pkl_path.resolve(),
+                    file_name=pkl_path.name,
+                    life=int(labels[pkl_path.name]),
+                )
+            )
+
+        if missing_labels:
+            print(
+                f"[warning] {dataset_name}: {len(missing_labels)} pkl files have no matching label."
+            )
+
+        if max_batteries_per_dataset > 0:
+            records = records[:max_batteries_per_dataset]
+
+        if records:
+            all_records[dataset_name] = records
+            print(
+                f"[dataset] {dataset_name}: {len(records)} matched source batteries "
+                f"(label file: {label_file.name})"
+            )
+
+    if not all_records:
+        raise RuntimeError("No matched battery-label pairs were found.")
+
+    return all_records
+
+
+def safe_float_array(value: object) -> Optional[np.ndarray]:
+    if value is None:
+        return None
+    try:
+        arr = np.asarray(value, dtype=np.float64).reshape(-1)
+    except (TypeError, ValueError):
+        return None
+    if arr.size == 0:
+        return None
+    return arr
+
+
+def unique_sorted_xy(x: np.ndarray, y: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
+    order = np.argsort(x, kind="stable")
+    x_sorted = x[order]
+    y_sorted = y[order]
+
+    unique_x, unique_indices = np.unique(x_sorted, return_index=True)
+    unique_y = y_sorted[unique_indices]
+    return unique_x, unique_y
+
+
+def interpolate_feature(
+    time_axis: np.ndarray,
+    values: np.ndarray,
+    interp_length: int,
+) -> np.ndarray:
+    valid = np.isfinite(time_axis) & np.isfinite(values)
+    time_axis = time_axis[valid]
+    values = values[valid]
+
+    if values.size == 0:
+        return np.zeros(interp_length, dtype=np.float32)
+    if values.size == 1:
+        return np.full(interp_length, values[0], dtype=np.float32)
+
+    time_axis, values = unique_sorted_xy(time_axis, values)
+    if time_axis.size == 1 or math.isclose(float(time_axis[-1]), float(time_axis[0])):
+        return np.full(interp_length, values[-1], dtype=np.float32)
+
+    normalized_time = (time_axis - time_axis[0]) / (time_axis[-1] - time_axis[0])
+    target_time = np.linspace(0.0, 1.0, interp_length, dtype=np.float64)
+    out = np.interp(target_time, normalized_time, values)
+    return out.astype(np.float32)
+
+
+def cycle_to_array(cycle: dict, interp_length: int) -> Optional[np.ndarray]:
+    if not isinstance(cycle, dict):
+        return None
+
+    feature_arrays = [safe_float_array(cycle.get(key)) for key in FEATURE_KEYS]
+    if any(arr is None for arr in feature_arrays):
+        return None
+
+    assert all(arr is not None for arr in feature_arrays)
+    lengths = [arr.size for arr in feature_arrays if arr is not None]
+    time_arr = safe_float_array(cycle.get(TIME_KEY))
+
+    if time_arr is None:
+        common_length = min(lengths)
+        if common_length < 2:
+            return None
+        time_arr = np.arange(common_length, dtype=np.float64)
+    else:
+        common_length = min([time_arr.size] + lengths)
+        if common_length < 2:
+            return None
+        time_arr = time_arr[:common_length]
+
+    output: List[np.ndarray] = []
+    for arr in feature_arrays:
+        assert arr is not None
+        output.append(
+            interpolate_feature(
+                time_axis=time_arr,
+                values=arr[:common_length],
+                interp_length=interp_length,
+            )
+        )
+
+    # [C, L]
+    return np.stack(output, axis=0).astype(np.float32)
+
+
+def infer_cycle_numbers(
+    cycle_data: Sequence[dict],
+    already_spent_cycles: int,
+) -> np.ndarray:
+    """
+    Returns an estimated absolute cycle number for every retained cycle.
+
+    Rule:
+    - If cycle_number values are valid and monotonic, use them.
+    - If already_spent_cycles > 0 and the first cycle_number looks relative
+      (close to 1), add already_spent_cycles.
+    - Otherwise fall back to 1..N plus already_spent_cycles.
+    """
+    raw_numbers: List[int] = []
+    valid = True
+
+    for index, cycle in enumerate(cycle_data):
+        try:
+            number = int(cycle.get("cycle_number", index + 1))
+        except (TypeError, ValueError, AttributeError):
+            valid = False
+            break
+        raw_numbers.append(number)
+
+    if valid and raw_numbers:
+        arr = np.asarray(raw_numbers, dtype=np.int64)
+        monotonic = bool(np.all(np.diff(arr) >= 0))
+        positive = bool(np.all(arr > 0))
+        if monotonic and positive:
+            if already_spent_cycles > 0 and arr[0] <= 2:
+                arr = arr + int(already_spent_cycles)
+            return arr
+
+    return (
+        np.arange(1, len(cycle_data) + 1, dtype=np.int64)
+        + int(max(already_spent_cycles, 0))
+    )
+
+
+def cache_signature(record: BatteryRecord, interp_length: int) -> str:
+    stat = record.file_path.stat()
+    text = (
+        f"{record.file_path}|{stat.st_size}|{stat.st_mtime_ns}|"
+        f"{interp_length}|{'|'.join(FEATURE_KEYS)}"
+    )
+    return hashlib.sha1(text.encode("utf-8")).hexdigest()[:12]
+
+
+def cache_paths(
+    cache_root: Path,
+    record: BatteryRecord,
+    interp_length: int,
+) -> Tuple[Path, Path, Path]:
+    dataset_cache = cache_root / record.dataset
+    dataset_cache.mkdir(parents=True, exist_ok=True)
+    signature = cache_signature(record, interp_length)
+    stem = f"{record.file_path.stem}_{signature}"
+    return (
+        dataset_cache / f"{stem}_curves.npy",
+        dataset_cache / f"{stem}_cycles.npy",
+        dataset_cache / f"{stem}_meta.json",
+    )
+
+
+def build_battery_cache(
+    record: BatteryRecord,
+    cache_root: Path,
+    interp_length: int,
+    rebuild: bool,
+) -> Tuple[Path, Path]:
+    curves_path, cycles_path, meta_path = cache_paths(
+        cache_root, record, interp_length
+    )
+
+    if (
+        not rebuild
+        and curves_path.exists()
+        and cycles_path.exists()
+        and meta_path.exists()
+    ):
+        return curves_path, cycles_path
+
+    try:
+        with record.file_path.open("rb") as f:
+            battery = pickle.load(f)
+    except (OSError, pickle.UnpicklingError, EOFError) as exc:
+        raise RuntimeError(f"Failed to read battery file: {record.file_path}") from exc
+
+    if not isinstance(battery, dict):
+        raise ValueError(f"Battery file must contain a dict: {record.file_path}")
+
+    cycle_data = battery.get("cycle_data")
+    if not isinstance(cycle_data, list) or not cycle_data:
+        raise ValueError(
+            f"'cycle_data' must be a non-empty list: {record.file_path}"
+        )
+
+    try:
+        already_spent = int(battery.get("already_spent_cycles") or 0)
+    except (TypeError, ValueError):
+        already_spent = 0
+
+    original_cycle_numbers = infer_cycle_numbers(cycle_data, already_spent)
+
+    retained_curves: List[np.ndarray] = []
+    retained_numbers: List[int] = []
+    skipped = 0
+
+    for cycle, cycle_number in zip(cycle_data, original_cycle_numbers):
+        curve = cycle_to_array(cycle, interp_length)
+        if curve is None or not np.all(np.isfinite(curve)):
+            skipped += 1
+            continue
+        retained_curves.append(curve)
+        retained_numbers.append(int(cycle_number))
+
+    if not retained_curves:
+        raise ValueError(f"No valid cycles could be extracted: {record.file_path}")
+
+    curves = np.stack(retained_curves, axis=0).astype(np.float16)
+    cycle_numbers = np.asarray(retained_numbers, dtype=np.int64)
+
+    # Atomic-ish writes through temporary files.
+    curves_tmp = curves_path.with_name(curves_path.name + ".tmp.npy")
+    cycles_tmp = cycles_path.with_name(cycles_path.name + ".tmp.npy")
+    np.save(curves_tmp, curves)
+    np.save(cycles_tmp, cycle_numbers)
+    curves_tmp.replace(curves_path)
+    cycles_tmp.replace(cycles_path)
+
+    metadata = {
+        "dataset": record.dataset,
+        "file_name": record.file_name,
+        "life": record.life,
+        "original_cycle_count": len(cycle_data),
+        "retained_cycle_count": int(curves.shape[0]),
+        "skipped_cycle_count": skipped,
+        "first_cycle_number": int(cycle_numbers[0]),
+        "last_cycle_number": int(cycle_numbers[-1]),
+        "already_spent_cycles": already_spent,
+        "interp_length": interp_length,
+        "features": list(FEATURE_KEYS),
+    }
+    with meta_path.open("w", encoding="utf-8") as f:
+        json.dump(metadata, f, ensure_ascii=False, indent=2)
+
+    return curves_path, cycles_path
+
+
+def prepare_all_caches(
+    records: Iterable[BatteryRecord],
+    cache_root: Path,
+    interp_length: int,
+    rebuild: bool,
+) -> Dict[Path, Tuple[Path, Path]]:
+    cache_map: Dict[Path, Tuple[Path, Path]] = {}
+    records = list(records)
+    total = len(records)
+
+    for i, record in enumerate(records, start=1):
+        print(f"[cache {i:>4}/{total}] {record.dataset}/{record.file_name}")
+        try:
+            cache_map[record.file_path] = build_battery_cache(
+                record=record,
+                cache_root=cache_root,
+                interp_length=interp_length,
+                rebuild=rebuild,
+            )
+        except Exception as exc:
+            print(f"[cache skip] {record.file_name}: {exc}")
+
+    if not cache_map:
+        raise RuntimeError("No valid battery caches were created.")
+    return cache_map
+
+
+def load_cached_battery(
+    cache_pair: Tuple[Path, Path],
+) -> Tuple[np.ndarray, np.ndarray]:
+    curves_path, cycles_path = cache_pair
+    curves = np.load(curves_path, mmap_mode="r")
+    cycle_numbers = np.load(cycles_path, mmap_mode="r")
+    return curves, cycle_numbers
+
+
+def filter_valid_records(
+    records: Sequence[BatteryRecord],
+    cache_map: Dict[Path, Tuple[Path, Path]],
+    min_prefix_cycles: int,
+) -> List[BatteryRecord]:
+    valid_records: List[BatteryRecord] = []
+    for record in records:
+        cache_pair = cache_map.get(record.file_path)
+        if cache_pair is None:
+            continue
+        curves, cycle_numbers = load_cached_battery(cache_pair)
+        if len(curves) < min_prefix_cycles:
+            continue
+        valid_until = np.flatnonzero(cycle_numbers < record.life)
+        if valid_until.size < min_prefix_cycles:
+            continue
+        valid_records.append(record)
+    return valid_records
+
+
+def filter_unlabeled_target_records(
+    records: Sequence[BatteryRecord],
+    cache_map: Dict[Path, Tuple[Path, Path]],
+    min_prefix_cycles: int,
+) -> List[BatteryRecord]:
+    """Filter the target using input availability only; no target life is consulted."""
+    valid_records: List[BatteryRecord] = []
+    for record in records:
+        cache_pair = cache_map.get(record.file_path)
+        if cache_pair is None:
+            continue
+        curves, _ = load_cached_battery(cache_pair)
+        if len(curves) >= min_prefix_cycles:
+            valid_records.append(record)
+    return valid_records
+
+
+def attach_target_labels_for_evaluation(
+    records: Sequence[BatteryRecord],
+    label_root: Path,
+) -> List[BatteryRecord]:
+    """Open the held-out target JSON only after supervised source training."""
+    if not records:
+        return []
+
+    dataset_name = records[0].dataset
+    label_file = find_label_file(label_root, dataset_name)
+    labels = read_json(label_file)
+
+    labeled_records: List[BatteryRecord] = []
+    missing: List[str] = []
+
+    for record in records:
+        life = labels.get(record.file_name)
+        if life is None:
+            missing.append(record.file_name)
+            continue
+        labeled_records.append(
+            BatteryRecord(
+                dataset=record.dataset,
+                file_path=record.file_path,
+                file_name=record.file_name,
+                life=int(life),
+            )
+        )
+
+    if missing:
+        print(
+            f"[warning] Target evaluation skipped {len(missing)} files "
+            "without matching labels."
+        )
+    print(
+        f"[target evaluation] Opened {label_file.name}: "
+        f"{len(labeled_records)} matched labels."
+    )
+    return labeled_records
+
+
+def split_source_records(
+    source_records_by_dataset: Dict[str, List[BatteryRecord]],
+    val_ratio: float,
+    seed: int,
+) -> Tuple[List[BatteryRecord], List[BatteryRecord]]:
+    rng = random.Random(seed)
+    train_records: List[BatteryRecord] = []
+    val_records: List[BatteryRecord] = []
+
+    for dataset, records in sorted(source_records_by_dataset.items()):
+        shuffled = list(records)
+        rng.shuffle(shuffled)
+
+        if len(shuffled) == 1 or val_ratio <= 0:
+            train_part = shuffled
+            val_part: List[BatteryRecord] = []
+        else:
+            n_val = max(1, int(round(len(shuffled) * val_ratio)))
+            n_val = min(n_val, len(shuffled) - 1)
+            val_part = shuffled[:n_val]
+            train_part = shuffled[n_val:]
+
+        train_records.extend(train_part)
+        val_records.extend(val_part)
+        print(
+            f"[split] {dataset}: train batteries={len(train_part)}, "
+            f"validation batteries={len(val_part)}"
+        )
+
+    return train_records, val_records
+
+
+def make_prefix_lengths(
+    max_length: int,
+    min_prefix_cycles: int,
+    count: int,
+) -> List[int]:
+    if max_length < min_prefix_cycles:
+        return []
+    if count <= 1:
+        return [max_length]
+
+    values = np.linspace(
+        min_prefix_cycles,
+        max_length,
+        num=min(count, max_length - min_prefix_cycles + 1),
+    )
+    lengths = sorted(set(int(round(v)) for v in values))
+    if lengths[-1] != max_length:
+        lengths.append(max_length)
+    return lengths
+
+
+def build_source_samples(
+    records: Sequence[BatteryRecord],
+    cache_map: Dict[Path, Tuple[Path, Path]],
+    min_prefix_cycles: int,
+    prefixes_per_battery: int,
+) -> List[PrefixSample]:
+    samples: List[PrefixSample] = []
+
+    for record in records:
+        curves, cycle_numbers = load_cached_battery(cache_map[record.file_path])
+        valid_indices = np.flatnonzero(cycle_numbers < record.life)
+        if valid_indices.size < min_prefix_cycles:
+            continue
+
+        max_valid_length = int(valid_indices[-1] + 1)
+        prefix_lengths = make_prefix_lengths(
+            max_length=max_valid_length,
+            min_prefix_cycles=min_prefix_cycles,
+            count=prefixes_per_battery,
+        )
+
+        for prefix_length in prefix_lengths:
+            current_cycle = int(cycle_numbers[prefix_length - 1])
+            rul = float(record.life - current_cycle)
+            if rul <= 0:
+                continue
+            samples.append(
+                PrefixSample(
+                    record=record,
+                    prefix_length=prefix_length,
+                    current_cycle=current_cycle,
+                    rul=rul,
+                )
+            )
+
+    return samples
+
+
+def build_target_samples(
+    records: Sequence[BatteryRecord],
+    cache_map: Dict[Path, Tuple[Path, Path]],
+    min_prefix_cycles: int,
+    target_observation: str,
+    target_fraction: float,
+) -> List[PrefixSample]:
+    samples: List[PrefixSample] = []
+
+    for record in records:
+        curves, cycle_numbers = load_cached_battery(cache_map[record.file_path])
+        valid_indices = np.flatnonzero(cycle_numbers < record.life)
+        if valid_indices.size < min_prefix_cycles:
+            continue
+
+        max_valid_length = int(valid_indices[-1] + 1)
+
+        if target_observation == "available":
+            prefix_length = max_valid_length
+        else:
+            if not (0.0 < target_fraction <= 1.0):
+                raise ValueError("--target-fraction must be in (0, 1].")
+            prefix_length = max(
+                min_prefix_cycles,
+                int(round(max_valid_length * target_fraction)),
+            )
+            prefix_length = min(prefix_length, max_valid_length)
+
+        current_cycle = int(cycle_numbers[prefix_length - 1])
+        rul = float(record.life - current_cycle)
+        if rul <= 0:
+            continue
+
+        samples.append(
+            PrefixSample(
+                record=record,
+                prefix_length=prefix_length,
+                current_cycle=current_cycle,
+                rul=rul,
+            )
+        )
+
+    return samples
+
+
+def fit_channel_scaler(
+    records: Sequence[BatteryRecord],
+    cache_map: Dict[Path, Tuple[Path, Path]],
+    cycles_per_battery: int,
+    seed: int,
+) -> ChannelScaler:
+    rng = np.random.default_rng(seed)
+
+    channel_sum = np.zeros(len(FEATURE_KEYS), dtype=np.float64)
+    channel_sq_sum = np.zeros(len(FEATURE_KEYS), dtype=np.float64)
+    channel_count = 0
+
+    for record in records:
+        curves, cycle_numbers = load_cached_battery(cache_map[record.file_path])
+        valid_indices = np.flatnonzero(cycle_numbers < record.life)
+        if valid_indices.size == 0:
+            continue
+
+        if cycles_per_battery > 0 and valid_indices.size > cycles_per_battery:
+            selected = rng.choice(
+                valid_indices, size=cycles_per_battery, replace=False
+            )
+        else:
+            selected = valid_indices
+
+        x = np.asarray(curves[selected], dtype=np.float32)  # [T, C, L]
+        channel_sum += x.sum(axis=(0, 2), dtype=np.float64)
+        channel_sq_sum += np.square(x, dtype=np.float64).sum(
+            axis=(0, 2), dtype=np.float64
+        )
+        channel_count += x.shape[0] * x.shape[2]
+
+    if channel_count == 0:
+        raise RuntimeError("Could not fit scaler: no source cycles available.")
+
+    mean = channel_sum / channel_count
+    variance = channel_sq_sum / channel_count - np.square(mean)
+    std = np.sqrt(np.maximum(variance, 1e-8))
+    std = np.maximum(std, 1e-4)
+
+    print("[scaler]")
+    for key, mu, sigma in zip(FEATURE_KEYS, mean, std):
+        print(f"  {key:<30} mean={mu: .6f}, std={sigma: .6f}")
+
+    return ChannelScaler(
+        mean=mean.astype(np.float32),
+        std=std.astype(np.float32),
+    )
+
+
+def uniform_subsample_indices(length: int, max_length: int) -> np.ndarray:
+    if max_length <= 0 or length <= max_length:
+        return np.arange(length, dtype=np.int64)
+    return np.linspace(0, length - 1, num=max_length).round().astype(np.int64)
+
+
+class BatteryPrefixDataset(Dataset):
+    def __init__(
+        self,
+        samples: Sequence[PrefixSample],
+        cache_map: Dict[Path, Tuple[Path, Path]],
+        scaler: ChannelScaler,
+        max_sequence_cycles: int,
+    ) -> None:
+        self.samples = list(samples)
+        self.cache_map = cache_map
+        self.scaler = scaler
+        self.max_sequence_cycles = max_sequence_cycles
+
+    def __len__(self) -> int:
+        return len(self.samples)
+
+    def __getitem__(self, index: int) -> dict:
+        sample = self.samples[index]
+        curves, cycle_numbers = load_cached_battery(
+            self.cache_map[sample.record.file_path]
+        )
+
+        x = np.asarray(
+            curves[: sample.prefix_length],
+            dtype=np.float32,
+        )
+        cycle_ids = np.asarray(
+            cycle_numbers[: sample.prefix_length],
+            dtype=np.int64,
+        )
+
+        keep = uniform_subsample_indices(
+            length=x.shape[0],
+            max_length=self.max_sequence_cycles,
+        )
+        x = x[keep]
+        cycle_ids = cycle_ids[keep]
+
+        x = self.scaler.normalize(x).astype(np.float32)
+
+        return {
+            "x": torch.from_numpy(x),  # [T, C, L]
+            "length": int(x.shape[0]),
+            "rul": torch.tensor(sample.rul, dtype=torch.float32),
+            "log_rul": torch.tensor(
+                math.log1p(sample.rul), dtype=torch.float32
+            ),
+            "life": torch.tensor(sample.record.life, dtype=torch.float32),
+            "current_cycle": torch.tensor(
+                sample.current_cycle, dtype=torch.float32
+            ),
+            "cycle_ids": torch.from_numpy(cycle_ids),
+            "dataset": sample.record.dataset,
+            "file_name": sample.record.file_name,
+        }
+
+
+def collate_prefix_batch(batch: Sequence[dict]) -> dict:
+    lengths = torch.tensor(
+        [item["length"] for item in batch],
+        dtype=torch.long,
+    )
+    max_t = int(lengths.max().item())
+    channels = int(batch[0]["x"].shape[1])
+    curve_length = int(batch[0]["x"].shape[2])
+
+    x = torch.zeros(
+        len(batch),
+        max_t,
+        channels,
+        curve_length,
+        dtype=torch.float32,
+    )
+    cycle_ids = torch.zeros(len(batch), max_t, dtype=torch.long)
+    mask = torch.zeros(len(batch), max_t, dtype=torch.bool)
+
+    for i, item in enumerate(batch):
+        t = item["length"]
+        x[i, :t] = item["x"]
+        cycle_ids[i, :t] = item["cycle_ids"]
+        mask[i, :t] = True
+
+    return {
+        "x": x,
+        "lengths": lengths,
+        "mask": mask,
+        "cycle_ids": cycle_ids,
+        "rul": torch.stack([item["rul"] for item in batch]),
+        "log_rul": torch.stack([item["log_rul"] for item in batch]),
+        "life": torch.stack([item["life"] for item in batch]),
+        "current_cycle": torch.stack(
+            [item["current_cycle"] for item in batch]
+        ),
+        "dataset": [item["dataset"] for item in batch],
+        "file_name": [item["file_name"] for item in batch],
+    }
+
+
+class CycleCNN(nn.Module):
+    def __init__(
+        self,
+        in_channels: int,
+        embedding_dim: int,
+        dropout: float,
+    ) -> None:
+        super().__init__()
+        self.encoder = nn.Sequential(
+            nn.Conv1d(in_channels, 32, kernel_size=7, padding=3),
+            nn.BatchNorm1d(32),
+            nn.ReLU(inplace=True),
+            nn.MaxPool1d(kernel_size=2),
+            nn.Conv1d(32, 64, kernel_size=5, padding=2),
+            nn.BatchNorm1d(64),
+            nn.ReLU(inplace=True),
+            nn.MaxPool1d(kernel_size=2),
+            nn.Conv1d(64, 128, kernel_size=3, padding=1),
+            nn.BatchNorm1d(128),
+            nn.ReLU(inplace=True),
+            nn.AdaptiveAvgPool1d(1),
+        )
+        self.projection = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(128, embedding_dim),
+            nn.ReLU(inplace=True),
+            nn.Dropout(dropout),
+        )
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return self.projection(self.encoder(x))
+
+
+class BatteryRULModel(nn.Module):
+    def __init__(
+        self,
+        in_channels: int,
+        cycle_embedding_dim: int,
+        gru_hidden_dim: int,
+        gru_layers: int,
+        dropout: float,
+    ) -> None:
+        super().__init__()
+        self.cycle_encoder = CycleCNN(
+            in_channels=in_channels,
+            embedding_dim=cycle_embedding_dim,
+            dropout=dropout,
+        )
+
+        gru_dropout = dropout if gru_layers > 1 else 0.0
+        self.sequence_encoder = nn.GRU(
+            input_size=cycle_embedding_dim,
+            hidden_size=gru_hidden_dim,
+            num_layers=gru_layers,
+            batch_first=True,
+            dropout=gru_dropout,
+        )
+
+        self.rul_head = nn.Sequential(
+            nn.Linear(gru_hidden_dim, gru_hidden_dim),
+            nn.ReLU(inplace=True),
+            nn.Dropout(dropout),
+            nn.Linear(gru_hidden_dim, 1),
+        )
+
+    def forward(
+        self,
+        x: torch.Tensor,
+        lengths: torch.Tensor,
+    ) -> torch.Tensor:
+        # x: [B, T, C, L]
+        batch_size, max_t, channels, curve_length = x.shape
+
+        flat = x.reshape(batch_size * max_t, channels, curve_length)
+        cycle_embeddings = self.cycle_encoder(flat)
+        cycle_embeddings = cycle_embeddings.reshape(batch_size, max_t, -1)
+
+        packed = pack_padded_sequence(
+            cycle_embeddings,
+            lengths=lengths.cpu(),
+            batch_first=True,
+            enforce_sorted=False,
+        )
+        _, hidden = self.sequence_encoder(packed)
+        battery_embedding = hidden[-1]
+
+        predicted_log_rul = self.rul_head(battery_embedding).squeeze(-1)
+        return predicted_log_rul
+
+
+def inverse_log_rul(predicted_log_rul: torch.Tensor) -> torch.Tensor:
+    return torch.expm1(predicted_log_rul).clamp(min=0.0)
+
+
+def regression_metrics(
+    y_true: np.ndarray,
+    y_pred: np.ndarray,
+) -> Dict[str, float]:
+    if y_true.size == 0:
+        return {"mae": float("nan"), "rmse": float("nan"), "mape": float("nan")}
+
+    error = y_pred - y_true
+    mae = float(np.mean(np.abs(error)))
+    rmse = float(np.sqrt(np.mean(np.square(error))))
+    nonzero = np.abs(y_true) > 1e-8
+    mape = (
+        float(np.mean(np.abs(error[nonzero] / y_true[nonzero])) * 100.0)
+        if np.any(nonzero)
+        else float("nan")
+    )
+    return {"mae": mae, "rmse": rmse, "mape": mape}
+
+
+def move_batch_to_device(batch: dict, device: torch.device) -> dict:
+    return {
+        key: value.to(device, non_blocking=True)
+        if torch.is_tensor(value)
+        else value
+        for key, value in batch.items()
+    }
+
+
+def train_one_epoch(
+    model: nn.Module,
+    loader: DataLoader,
+    optimizer: torch.optim.Optimizer,
+    device: torch.device,
+    grad_clip: float,
+) -> float:
+    model.train()
+    total_loss = 0.0
+    total_count = 0
+
+    for batch in loader:
+        batch = move_batch_to_device(batch, device)
+        optimizer.zero_grad(set_to_none=True)
+
+        pred_log_rul = model(batch["x"], batch["lengths"])
+        loss = F.smooth_l1_loss(pred_log_rul, batch["log_rul"])
+
+        if not torch.isfinite(loss):
+            raise FloatingPointError(f"Non-finite training loss: {loss.item()}")
+
+        loss.backward()
+        if grad_clip > 0:
+            nn.utils.clip_grad_norm_(model.parameters(), grad_clip)
+        optimizer.step()
+
+        batch_size = int(batch["x"].shape[0])
+        total_loss += float(loss.item()) * batch_size
+        total_count += batch_size
+
+    return total_loss / max(total_count, 1)
+
+
+@torch.no_grad()
+def evaluate(
+    model: nn.Module,
+    loader: DataLoader,
+    device: torch.device,
+    collect_rows: bool = False,
+) -> Tuple[float, Dict[str, float], List[dict]]:
+    model.eval()
+    total_loss = 0.0
+    total_count = 0
+    true_values: List[np.ndarray] = []
+    pred_values: List[np.ndarray] = []
+    rows: List[dict] = []
+
+    for batch in loader:
+        batch = move_batch_to_device(batch, device)
+        pred_log_rul = model(batch["x"], batch["lengths"])
+        loss = F.smooth_l1_loss(pred_log_rul, batch["log_rul"])
+
+        pred_rul = inverse_log_rul(pred_log_rul)
+        true_rul = batch["rul"]
+
+        batch_size = int(batch["x"].shape[0])
+        total_loss += float(loss.item()) * batch_size
+        total_count += batch_size
+
+        true_np = true_rul.detach().cpu().numpy()
+        pred_np = pred_rul.detach().cpu().numpy()
+        true_values.append(true_np)
+        pred_values.append(pred_np)
+
+        if collect_rows:
+            lives = batch["life"].detach().cpu().numpy()
+            current_cycles = batch["current_cycle"].detach().cpu().numpy()
+            for i in range(batch_size):
+                rows.append(
+                    {
+                        "dataset": batch["dataset"][i],
+                        "file_name": batch["file_name"][i],
+                        "life": int(lives[i]),
+                        "current_cycle": int(current_cycles[i]),
+                        "true_rul": float(true_np[i]),
+                        "predicted_rul": float(pred_np[i]),
+                        "absolute_error": float(abs(pred_np[i] - true_np[i])),
+                    }
+                )
+
+    y_true = np.concatenate(true_values) if true_values else np.array([])
+    y_pred = np.concatenate(pred_values) if pred_values else np.array([])
+    metrics = regression_metrics(y_true, y_pred)
+    avg_loss = total_loss / max(total_count, 1)
+    return avg_loss, metrics, rows
+
+
+def save_predictions(rows: Sequence[dict], output_path: Path) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    columns = [
+        "dataset",
+        "file_name",
+        "life",
+        "current_cycle",
+        "true_rul",
+        "predicted_rul",
+        "absolute_error",
+    ]
+    with output_path.open("w", encoding="utf-8", newline="") as f:
+        f.write(",".join(columns) + "\n")
+        for row in rows:
+            values = []
+            for column in columns:
+                value = row[column]
+                if isinstance(value, str):
+                    value = '"' + value.replace('"', '""') + '"'
+                values.append(str(value))
+            f.write(",".join(values) + "\n")
+
+
+def create_loader(
+    dataset: Dataset,
+    batch_size: int,
+    shuffle: bool,
+    num_workers: int,
+    device: torch.device,
+) -> DataLoader:
+    return DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=shuffle,
+        num_workers=num_workers,
+        collate_fn=collate_prefix_batch,
+        pin_memory=(device.type == "cuda"),
+        persistent_workers=(num_workers > 0),
+    )
+
+
+def save_checkpoint(
+    output_path: Path,
+    model: nn.Module,
+    optimizer: torch.optim.Optimizer,
+    epoch: int,
+    val_loss: float,
+    scaler: ChannelScaler,
+    args: argparse.Namespace,
+    dataset_names: Sequence[str],
+) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    checkpoint = {
+        "model_state_dict": model.state_dict(),
+        "optimizer_state_dict": optimizer.state_dict(),
+        "epoch": epoch,
+        "val_loss": val_loss,
+        "scaler": scaler.to_dict(),
+        "feature_keys": list(FEATURE_KEYS),
+        "args": {
+            key: str(value) if isinstance(value, Path) else value
+            for key, value in vars(args).items()
+        },
+        "source_datasets": list(dataset_names),
+        "target_dataset": args.target,
+    }
+    torch.save(checkpoint, output_path)
+
+
+def main() -> None:
+    args = parse_args()
+    set_seed(args.seed)
+    device = resolve_device(args.device)
+
+    project_root = args.project_root.resolve()
+    data_root = project_root / args.data_dir
+    label_root = project_root / args.label_dir
+    model_root = project_root / args.model_dir
+    cache_root = project_root / args.cache_dir
+
+    print("=" * 80)
+    print("BatteryLife multi-source RUL baseline")
+    print(f"project root : {project_root}")
+    print(f"data root    : {data_root}")
+    print(f"label root   : {label_root}")
+    print(f"target       : {args.target}")
+    print(f"device       : {device}")
+    print("=" * 80)
+
+    records_by_dataset = discover_records(
+        data_root=data_root,
+        label_root=label_root,
+        max_batteries_per_dataset=args.max_batteries_per_dataset,
+        target_dataset=args.target,
+    )
+
+    dataset_lookup = {name.lower(): name for name in records_by_dataset}
+    target_key = args.target.lower()
+    if target_key not in dataset_lookup:
+        available = ", ".join(sorted(records_by_dataset))
+        raise ValueError(
+            f"Target dataset '{args.target}' was not found. "
+            f"Available datasets: {available}"
+        )
+    target_name = dataset_lookup[target_key]
+    args.target = target_name
+
+    target_records = records_by_dataset[target_name]
+    source_records_by_dataset = {
+        name: records
+        for name, records in records_by_dataset.items()
+        if name != target_name
+    }
+    if not source_records_by_dataset:
+        raise RuntimeError("LODO training requires at least one source dataset.")
+
+    all_records = [
+        record
+        for records in records_by_dataset.values()
+        for record in records
+    ]
+
+    cache_map = prepare_all_caches(
+        records=all_records,
+        cache_root=cache_root,
+        interp_length=args.interp_length,
+        rebuild=args.rebuild_cache,
+    )
+
+    source_records_by_dataset = {
+        name: filter_valid_records(
+            records,
+            cache_map,
+            args.min_prefix_cycles,
+        )
+        for name, records in source_records_by_dataset.items()
+    }
+    source_records_by_dataset = {
+        name: records
+        for name, records in source_records_by_dataset.items()
+        if records
+    }
+    target_records = filter_unlabeled_target_records(
+        target_records,
+        cache_map,
+        args.min_prefix_cycles,
+    )
+
+    if not source_records_by_dataset:
+        raise RuntimeError("No valid source batteries remain after preprocessing.")
+    if not target_records:
+        raise RuntimeError("No valid target batteries remain after preprocessing.")
+
+    train_records, val_records = split_source_records(
+        source_records_by_dataset=source_records_by_dataset,
+        val_ratio=args.val_ratio,
+        seed=args.seed,
+    )
+
+    if not train_records:
+        raise RuntimeError("No source training batteries were created.")
+
+    scaler = fit_channel_scaler(
+        records=train_records,
+        cache_map=cache_map,
+        cycles_per_battery=args.scaler_cycles_per_battery,
+        seed=args.seed,
+    )
+
+    train_samples = build_source_samples(
+        records=train_records,
+        cache_map=cache_map,
+        min_prefix_cycles=args.min_prefix_cycles,
+        prefixes_per_battery=args.prefixes_per_battery,
+    )
+    val_samples = build_source_samples(
+        records=val_records,
+        cache_map=cache_map,
+        min_prefix_cycles=args.min_prefix_cycles,
+        prefixes_per_battery=max(2, args.prefixes_per_battery // 2),
+    )
+    if not train_samples:
+        raise RuntimeError("No source training prefixes were created.")
+
+    # If the source pool is very small, use training prefixes for monitoring only.
+    if not val_samples:
+        print("[warning] No independent validation samples. Reusing train samples for monitoring.")
+        val_samples = train_samples
+
+    print(
+        f"[samples] train={len(train_samples)}, validation={len(val_samples)}"
+    )
+    print(
+        "[target-label policy] The target JSON has not been opened. "
+        "Target curves are unlabeled throughout supervised source training."
+    )
+
+    train_dataset = BatteryPrefixDataset(
+        samples=train_samples,
+        cache_map=cache_map,
+        scaler=scaler,
+        max_sequence_cycles=args.max_sequence_cycles,
+    )
+    val_dataset = BatteryPrefixDataset(
+        samples=val_samples,
+        cache_map=cache_map,
+        scaler=scaler,
+        max_sequence_cycles=args.max_sequence_cycles,
+    )
+    train_loader = create_loader(
+        train_dataset,
+        batch_size=args.batch_size,
+        shuffle=True,
+        num_workers=args.num_workers,
+        device=device,
+    )
+    val_loader = create_loader(
+        val_dataset,
+        batch_size=args.batch_size,
+        shuffle=False,
+        num_workers=args.num_workers,
+        device=device,
+    )
+    model = BatteryRULModel(
+        in_channels=len(FEATURE_KEYS),
+        cycle_embedding_dim=args.cycle_embedding_dim,
+        gru_hidden_dim=args.gru_hidden_dim,
+        gru_layers=args.gru_layers,
+        dropout=args.dropout,
+    ).to(device)
+
+    optimizer = torch.optim.AdamW(
+        model.parameters(),
+        lr=args.learning_rate,
+        weight_decay=args.weight_decay,
+    )
+
+    source_names = sorted(source_records_by_dataset)
+    checkpoint_path = model_root / f"baseline_lodo_target_{target_name}.pt"
+    prediction_path = model_root / f"baseline_lodo_target_{target_name}_predictions.csv"
+    config_path = model_root / f"baseline_lodo_target_{target_name}_config.json"
+
+    model_root.mkdir(parents=True, exist_ok=True)
+    with config_path.open("w", encoding="utf-8") as f:
+        serializable_args = {
+            key: str(value) if isinstance(value, Path) else value
+            for key, value in vars(args).items()
+        }
+        json.dump(
+            {
+                "args": serializable_args,
+                "feature_keys": list(FEATURE_KEYS),
+                "scaler": scaler.to_dict(),
+                "source_datasets": source_names,
+                "target_dataset": target_name,
+                "train_batteries": len(train_records),
+                "validation_batteries": len(val_records),
+                "target_batteries_unlabeled": len(target_records),
+                "train_samples": len(train_samples),
+                "validation_samples": len(val_samples),
+            },
+            f,
+            ensure_ascii=False,
+            indent=2,
+        )
+
+    best_val_loss = float("inf")
+    epochs_without_improvement = 0
+    start_time = time.time()
+
+    for epoch in range(1, args.epochs + 1):
+        train_loss = train_one_epoch(
+            model=model,
+            loader=train_loader,
+            optimizer=optimizer,
+            device=device,
+            grad_clip=args.grad_clip,
+        )
+        val_loss, val_metrics, _ = evaluate(
+            model=model,
+            loader=val_loader,
+            device=device,
+            collect_rows=False,
+        )
+
+        print(
+            f"[epoch {epoch:03d}] "
+            f"train loss={train_loss:.5f} | "
+            f"val loss={val_loss:.5f} | "
+            f"val MAE={val_metrics['mae']:.2f} | "
+            f"val RMSE={val_metrics['rmse']:.2f}"
+        )
+
+        if val_loss < best_val_loss:
+            best_val_loss = val_loss
+            epochs_without_improvement = 0
+            save_checkpoint(
+                output_path=checkpoint_path,
+                model=model,
+                optimizer=optimizer,
+                epoch=epoch,
+                val_loss=val_loss,
+                scaler=scaler,
+                args=args,
+                dataset_names=source_names,
+            )
+        else:
+            epochs_without_improvement += 1
+            if epochs_without_improvement >= args.patience:
+                print(f"[early stop] No validation improvement for {args.patience} epochs.")
+                break
+
+    if not checkpoint_path.exists():
+        raise RuntimeError("Training ended without creating a checkpoint.")
+
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+    model.load_state_dict(checkpoint["model_state_dict"])
+
+    # Evaluation begins here. This is the first point at which target labels are opened.
+    target_records_labeled = attach_target_labels_for_evaluation(
+        records=target_records,
+        label_root=label_root,
+    )
+    target_samples = build_target_samples(
+        records=target_records_labeled,
+        cache_map=cache_map,
+        min_prefix_cycles=args.min_prefix_cycles,
+        target_observation=args.target_observation,
+        target_fraction=args.target_fraction,
+    )
+    if not target_samples:
+        raise RuntimeError("No target evaluation samples were created.")
+
+    target_dataset = BatteryPrefixDataset(
+        samples=target_samples,
+        cache_map=cache_map,
+        scaler=scaler,
+        max_sequence_cycles=args.max_sequence_cycles,
+    )
+    target_loader = create_loader(
+        target_dataset,
+        batch_size=args.batch_size,
+        shuffle=False,
+        num_workers=args.num_workers,
+        device=device,
+    )
+
+    target_loss, target_metrics, prediction_rows = evaluate(
+        model=model,
+        loader=target_loader,
+        device=device,
+        collect_rows=True,
+    )
+    save_predictions(prediction_rows, prediction_path)
+
+    elapsed = time.time() - start_time
+    print("=" * 80)
+    print(f"Best validation epoch : {checkpoint['epoch']}")
+    print(f"Target dataset        : {target_name}")
+    print(f"Target log-space loss : {target_loss:.5f}")
+    print(f"Target MAE            : {target_metrics['mae']:.2f} cycles")
+    print(f"Target RMSE           : {target_metrics['rmse']:.2f} cycles")
+    print(f"Target MAPE           : {target_metrics['mape']:.2f}%")
+    print(f"Checkpoint            : {checkpoint_path}")
+    print(f"Predictions           : {prediction_path}")
+    print(f"Configuration         : {config_path}")
+    print(f"Elapsed               : {elapsed / 60.0:.1f} minutes")
+    print("=" * 80)
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nInterrupted by user.", file=sys.stderr)
+        sys.exit(130)
+    except Exception as exc:
+        print(f"\n[error] {exc}", file=sys.stderr)
+        raise
