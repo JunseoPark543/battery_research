@@ -1,0 +1,58 @@
+{
+  "source_angles": [
+    0,
+    15,
+    40,
+    70,
+    100
+  ],
+  "target_angle": 20.0,
+  "source_size": 1000,
+  "target_weight_size": 20,
+  "target_adapt_size": 20,
+  "target_test_size": 2000,
+  "label_noise": 0.03,
+  "hidden_dim": 32,
+  "feature_dim": 16,
+  "probe_steps": 600,
+  "probe_batch_size": 128,
+  "probe_lr": 0.001,
+  "head_fit_steps": 300,
+  "head_fit_lr": 0.03,
+  "head_weight_decay": 0.001,
+  "variance_lambda": 1.0,
+  "qp_max_iter": 20000,
+  "qp_tol": 1e-10,
+  "meta_iters": 600,
+  "support_size": 10,
+  "query_size": 20,
+  "inner_steps": 1,
+  "inner_lr": 0.05,
+  "outer_lr": 0.001,
+  "grad_clip": 5.0,
+  "supervised_steps": 1500,
+  "supervised_batch_size": 128,
+  "supervised_lr": 0.001,
+  "adaptation_steps": [
+    0,
+    1,
+    5,
+    10
+  ],
+  "adaptation_lr": 0.05,
+  "rhos": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "oracle_temperature": 20.0,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "device": "cuda",
+  "output_dir": "weighted_meta_results"
+}
