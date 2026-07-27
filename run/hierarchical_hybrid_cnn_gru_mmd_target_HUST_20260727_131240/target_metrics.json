@@ -1,0 +1,209 @@
+{
+  "overall_micro": {
+    "mae": 1032.7625464677467,
+    "rmse": 1192.1483554629692,
+    "mape": 64.8578513952948,
+    "life_normalized_mae_percent": 51.89951941408509
+  },
+  "overall_macro_battery": {
+    "mae": 1032.7625464677465,
+    "rmse": 1145.8834206061852,
+    "mape": 64.8578513952948,
+    "life_normalized_mae_percent": 51.89951941408509
+  },
+  "evaluated_batteries": 77,
+  "evaluation_samples": 693,
+  "groups": [
+    {
+      "evaluation_scheme": "life_fraction",
+      "evaluation_label": "20%",
+      "evaluation_point": 0.20000000298023224,
+      "samples": 77,
+      "batteries": 77,
+      "coverage_percent": 100.0,
+      "mean_observation_fraction": 0.199993515943552,
+      "mae": 1164.6163714520344,
+      "rmse": 1208.0830513068142,
+      "mape": 73.4305333854979,
+      "life_normalized_mae_percent": 58.74488682754387
+    },
+    {
+      "evaluation_scheme": "life_fraction",
+      "evaluation_label": "40%",
+      "evaluation_point": 0.4000000059604645,
+      "samples": 77,
+      "batteries": 77,
+      "coverage_percent": 100.0,
+      "mean_observation_fraction": 0.39999350015219154,
+      "mae": 774.1487926136364,
+      "rmse": 810.7613305900328,
+      "mape": 64.57391704011819,
+      "life_normalized_mae_percent": 38.74488572989565
+    },
+    {
+      "evaluation_scheme": "life_fraction",
+      "evaluation_label": "60%",
+      "evaluation_point": 0.6000000238418579,
+      "samples": 77,
+      "batteries": 77,
+      "coverage_percent": 100.0,
+      "mean_observation_fraction": 0.600006509136844,
+      "mae": 383.64230941177965,
+      "rmse": 415.8951958966289,
+      "mape": 46.860141230508894,
+      "life_normalized_mae_percent": 18.743584329830444
+    },
+    {
+      "evaluation_scheme": "life_fraction",
+      "evaluation_label": "80%",
+      "evaluation_point": 0.800000011920929,
+      "samples": 77,
+      "batteries": 77,
+      "coverage_percent": 100.0,
+      "mean_observation_fraction": 0.8000064887009658,
+      "mae": 66.93744926948052,
+      "rmse": 80.61960331484643,
+      "mape": 18.40997224055643,
+      "life_normalized_mae_percent": 3.6821886134876816
+    },
+    {
+      "evaluation_scheme": "absolute_cycle",
+      "evaluation_label": "20_cycles",
+      "evaluation_point": 20.0,
+      "samples": 77,
+      "batteries": 77,
+      "coverage_percent": 100.0,
+      "mean_observation_fraction": 0.010700307617133314,
+      "mae": 1535.1821859780844,
+      "rmse": 1586.8098023531995,
+      "mape": 78.50892782319853,
+      "life_normalized_mae_percent": 77.67947181288541
+    },
+    {
+      "evaluation_scheme": "absolute_cycle",
+      "evaluation_label": "50_cycles",
+      "evaluation_point": 50.0,
+      "samples": 77,
+      "batteries": 77,
+      "coverage_percent": 100.0,
+      "mean_observation_fraction": 0.02675076907911858,
+      "mae": 1505.0839923016438,
+      "rmse": 1557.7095791820773,
+      "mape": 78.13176555125077,
+      "life_normalized_mae_percent": 76.06916710007951
+    },
+    {
+      "evaluation_scheme": "absolute_cycle",
+      "evaluation_label": "100_cycles",
+      "evaluation_point": 100.0,
+      "samples": 77,
+      "batteries": 77,
+      "coverage_percent": 100.0,
+      "mean_observation_fraction": 0.05350153815823716,
+      "mae": 1455.083899956245,
+      "rmse": 1509.4537051328407,
+      "mape": 77.48107289416026,
+      "life_normalized_mae_percent": 73.39408499603566
+    },
+    {
+      "evaluation_scheme": "absolute_cycle",
+      "evaluation_label": "200_cycles",
+      "evaluation_point": 200.0,
+      "samples": 77,
+      "batteries": 77,
+      "coverage_percent": 100.0,
+      "mean_observation_fraction": 0.10700307631647432,
+      "mae": 1355.083917394861,
+      "rmse": 1413.3059795676656,
+      "mape": 76.04894825959335,
+      "life_normalized_mae_percent": 68.04393124689209
+    },
+    {
+      "evaluation_scheme": "absolute_cycle",
+      "evaluation_label": "500_cycles",
+      "evaluation_point": 500.0,
+      "samples": 77,
+      "batteries": 77,
+      "coverage_percent": 100.0,
+      "mean_observation_fraction": 0.26750768817864456,
+      "mae": 1055.0839998319552,
+      "rmse": 1128.8860096189212,
+      "mape": 70.27538413276888,
+      "life_normalized_mae_percent": 51.993474070115504
+    }
+  ],
+  "coverage": [
+    {
+      "evaluation_scheme": "life_fraction",
+      "evaluation_label": "20%",
+      "evaluation_point": 0.2,
+      "eligible_batteries": 77,
+      "total_batteries": 77,
+      "coverage_percent": 100.0
+    },
+    {
+      "evaluation_scheme": "life_fraction",
+      "evaluation_label": "40%",
+      "evaluation_point": 0.4,
+      "eligible_batteries": 77,
+      "total_batteries": 77,
+      "coverage_percent": 100.0
+    },
+    {
+      "evaluation_scheme": "life_fraction",
+      "evaluation_label": "60%",
+      "evaluation_point": 0.6,
+      "eligible_batteries": 77,
+      "total_batteries": 77,
+      "coverage_percent": 100.0
+    },
+    {
+      "evaluation_scheme": "life_fraction",
+      "evaluation_label": "80%",
+      "evaluation_point": 0.8,
+      "eligible_batteries": 77,
+      "total_batteries": 77,
+      "coverage_percent": 100.0
+    },
+    {
+      "evaluation_scheme": "absolute_cycle",
+      "evaluation_label": "20_cycles",
+      "evaluation_point": 20,
+      "eligible_batteries": 77,
+      "total_batteries": 77,
+      "coverage_percent": 100.0
+    },
+    {
+      "evaluation_scheme": "absolute_cycle",
+      "evaluation_label": "50_cycles",
+      "evaluation_point": 50,
+      "eligible_batteries": 77,
+      "total_batteries": 77,
+      "coverage_percent": 100.0
+    },
+    {
+      "evaluation_scheme": "absolute_cycle",
+      "evaluation_label": "100_cycles",
+      "evaluation_point": 100,
+      "eligible_batteries": 77,
+      "total_batteries": 77,
+      "coverage_percent": 100.0
+    },
+    {
+      "evaluation_scheme": "absolute_cycle",
+      "evaluation_label": "200_cycles",
+      "evaluation_point": 200,
+      "eligible_batteries": 77,
+      "total_batteries": 77,
+      "coverage_percent": 100.0
+    },
+    {
+      "evaluation_scheme": "absolute_cycle",
+      "evaluation_label": "500_cycles",
+      "evaluation_point": 500,
+      "eligible_batteries": 77,
+      "total_batteries": 77,
+      "coverage_percent": 100.0
+    }
+  ]
+}

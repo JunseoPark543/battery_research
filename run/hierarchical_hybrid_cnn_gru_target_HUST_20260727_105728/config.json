@@ -1,0 +1,104 @@
+{
+  "args": {
+    "project_root": null,
+    "data_dir": "data",
+    "label_dir": "1. Life labels",
+    "run_dir": "run",
+    "model_name": "hierarchical_hybrid_cnn_gru",
+    "cache_dir": ".cache_battery_rul",
+    "target": "HUST",
+    "interp_length": 128,
+    "min_prefix_cycles": 20,
+    "prefixes_per_battery": 12,
+    "source_min_fraction": 0.1,
+    "source_max_fraction": 0.8,
+    "target_life_fractions": [
+      0.2,
+      0.4,
+      0.6,
+      0.8
+    ],
+    "target_cycle_counts": [
+      20,
+      50,
+      100,
+      200,
+      500
+    ],
+    "max_sequence_cycles": 0,
+    "max_batteries_per_dataset": 0,
+    "val_ratio": 0.2,
+    "batch_size": 2,
+    "epochs": 30,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "grad_clip": 5.0,
+    "patience": 8,
+    "cnn_branch_dim": 64,
+    "intra_gru_hidden_dim": 64,
+    "cycle_embedding_dim": 128,
+    "gru_hidden_dim": 128,
+    "gru_layers": 1,
+    "cycle_encoder_chunk_size": 512,
+    "dropout": 0.2,
+    "scaler_cycles_per_battery": 32,
+    "num_workers": 0,
+    "seed": 42,
+    "device": "auto",
+    "rebuild_cache": false
+  },
+  "feature_keys": [
+    "current_in_A",
+    "voltage_in_V",
+    "charge_capacity_in_Ah",
+    "discharge_capacity_in_Ah"
+  ],
+  "scaler": {
+    "mean": [
+      -0.015622966922819614,
+      3.5087151527404785,
+      0.9326691031455994,
+      0.41443729400634766
+    ],
+    "std": [
+      2.4603846073150635,
+      0.5237425565719604,
+      0.8487737774848938,
+      0.6924294829368591
+    ]
+  },
+  "model_name": "hierarchical_hybrid_cnn_gru",
+  "architecture": {
+    "name": "hierarchical_parallel_cnn_gru_then_inter_gru",
+    "intra_cycle_cnn_branch_dim": 64,
+    "intra_cycle_gru_hidden_dim": 64,
+    "fused_cycle_embedding_dim": 128,
+    "inter_cycle_gru_hidden_dim": 128,
+    "inter_cycle_gru_layers": 1,
+    "cycle_encoder_chunk_size": 512
+  },
+  "run_name": "hierarchical_hybrid_cnn_gru_target_HUST_20260727_105728",
+  "run_timestamp_asia_seoul": "20260727_105728",
+  "run_path": "/home/JunseoPark/바탕화면/battery/run/hierarchical_hybrid_cnn_gru_target_HUST_20260727_105728",
+  "allowed_datasets": [
+    "HUST",
+    "MATR",
+    "RWTH",
+    "SNL",
+    "Stanford",
+    "Tongji"
+  ],
+  "source_datasets": [
+    "MATR",
+    "RWTH",
+    "SNL",
+    "Stanford",
+    "Tongji"
+  ],
+  "target_dataset": "HUST",
+  "train_batteries": 332,
+  "validation_batteries": 83,
+  "target_batteries_unlabeled": 77,
+  "train_samples": 3917,
+  "validation_samples": 484
+}
