@@ -1,0 +1,18 @@
+{
+  "dataset": "RWTH",
+  "file_name": "RWTH_013.pkl",
+  "life": 700,
+  "original_cycle_count": 2440,
+  "retained_cycle_count": 2440,
+  "skipped_cycle_count": 0,
+  "first_cycle_number": 1,
+  "last_cycle_number": 2455,
+  "already_spent_cycles": 0,
+  "interp_length": 128,
+  "features": [
+    "current_in_A",
+    "voltage_in_V",
+    "charge_capacity_in_Ah",
+    "discharge_capacity_in_Ah"
+  ]
+}

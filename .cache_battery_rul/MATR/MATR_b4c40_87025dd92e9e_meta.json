@@ -1,0 +1,18 @@
+{
+  "dataset": "MATR",
+  "file_name": "MATR_b4c40.pkl",
+  "life": 871,
+  "original_cycle_count": 1122,
+  "retained_cycle_count": 1122,
+  "skipped_cycle_count": 0,
+  "first_cycle_number": 1,
+  "last_cycle_number": 1122,
+  "already_spent_cycles": 0,
+  "interp_length": 128,
+  "features": [
+    "current_in_A",
+    "voltage_in_V",
+    "charge_capacity_in_Ah",
+    "discharge_capacity_in_Ah"
+  ]
+}

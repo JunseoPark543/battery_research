@@ -1,0 +1,18 @@
+{
+  "dataset": "SNL",
+  "file_name": "SNL_18650_NMC_25C_0-100_0.5-1C_a.pkl",
+  "life": 406,
+  "original_cycle_count": 521,
+  "retained_cycle_count": 521,
+  "skipped_cycle_count": 0,
+  "first_cycle_number": 1,
+  "last_cycle_number": 521,
+  "already_spent_cycles": 0,
+  "interp_length": 128,
+  "features": [
+    "current_in_A",
+    "voltage_in_V",
+    "charge_capacity_in_Ah",
+    "discharge_capacity_in_Ah"
+  ]
+}

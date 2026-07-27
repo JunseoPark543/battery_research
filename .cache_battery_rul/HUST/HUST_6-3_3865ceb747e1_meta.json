@@ -1,0 +1,22 @@
+{
+  "dataset": "HUST",
+  "file_name": "HUST_6-3.pkl",
+  "life": -1,
+  "original_cycle_count": 1804,
+  "retained_cycle_count": 1804,
+  "skipped_cycle_count": 0,
+  "cycle_age_definition": "ordered cycle_data position + already_spent_cycles",
+  "first_cycle_age": 1,
+  "last_cycle_age": 1804,
+  "raw_first_cycle_number": 1,
+  "raw_last_cycle_number": 1804,
+  "already_spent_cycles": 0,
+  "cache_format_version": "v5_ordinal_cycle_age_and_flexible_label_match",
+  "interp_length": 128,
+  "features": [
+    "current_in_A",
+    "voltage_in_V",
+    "charge_capacity_in_Ah",
+    "discharge_capacity_in_Ah"
+  ]
+}

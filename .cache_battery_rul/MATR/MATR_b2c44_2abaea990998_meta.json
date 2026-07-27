@@ -1,0 +1,18 @@
+{
+  "dataset": "MATR",
+  "file_name": "MATR_b2c44.pkl",
+  "life": 455,
+  "original_cycle_count": 477,
+  "retained_cycle_count": 477,
+  "skipped_cycle_count": 0,
+  "first_cycle_number": 1,
+  "last_cycle_number": 477,
+  "already_spent_cycles": 0,
+  "interp_length": 128,
+  "features": [
+    "current_in_A",
+    "voltage_in_V",
+    "charge_capacity_in_Ah",
+    "discharge_capacity_in_Ah"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "dataset": "SNL",
+  "file_name": "SNL_18650_NCA_25C_20-80_0.5-0.5C_d.pkl",
+  "life": 840,
+  "original_cycle_count": 1509,
+  "retained_cycle_count": 1509,
+  "skipped_cycle_count": 0,
+  "first_cycle_number": 1,
+  "last_cycle_number": 1509,
+  "already_spent_cycles": 0,
+  "interp_length": 128,
+  "features": [
+    "current_in_A",
+    "voltage_in_V",
+    "charge_capacity_in_Ah",
+    "discharge_capacity_in_Ah"
+  ]
+}
