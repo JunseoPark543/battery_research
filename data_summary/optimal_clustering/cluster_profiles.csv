@@ -1,0 +1,12 @@
+﻿cluster,cell_count,cell_percent,datasets,nominal_capacity_in_Ah__median,max_voltage_limit_in_V__median,min_voltage_limit_in_V__median,soc_interval_start__median,soc_interval_end__median,charge_step_count__median,charge_rate_min_C__median,charge_rate_max_C__median,charge_rate_mean_C__median,discharge_step_count__median,discharge_rate_min_C__median,discharge_rate_max_C__median,discharge_rate_mean_C__median,form_factor__mode,anode_material__mode,cathode_material__mode
+0,154,16.365568544102018,"{""SNL"": 24, ""Tongji"": 130}",3.5,4.2,2.5,0.0,1.0,1.0,0.5,0.5,0.5,1.0,1.0,1.0,1.0,cylindrical_18650,graphite/si,li0.86ni0.86co0.11al0.03 o2 (nca)
+1,83,8.820403825717323,"{""ISU_ILCC"": 83}",0.25,4.2,3.0,0.0,1.0,1.0,1.2,1.2,1.2,1.0,0.5,0.5,0.5,502030-size li-polymer,graphite,nmc
+2,77,8.182784272051009,"{""HUST"": 77}",1.1,3.6,2.0,0.0,1.0,3.0,1.0,5.0,3.0,4.0,1.0,5.0,2.75,cylindrical_18650,graphite,lfp
+3,55,5.844845908607864,"{""ISU_ILCC"": 55}",0.25,4.2,3.0,0.4603592222222222,1.0,1.0,2.475,2.475,2.475,1.0,0.5,0.5,0.5,502030-size li-polymer,graphite,nmc
+4,52,5.526036131774708,"{""RWTH"": 48, ""SNL"": 4}",1.85,3.9,3.5,0.2,0.8,2.0,0.5,0.5,0.5,2.0,0.5,0.5,0.5,cylindrical_18650,graphite,nmc
+5,181,19.234856535600425,"{""Stanford_2"": 181}",0.24,4.4,3.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0.75,0.75,0.75,pouch,graphite,lini0.5mn0.3co0.2o2
+6,154,16.365568544102018,"{""CALCE"": 13, ""MICH"": 40, ""MICH_EXP"": 15, ""SDU"": 86}",2.4,4.2,3.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,cylindrical,graphite,nmc_532
+7,32,3.4006376195536663,"{""ISU_ILCC"": 32}",0.25,4.2,3.0,0.6348290333333324,1.0,1.0,0.95,0.95,0.95,1.0,0.9,0.9,0.9,502030-size li-polymer,graphite,nmc
+8,33,3.5069075451647183,"{""SNL"": 33}",1.1,3.6,2.0,0.0,1.0,1.0,0.5,0.5,0.5,1.0,2.0,2.0,2.0,cylindrical_18650,graphite,lfp
+9,50,5.313496280552603,"{""HNEI"": 14, ""MICH_EXP"": 3, ""UL_PUR"": 10, ""XJTU"": 23}",2.8,4.2,2.7,0.0,1.0,1.0,2.0,2.0,2.0,1.0,1.0,1.0,1.0,cylindrical_18650,graphite,lini0.5co0.2mn0.3o2
+10,70,7.438894792773645,"{""ISU_ILCC"": 70}",0.25,4.2,3.0,0.368385813333332,1.0,1.0,1.925,1.925,1.925,1.0,1.925,1.925,1.925,502030-size li-polymer,graphite,nmc

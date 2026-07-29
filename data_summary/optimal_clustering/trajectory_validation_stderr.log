@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\pc\Desktop\SIA LAB\battery\battery_research\code\validate_cluster_trajectory_consistency.py", line 457, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\pc\Desktop\SIA LAB\battery\battery_research\code\validate_cluster_trajectory_consistency.py", line 338, in main
+    raise RuntimeError("Fewer than 2 clusters have valid trajectories")
+RuntimeError: Fewer than 2 clusters have valid trajectories
