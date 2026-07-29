@@ -20,7 +20,7 @@ Examples
 --------
 Prepare dQ(V) caches once:
     python model/msda_rul.py prepare --data-root data --cache-root cache \
-        --labels-path "data/1. Life lables"
+        --labels-path "data/1. Life labels"
 
 Quick smoke test:
     python model/weighted_meta_lodo_rul.py --target HUST --meta-steps 5 \
@@ -801,7 +801,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--project-root", type=Path, default=PROJECT_ROOT)
     parser.add_argument("--cache-root", type=Path, default=Path("cache"))
     parser.add_argument(
-        "--labels-path", type=Path, default=Path("data/1. Life lables")
+        "--labels-path", type=Path, default=Path("data/1. Life labels")
     )
     parser.add_argument("--output-root", type=Path, default=Path("runs"))
     parser.add_argument("--device", default="auto")
