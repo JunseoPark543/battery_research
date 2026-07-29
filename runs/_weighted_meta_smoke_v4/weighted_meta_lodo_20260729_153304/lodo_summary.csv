@@ -1,0 +1,2 @@
+﻿target,n,MAPE_life_%,MAE_rul_cyc,RMSE_rul_cyc,RMSE_log,fold_dir
+HUST,77,78.26052553383286,1546.1528161014126,1597.5740486643838,1.562726741251742,C:\Users\pc\Desktop\SIA LAB\battery\battery_research\runs\_weighted_meta_smoke_v4\weighted_meta_lodo_20260729_153304\target_HUST

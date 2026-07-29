@@ -1,0 +1,2 @@
+﻿step,pseudo_target,query_loss,objective,temperature,weight_entropy,max_weight
+1,RWTH,0.4715902805328369,0.4708995223045349,0.2501102387905121,0.6907707452774048,0.5344562530517578
