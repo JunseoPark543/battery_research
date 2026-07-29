@@ -1,0 +1,14 @@
+﻿dataset,cell_count,total_cycles,median_cycles,total_file_size_bytes,nominal_capacity_in_Ah__median,depth_of_charge__median,depth_of_discharge__median,already_spent_cycles__median,max_voltage_limit_in_V__median,min_voltage_limit_in_V__median,max_current_limit_in_A__median,min_current_limit_in_A__median,soc_interval_start__median,soc_interval_end__median,charge_step_count__median,charge_rate_min_C__median,charge_rate_max_C__median,charge_rate_mean_C__median,charge_current_max_A__median,charge_voltage_max_V__median,discharge_step_count__median,discharge_rate_min_C__median,discharge_rate_max_C__median,discharge_rate_mean_C__median,discharge_current_max_A__median,discharge_voltage_min_V__median
+CALCE,13,14298,1072.0,206713245,1.35,1.0,1.0,0.0,4.2,2.7,,,0.0,1.0,0.0,,,,,,0.0,,,,,
+HNEI,14,15164,1081.5,398207822,2.8,1.0,1.0,0.0,4.3,3.0,,,0.0,1.0,1.0,2.0,2.0,2.0,,,1.0,1.0,1.0,1.0,,
+HUST,77,146120,1873.0,4135274378,1.1,1.0,1.0,0.0,3.6,2.0,,,0.0,1.0,3.0,1.0,5.0,3.0,,3.6,4.0,1.0,5.0,2.75,,
+ISU_ILCC,240,1194846,3072.0,29652259795,0.25,1.0,1.0,0.0,4.2,3.0,,,0.3117533333333333,1.0,1.0,1.775,1.775,1.775,,,1.0,0.8,0.8,0.8,,
+MICH,40,19895,492.0,791649640,2.36,1.0,1.0,0.0,4.2,3.0,,,0.0,1.0,1.0,1.0,1.0,1.0,,,1.0,1.0,1.0,1.0,,
+MICH_EXP,18,6545,353.0,500222916,5.0,1.0,1.0,0.0,4.2,3.0,,,0.0,1.0,1.0,0.2,0.2,0.2,,,1.0,1.5,1.5,1.5,,
+RWTH,48,105006,2247.5,2582048284,1.85,1.0,1.0,0.0,3.9,3.5,4.0,,0.2,0.8,2.0,,,,4.0,3.9,2.0,,,,4.0,3.5
+SDU,86,49146,453.5,3959873319,2.4,1.0,1.0,0.0,4.2,3.0,,,0.0,1.0,0.0,,,,,,0.0,,,,,
+SNL,61,96492,786.0,629693691,3.0,1.0,1.0,0.0,4.2,2.0,20.0,,0.0,1.0,1.0,0.5,0.5,0.5,,,1.0,1.0,1.0,1.0,,
+Stanford_2,181,188621,1019.0,20364177417,0.24,1.0,1.0,0.0,4.4,3.0,,,0.0,1.0,1.0,1.0,1.0,1.0,,,1.0,0.75,0.75,0.75,,
+Tongji,130,59038,399.0,4173056764,3.5,1.0,1.0,0.0,4.2,2.65,,,0.0,1.0,1.0,,,,,,1.0,,,,,
+UL_PUR,10,2245,211.5,27975169,3.4,1.0,1.0,0.0,4.2,2.7,,,0.0,1.0,1.0,2.0,2.0,2.0,,,1.0,1.0,1.0,1.0,,
+XJTU,23,6938,298.0,2511796401,2.0,1.0,1.0,0.0,4.2,2.5,,,0.0,1.0,1.0,3.0,3.0,3.0,,,1.0,1.0,1.0,1.0,,
