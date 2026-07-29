@@ -1,0 +1,21 @@
+{
+  "assigned_cell_count": 941,
+  "valid_trajectory_count": 923,
+  "failed_trajectory_count": 18,
+  "cluster_count_with_valid_data": 11,
+  "grid_points": 101,
+  "baseline_cycles": 5,
+  "minimum_valid_cycles": 20,
+  "trajectory_silhouette_score": -0.07452137037807854,
+  "trajectory_variance_explained_by_clusters": 0.6513519962346546,
+  "observed_within_cluster_sse": 1337.5294807039195,
+  "permuted_within_cluster_sse_mean": 3794.77313537252,
+  "compactness_improvement_over_random": 0.6475337436548447,
+  "permutation_count": 1000,
+  "permutation_p_value": 0.000999000999000999,
+  "interpretation_rule": {
+    "silhouette": ">0.50 strong, 0.25-0.50 moderate, 0-0.25 weak, <0 conflicting",
+    "separation_to_compactness_ratio": ">1 means nearest cluster centroid is farther than average within-cluster trajectory deviation",
+    "permutation_p_value": "<0.05 means metadata clusters are more trajectory-compact than random groups of the same sizes"
+  }
+}
