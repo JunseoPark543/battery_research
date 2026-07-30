@@ -1,0 +1,70 @@
+[    0.8s] INFO  loaded 1344 cached cells
+[    0.8s] INFO    CALB_labels.json: 27 labels (hint=CALB) e.g. [('CALB_0_B182', 108.0), ('CALB_0_B183', 105.0)]
+[    0.8s] INFO    CALCE_labels.json: 13 labels (hint=CALCE) e.g. [('CALCE_CS2_38', 568.0), ('CALCE_CX2_36', 519.0)]
+[    0.8s] INFO    HNEI_labels.json: 14 labels (hint=HNEI) e.g. [('HNEI_18650_NMC_LCO_25C_0_100_0.5_1.5C_O', 266.0), ('HNEI_18650_NMC_LCO_25C_0_100_0.5_1.5C_L', 228.0)]
+[    0.8s] INFO    HUST_labels.json: 77 labels (hint=HUST) e.g. [('HUST_10_1', 1760.0), ('HUST_1_6', 1179.0)]
+[    0.8s] INFO    ISU-ILCC_labels.json: 240 labels (hint=ISU_ILCC) e.g. [('ISU_ILCC_G41C2', 735.0), ('ISU_ILCC_G33C1', 1667.0)]
+[    0.8s] INFO    MATR_labels.json: 169 labels (hint=MATR) e.g. [('MATR_B4C36', 599.0), ('MATR_B2C46', 428.0)]
+[    0.8s] INFO    MICH_EXP_labels.json: 12 labels (hint=MICH_EXP) e.g. [('MICH_01R_POUCH_NMC_25C_0_100_0.2_0.2C', 269.0), ('MICH_02C_POUCH_NMC__5C_0_100_0.2_0.2C', 204.0)]
+[    0.8s] INFO    MICH_labels.json: 40 labels (hint=MICH) e.g. [('MICH_BLFORM10_POUCH_NMC_25C_0_100_1_1C_J', 323.0), ('MICH_BLFORM11_POUCH_NMC_25C_0_100_1_1C_A', 314.0)]
+[    0.8s] INFO    NA-ion_labels.json: 34 labels (hint=NA_ION) e.g. [('NA_ION_270040_1_2_63', 177.0), ('NA_ION_270040_1_3_62', 268.0)]
+[    0.8s] INFO    RWTH_labels.json: 48 labels (hint=RWTH) e.g. [('RWTH_021', 614.0), ('RWTH_032', 667.0)]
+[    0.8s] INFO    SDU_labels.json: 70 labels (hint=SDU) e.g. [('SDU_BATTERY_1', 820.0), ('SDU_BATTERY_10', 399.0)]
+[    0.8s] INFO    SNL_labels.json: 52 labels (hint=SNL) e.g. [('SNL_18650_NCA_15C_0_100_0.5_1C_A', 331.0), ('SNL_18650_NCA_25C_20_80_0.5_0.5C_D', 840.0)]
+[    0.8s] INFO    Stanford_2_labels.json: 181 labels (hint=STANFORD_2) e.g. [('STANFORD_NOVA_REGULAR_100', 470.0), ('STANFORD_NOVA_REGULAR_101', 533.0)]
+[    0.8s] INFO    Stanford_labels.json: 41 labels (hint=STANFORD) e.g. [('STANFORD_NOVA_REGULAR_225', 859.0), ('STANFORD_NOVA_REGULAR_191', 665.0)]
+[    0.8s] INFO    Tongji_labels.json: 108 labels (hint=TONGJI) e.g. [('TONGJI1_CY25_05_1_#19', 127.0), ('TONGJI2_CY35_05_1_#4', 460.0)]
+[    0.8s] INFO    UL-PUR_labels.json: 2 labels (hint=UL_PUR) e.g. [('UL_PUR_N10_NA7_18650_NCA_23C_0_100_0.5_0.5C_G', 159.0), ('UL_PUR_N15_NA10_18650_NCA_23C_0_100_0.5_0.5C_J', 259.0)]
+[    0.8s] INFO    XJTU_labels.json: 23 labels (hint=XJTU) e.g. [('XJTU_2C_BATTERY_1', 389.0), ('XJTU_2C_BATTERY_2', 405.0)]
+[    0.8s] INFO    ZN-coin_labels.json: 121 labels (hint=ZN_COIN) e.g. [('ZN_COIN_202_20231213213655_03_3', 359.0), ('ZN_COIN_202_20231213213655_03_4', 223.0)]
+[    0.8s] INFO    total_MICH_labels.json: 52 labels (hint=TOTAL_MICH) e.g. [('MICH_BLFORM9_POUCH_NMC_45C_0_100_1_1C_I', 191.0), ('MICH_MCFORM21_POUCH_NMC_25C_0_100_1_1C_A', 362.0)]
+[    0.8s] INFO  official life labels: 1324 entries across 19 files
+[    0.8s] INFO  label source: mixed (1139/1344 cells matched an official label)
+[    0.8s] WARNING 205 cells fell back to a DERIVED life. Stored records can stop before the EOL threshold is crossed, in which case the derived value is missing or wrong (HUST_1-1: official 1542, record ends at cycle 1504). Check that the cell ids in the label json match the pkl file names.
+[    0.8s] INFO    official vs derived: median |rel diff| = 0.000%, max = 99.980%
+[    0.8s] WARNING dropped 208 cells (no life or life < 150): [('CALB_0_B182', 108), ('CALB_0_B183', 105), ('CALB_0_B188', 123), ('CALB_0_B190', 104), ('ISU-ILCC_G14C3', 134), ('ISU-ILCC_G40C3', 16), ('MATR_b2c1', 147), ('MICH_03H_pouch_NMC_45C_0-100_0.2-0.2C', 107)]...
+[    0.8s] INFO  [CALB] 23 cells, branch=discharge, common V=[2.780,3.909]
+[    0.8s] INFO  [CALCE] 13 cells, branch=charge, common V=[4.058,4.192]
+[    0.8s] INFO  [HNEI] 14 cells, branch=charge, common V=[3.924,4.290]
+[    0.8s] INFO  [HUST] 77 cells, branch=charge, common V=[3.447,3.590]
+[    0.8s] INFO  [ISU_ILCC] 238 cells, branch=charge/discharge, common V=[3.916,3.950]
+[    0.8s] WARNING [ISU_ILCC] cells disagree on the branch (['charge', 'discharge']); pin it in DATASET_PROFILES or the curves are not comparable
+[    0.8s] INFO  [MATR] 168 cells, branch=discharge, common V=[2.553,3.209]
+[    0.8s] INFO  [MICH] 40 cells, branch=discharge, common V=[3.023,4.055]
+[    0.8s] INFO  [MICH_EXP] 4 cells, branch=charge/discharge, common V=[3.052,4.054]
+[    0.8s] WARNING [MICH_EXP] cells disagree on the branch (['charge', 'discharge']); pin it in DATASET_PROFILES or the curves are not comparable
+[    0.8s] INFO  [NA-ion] 22 cells, branch=discharge, common V=[2.090,3.615]
+[    0.8s] INFO  [RWTH] 28 cells, branch=charge, common V=[3.706,3.893]
+[    0.8s] INFO  [SDU] 62 cells, branch=discharge, common V=[3.024,3.887]
+[    0.8s] INFO  [SNL] 50 cells, branch=charge/discharge, common V=[3.649,3.248]
+[    0.8s] WARNING [SNL] cells disagree on the branch (['charge', 'discharge']); pin it in DATASET_PROFILES or the curves are not comparable
+[    0.8s] INFO  [Stanford] 41 cells, branch=charge, common V=[3.577,4.379]
+[    0.8s] INFO  [Stanford_2] 181 cells, branch=charge/discharge, common V=[3.541,4.191]
+[    0.8s] WARNING [Stanford_2] cells disagree on the branch (['charge', 'discharge']); pin it in DATASET_PROFILES or the curves are not comparable
+[    0.8s] INFO  [Tongji] 82 cells, branch=discharge, common V=[2.678,3.641]
+[    0.8s] INFO  [UL_PUR] 7 cells, branch=charge, common V=[3.471,4.184]
+[    0.8s] INFO  [XJTU] 21 cells, branch=discharge, common V=[2.532,4.050]
+[    0.8s] INFO  [ZN-coin] 65 cells, branch=charge/discharge, common V=[1.640,1.299]
+[    0.8s] WARNING [ZN-coin] cells disagree on the branch (['charge', 'discharge']); pin it in DATASET_PROFILES or the curves are not comparable
+[    0.9s] INFO  regridded 1136 cells onto the common grids (0.1s)
+[    0.9s] INFO  LEAK CHECK  corr(L_i, log c_eol) = -0.0068 (must be ~0; |r|>0.2 invalidates the protocol)
+[    0.9s] INFO    CALB_labels.json: 27 labels (hint=CALB) e.g. [('CALB_0_B182', 108.0), ('CALB_0_B183', 105.0)]
+[    0.9s] INFO    CALCE_labels.json: 13 labels (hint=CALCE) e.g. [('CALCE_CS2_38', 568.0), ('CALCE_CX2_36', 519.0)]
+[    0.9s] INFO    HNEI_labels.json: 14 labels (hint=HNEI) e.g. [('HNEI_18650_NMC_LCO_25C_0_100_0.5_1.5C_O', 266.0), ('HNEI_18650_NMC_LCO_25C_0_100_0.5_1.5C_L', 228.0)]
+[    0.9s] INFO    HUST_labels.json: 77 labels (hint=HUST) e.g. [('HUST_10_1', 1760.0), ('HUST_1_6', 1179.0)]
+[    0.9s] INFO    ISU-ILCC_labels.json: 240 labels (hint=ISU_ILCC) e.g. [('ISU_ILCC_G41C2', 735.0), ('ISU_ILCC_G33C1', 1667.0)]
+[    0.9s] INFO    MATR_labels.json: 169 labels (hint=MATR) e.g. [('MATR_B4C36', 599.0), ('MATR_B2C46', 428.0)]
+[    0.9s] INFO    MICH_EXP_labels.json: 12 labels (hint=MICH_EXP) e.g. [('MICH_01R_POUCH_NMC_25C_0_100_0.2_0.2C', 269.0), ('MICH_02C_POUCH_NMC__5C_0_100_0.2_0.2C', 204.0)]
+[    0.9s] INFO    MICH_labels.json: 40 labels (hint=MICH) e.g. [('MICH_BLFORM10_POUCH_NMC_25C_0_100_1_1C_J', 323.0), ('MICH_BLFORM11_POUCH_NMC_25C_0_100_1_1C_A', 314.0)]
+[    0.9s] INFO    NA-ion_labels.json: 34 labels (hint=NA_ION) e.g. [('NA_ION_270040_1_2_63', 177.0), ('NA_ION_270040_1_3_62', 268.0)]
+[    0.9s] INFO    RWTH_labels.json: 48 labels (hint=RWTH) e.g. [('RWTH_021', 614.0), ('RWTH_032', 667.0)]
+[    0.9s] INFO    SDU_labels.json: 70 labels (hint=SDU) e.g. [('SDU_BATTERY_1', 820.0), ('SDU_BATTERY_10', 399.0)]
+[    0.9s] INFO    SNL_labels.json: 52 labels (hint=SNL) e.g. [('SNL_18650_NCA_15C_0_100_0.5_1C_A', 331.0), ('SNL_18650_NCA_25C_20_80_0.5_0.5C_D', 840.0)]
+[    0.9s] INFO    Stanford_2_labels.json: 181 labels (hint=STANFORD_2) e.g. [('STANFORD_NOVA_REGULAR_100', 470.0), ('STANFORD_NOVA_REGULAR_101', 533.0)]
+[    0.9s] INFO    Stanford_labels.json: 41 labels (hint=STANFORD) e.g. [('STANFORD_NOVA_REGULAR_225', 859.0), ('STANFORD_NOVA_REGULAR_191', 665.0)]
+[    0.9s] INFO    Tongji_labels.json: 108 labels (hint=TONGJI) e.g. [('TONGJI1_CY25_05_1_#19', 127.0), ('TONGJI2_CY35_05_1_#4', 460.0)]
+[    0.9s] INFO    UL-PUR_labels.json: 2 labels (hint=UL_PUR) e.g. [('UL_PUR_N10_NA7_18650_NCA_23C_0_100_0.5_0.5C_G', 159.0), ('UL_PUR_N15_NA10_18650_NCA_23C_0_100_0.5_0.5C_J', 259.0)]
+[    0.9s] INFO    XJTU_labels.json: 23 labels (hint=XJTU) e.g. [('XJTU_2C_BATTERY_1', 389.0), ('XJTU_2C_BATTERY_2', 405.0)]
+[    0.9s] INFO    ZN-coin_labels.json: 121 labels (hint=ZN_COIN) e.g. [('ZN_COIN_202_20231213213655_03_3', 359.0), ('ZN_COIN_202_20231213213655_03_4', 223.0)]
+[    0.9s] INFO    total_MICH_labels.json: 52 labels (hint=TOTAL_MICH) e.g. [('MICH_BLFORM9_POUCH_NMC_45C_0_100_1_1C_I', 191.0), ('MICH_MCFORM21_POUCH_NMC_25C_0_100_1_1C_A', 362.0)]
+[    0.9s] INFO  official life labels: 1324 entries across 19 files

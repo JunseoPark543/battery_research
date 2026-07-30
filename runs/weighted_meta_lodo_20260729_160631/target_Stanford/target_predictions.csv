@@ -1,0 +1,4 @@
+﻿dataset,cell_id,observed_cycle,true_life,predicted_life,true_rul,predicted_rul
+Stanford,Stanford_Nova_Regular_Ref_100,29,667.9999999999998,418.701416015625,638.9999999999998,389.701416015625
+Stanford,Stanford_Nova_Regular_Ref_101,41,665.0,457.2879638671875,624.0,416.2879638671875
+Stanford,Stanford_Nova_Regular_Ref_102,88,472.99999999999983,420.5683288574219,384.99999999999983,332.5683288574219
